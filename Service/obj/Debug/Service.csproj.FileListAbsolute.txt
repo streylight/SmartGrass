@@ -1,0 +1,32 @@
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\Service.dll.config
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\Service.dll
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\Service.pdb
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\Core.dll
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\EntityFramework.dll
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\Map.dll
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\Ninject.dll
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\Core.pdb
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\Map.pdb
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\EntityFramework.xml
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\bin\Debug\Ninject.xml
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\obj\Debug\Service.dll
+C:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Service\obj\Debug\Service.pdb
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\Service.dll.config
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\Service.dll
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\Service.pdb
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\Core.dll
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\EntityFramework.dll
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\Map.dll
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\Ninject.dll
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\Core.pdb
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\Map.pdb
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\EntityFramework.xml
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Jeremiah\Documents\SmartGrass\Service\bin\Debug\Ninject.xml
+C:\Users\Jeremiah\Documents\SmartGrass\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
+C:\Users\Jeremiah\Documents\SmartGrass\Service\obj\Debug\Service.dll
+C:\Users\Jeremiah\Documents\SmartGrass\Service\obj\Debug\Service.pdb

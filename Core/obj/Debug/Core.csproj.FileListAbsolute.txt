@@ -1,0 +1,9 @@
+c:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Core\bin\Debug\Core.dll
+c:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Core\bin\Debug\Core.pdb
+c:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
+c:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Core\obj\Debug\Core.dll
+c:\Users\Jeremiah\documents\visual studio 2012\Projects\Blizzard\Core\obj\Debug\Core.pdb
+C:\Users\Jeremiah\Documents\SmartGrass\Core\bin\Debug\Core.dll
+C:\Users\Jeremiah\Documents\SmartGrass\Core\bin\Debug\Core.pdb
+C:\Users\Jeremiah\Documents\SmartGrass\Core\obj\Debug\Core.dll
+C:\Users\Jeremiah\Documents\SmartGrass\Core\obj\Debug\Core.pdb

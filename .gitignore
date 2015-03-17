@@ -24,7 +24,11 @@ Makefile-Release.mk
 *.log
 
 *.ipch
-
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
 *.unsuccessfulbuild
 
 *.opensdf

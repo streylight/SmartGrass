@@ -1,41 +1,216 @@
 ﻿@model Web.Models.RegisterViewModel
+
 @{
     ViewBag.Title = "Register";
+    Layout = null;
 }
 
-<h2>@ViewBag.Title.</h2>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+@Styles.Render("~/Content/css")
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary()
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+<style>
+    .login-cover, .login-cover-bg, .login-cover-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    .login-cover, .login-cover-bg, .login-cover-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+        .login-cover-image img {
+            max-width: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+        }
+
+    .login-cover-bg {
+        background: #666;
+        background: -moz-radial-gradient(center,ellipse cover,#666 0,#000 100%);
+        background: -webkit-gradient(radial,center center,0,center center,100%,color-stop(0%,#666),color-stop(100%,#000));
+        background: -webkit-radial-gradient(center,ellipse cover,#666 0,#000 100%);
+        background: -o-radial-gradient(center,ellipse cover,#666 0,#000 100%);
+        background: -ms-radial-gradient(center,ellipse cover,#666 0,#000 100%);
+        background: radial-gradient(ellipse at center,#666 0,#000 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#000000', GradientType=1);
+        opacity: .6;
+        filter: alpha(opacity=60);
+    }
+
+    /*.login.login-v2 {
+        margin: 108px 0;
+        width: 100%;
+    }*/
+
+    .login-v2 {
+        background: url(../img/transparent/black-0.4.png);
+        /*background: rgba(0,0,0,.4);*/
+        background: white;
+        color: #ccc;
+        width: 450px;
+        margin: 168px auto;
+        position: relative;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+
+    .login.login-v2 .login-header, .login.login-v2 a {
+        color: #fff;
+    }
+
+    .login .login-header {
+        left: 0;
+        margin: 0;
+    }
+
+    .login .login-header, .login-content {
+        width: 100% !important;
+    }
+
+    .login .login-header {
+        position: absolute;
+        top: -80px;
+        left: 50%;
+        right: 0;
+        width: 450px;
+        padding: 0 40px;
+        margin-left: -225px;
+        font-weight: 300;
+    }
+
+        .login .login-header .brand {
+            padding: 0;
+            font-size: 28px;
+        }
+
+        .login .login-header .icon {
+            position: absolute;
+            right: 40px;
+            top: -2px;
+            opacity: .1;
+            filter: alpha(opacity=10);
+        }
+
+    .login-v2 .login-content {
+        padding: 40px;
+    }
+
+    .login .login-content {
+        padding: 30px 40px;
+        color: #999;
+        width: 450px !important;
+        margin: 0 auto;
+    }
+
+    .login .login-content {
+        padding: 30px 40px;
+        color: #999;
+        width: 450px;
+        margin: 0 auto;
+    }
+
+    Inherited from div.login.login-v2.animated.flipInX .login-v2 {
+        background: url(../img/transparent/black-0.4.png);
+        background: rgba(0,0,0,.4);
+        color: #ccc;
+        width: 450px;
+        margin: 168px auto;
+        position: relative;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+
+    .login .login-content {
+        padding: 30px 40px;
+        color: #999;
+        width: 450px;
+        margin: 0 auto;
+    }
+
+    .m-b-20 {
+        margin-bottom: 20px !important;
+    }
+
+    .login .login-content {
+        padding: 30px 40px;
+        color: #999;
+        width: 450px;
+        margin: 0 auto;
+    }
+
+    .login-v2 .form-control {
+        color: #000;
+    }
+
+    .form-control {
+        border: 1px solid #ccd0d4;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        font-size: 12px;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+    }
+
+    .btn-block {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .btn {
+        font-weight: 300;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    .m-t-20 {
+        margin-top: 20px !important;
+    }
+</style>
+
+<div class="login-cover">
+    <div class="login-cover-image"><img src="~/Content/Images/summer-lawn-1920x1080.jpg" data-id="login-cover-image"></div>
+    <div class="login-cover-bg"></div>
+</div>
+<div id="page-container" class="fade in">
+    <div class="login login-v2">
+        <div class="login-header">
+        </div>
+        <div class="login-content">
+            <div class="form-group m-b-20" style="min-width: 370px">
+                <img src="~/Content/Images/smartGrassLogo.png" style="width: 100%; margin-left: auto; margin-right:auto; display:block;" />
+            </div>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @id = "registrationForm" })) {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <h3>Registration</h3>
+                <div class="form-group m-b-20">
+                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
+                </div>
+                <div class="form-group m-b-20">
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
+                </div>
+                <div class="form-group m-b-20">
+                    @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control input-lg", @placeholder = "Confirm Password" })
+                </div>
+                <div class="form-group m-b-20">
+                    @Html.TextBoxFor(x => x.ProductKey, new { @class = "form-control input-lg", @placeholder = "Product Key" })
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="btn btn-success btn-block btn-lg">Register</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

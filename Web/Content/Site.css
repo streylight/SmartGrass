@@ -22,6 +22,12 @@ textarea {
     max-width: 280px;
 }*/
 
+.notification-count {
+    position: relative;
+    top: -10px;
+    background: #c9302c;
+}
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;

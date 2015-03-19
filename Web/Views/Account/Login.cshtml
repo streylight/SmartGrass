@@ -45,14 +45,15 @@
         filter: alpha(opacity=60);
     }
 
-    .login.login-v2 {
+    /*.login.login-v2 {
         margin: 108px 0;
         width: 100%;
-    }
+    }*/
 
     .login-v2 {
         background: url(../img/transparent/black-0.4.png);
-        background: rgba(0,0,0,.4);
+        /*background: rgba(0,0,0,.4);*/
+        background: white;
         color: #ccc;
         width: 450px;
         margin: 168px auto;
@@ -148,10 +149,10 @@
     }
 
     .login-v2 .form-control {
-        background: url(../img/transparent/black-0.4.png);
-        background: rgba(0,0,0,.4);
-        border: none;
-        color: #fff;
+        /*background: url(../img/transparent/black-0.4.png);*/
+        /*background: rgba(0,0,0,.4);*/
+        /*border: none;*/
+        color: #000;
     }
 
     .form-control {
@@ -196,36 +197,35 @@
     <div class="login login-v2">
         <!-- begin brand -->
         <div class="login-header">
-            <div class="brand">
+            @*<div class="brand">
                 Smart Grass
                 <small style="font-size: 65%">smart irrigation controller</small>
             </div>
             <div class="icon">
                 <i class="fa fa-sign-in"></i>
-            </div>
+            </div>*@
         </div>
         <!-- end brand -->
         <div class="login-content">
+            <div class="form-group m-b-20" style="min-width: 370px">
+                <img src="~/Content/Images/smartGrassLogo.png" style="width: 100%; margin-left: auto; margin-right:auto; display:block;" />
+            </div>
            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "registrationForm" })) {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-            @*<form action="@Url.Action('Login', 'Account')" method="POST" class="margin-bottom-0">*@
                 <div class="form-group m-b-20">
-                    @*<input type="text" class="form-control input-lg" placeholder="Email Address">*@
                     @Html.TextBoxFor(x => x.UserName, new { @class = "form-control input-lg", @placeholder = "Username"})
                 </div>
                 <div class="form-group m-b-20">
-                    @*<input type="text" class="form-control input-lg" placeholder="Password">*@
                     @Html.PasswordFor(x => x.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
                 </div>
                 <div class="checkbox m-b-20">
                     <label>
-                        @*<input type="checkbox"> Remember Me*@
                         @Html.CheckBoxFor(x => x.RememberMe) Remember Me
                     </label>
                 </div>
                 <div class="login-buttons">
-                    <button type="submit" class="btn btn-success btn-block btn-lg">Sign me in</button>
+                    <button type="submit" class="btn btn-success btn-block btn-lg">Login</button>
                 </div>
                 <div class="m-t-20">
                     Not a member yet? Click <a href='@Url.Action("Register","Account")'>here</a> to register.
@@ -233,5 +233,4 @@
             }
         </div>
     </div>
-    <!-- end login -->
 </div>

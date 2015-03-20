@@ -2,30 +2,432 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+<style>
+    .content {
+        padding: 60px 15px 75px;
+    }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+        .content.has-bg {
+            padding-bottom: 60px;
+            overflow: hidden;
+            position: relative;
+        }
+
+    .home {
+        padding: 0 !important;
+        color: #fff;
+    }
+
+    .content.has-bg .content-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .home {
+        padding: 0 !important;
+        color: #fff;
+    }
+
+    .content.has-bg .content-bg:before {
+        content: '';
+        background: url(../img/content-bg-cover.png);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .content.has-bg .container {
+        position: relative;
+    }
+
+    .home-content {
+        z-index: 1020;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        color: #8F8E8E;
+        margin-top: -120px;
+        padding: 0 15px;
+        text-align: center;
+    }
+
+        .home-content h1 {
+            font-size: 64px;
+            font-weight: 600;
+        }
+
+        .home-content h1, .home-content h2, .home-content h3, .home-content h4 {
+            color: #fff;
+            margin: 0 0 30px;
+            font-weight: 300;
+        }
+
+    .content.has-bg h1, .content.has-bg h2, .content.has-bg h3, .content.has-bg h4, .content.has-bg h5, .content.has-bg h6 {
+        color: #fff;
+    }
+
+    p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .home-content .btn + .btn {
+        margin-left: 15px;
+    }
+
+    .btn.btn-outline {
+        color: #fff;
+        border-width: 2px;
+        border-color: #8F8E8E;
+        background: 0 0;
+    }
+
+    .btn {
+        padding: 15px 30px;
+        font-size: 14px;
+        font-weight: 500;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    .contentAnimated {
+        -webkit-animation-duration: 1.5s;
+        animation-duration: 1.5s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    .fadeInDown {
+        -webkit-animation-name: fadeInDown;
+        animation-name: fadeInDown;
+    }
+
+    .content .content-desc {
+        text-align: center;
+        margin-bottom: 60px;
+        color: #242a30;
+    }
+
+    .row {
+        margin: 0 -10px;
+    }
+
+        .row > [class*=col-] {
+            padding: 0 10px;
+        }
+    .about-author {
+        position: relative;
+    }
+
+        .about-author .quote {
+            position: relative;
+            padding: 30px 60px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+    .bg-silver {
+        background: #f0f3f4 !important;
+    }
+
+    .quote {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 300;
+        color: #fff;
+        color: rgba(255,255,255,.9);
+    }
+
+    .about-author .fa.fa-quote-left, .about-author .fa.fa-quote-right {
+        font-size: 14px;
+        position: absolute;
+        left: 30px;
+        margin-top: -14px;
+        line-height: 28px;
+        top: 30px;
+        color: #D5D9DA;
+    }
+
+    .quote .fa-quote-left, .quote .fa-quote-right {
+        color: #fff;
+        font-size: 14px;
+        position: relative;
+        top: -14px;
+    }
+
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transform: translate(0, 0);
+    }
+
+    .about-author .quote h3 {
+        margin: 0;
+        font-weight: 300;
+        color: #707478;
+        font-style: italic;
+        line-height: 30px;
+    }
+
+    about-author .fa.fa-quote-right {
+        left: auto;
+        right: 30px;
+        bottom: 30px;
+        margin-top: 0;
+        margin-bottom: -14px;
+        top: auto;
+    }
+
+    .about-author .fa.fa-quote-left, .about-author .fa.fa-quote-right {
+        font-size: 14px;
+        position: absolute;
+        left: 30px;
+        margin-top: -14px;
+        line-height: 28px;
+        top: 30px;
+        color: #D5D9DA;
+    }
+
+    .quote .fa-quote-left, .quote .fa-quote-right {
+        color: #fff;
+        font-size: 14px;
+        position: relative;
+        top: -14px;
+    }
+
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transform: translate(0, 0);
+    }
+
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    user agent stylesheeti, cite, em, var, address, dfn {
+        font-style: italic;
+    }
+
+    Inherited from div.quote.bg-silver .quote {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 300;
+        color: #fff;
+        color: rgba(255,255,255,.9);
+    }
+
+    .about-author .author {
+        position: relative;
+        text-align: right;
+        padding-left: 100px;
+        margin-bottom: 15px;
+    }
+
+        .about-author .author .image {
+            position: absolute;
+            left: -10px;
+            top: -40px;
+            background: #fff;
+            border: 5px solid #fff;
+            border-radius: 50%;
+            width: 100px;
+            overflow: hidden;
+        }
+
+            .about-author .author .image img {
+                max-width: 100%;
+            }
+
+        .about-author .author .info {
+            color: #242a30;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+            .about-author .author .info small {
+                display: block;
+                color: #999;
+                font-size: 12px;
+                font-weight: 400;
+            }
+
+    .skills .skills-name {
+        font-size: 12px;
+        color: #242a30;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
+    .progress {
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        height: 15px;
+        overflow: visible;
+        background: #e2e7eb;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .login-cover-bg {
+        background: #666;
+        background: -moz-radial-gradient(center,ellipse cover,#666 0,#000 100%);
+        background: -webkit-gradient(radial,center center,0,center center,100%,color-stop(0%,#666),color-stop(100%,#000));
+        background: -webkit-radial-gradient(center,ellipse cover,#666 0,#000 100%);
+        background: -o-radial-gradient(center,ellipse cover,#666 0,#000 100%);
+        background: -ms-radial-gradient(center,ellipse cover,#666 0,#000 100%);
+        background: radial-gradient(ellipse at center,#666 0,#000 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#000000', GradientType=1);
+        opacity: .6;
+        filter: alpha(opacity=60);
+    }
+
+    .login-cover, .login-cover-bg, .login-cover-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .login-cover, .login-cover-bg, .login-cover-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+
+<div id="home" class="content has-bg home login-cover-bg" style="height: 667px;">
+    <!-- begin content-bg -->
+    <div class="content-bg">
+        <img src="~/Content/Images/summer-lawn-1920x1080.jpg" alt="Home" />
+    </div>
+    <!-- end content-bg -->
+    <!-- begin container -->
+    <div class="container home-content">
+        <h1>Welcome to Color Admin</h1>
+        <h3>Multipurpose One Page Theme</h3>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            We have created a multi-purpose theme that take the form of One-Page or Multi-Page Version.<br>
+            Use our <a href="#">theme panel</a> to select your favorite theme color.
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <a href="#" class="btn btn-theme">Explore More</a> <a href="#" class="btn btn-outline">Purchase Now</a><br>
+        <br>
+        or <a href="#">subscribe</a> newsletter
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <!-- end container -->
+</div>
+<div id="about" class="content" data-scrollview="true">
+    <!-- begin container -->
+    <div class="container fadeInDown contentAnimated" data-animation="true" data-animation-type="fadeInDown">
+        <h2 class="content-title">About Us</h2>
+        <p class="content-desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consectetur eros dolor,<br>
+            sed bibendum turpis luctus eget
+        </p>
+        <!-- begin row -->
+        <div class="row">
+            <!-- begin col-4 -->
+            <div class="col-md-4 col-sm-6">
+                <!-- begin about -->
+                <div class="about">
+                    <h3>Our Story</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Vestibulum posuere augue eget ante porttitor fringilla.
+                        Aliquam laoreet, sem eu dapibus congue, velit justo ullamcorper urna,
+                        non rutrum dolor risus non sapien. Vivamus vel tincidunt quam.
+                        Donec ultrices nisl ipsum, sed elementum ex dictum nec.
+                    </p>
+                    <p>
+                        In non libero at orci rutrum viverra at ac felis.
+                        Curabitur a efficitur libero, eu finibus quam.
+                        Pellentesque pretium ante vitae est molestie, ut faucibus tortor commodo.
+                        Donec gravida, eros ac pretium cursus, est erat dapibus quam,
+                        sit amet dapibus nisl magna sit amet orci.
+                    </p>
+                </div>
+                <!-- end about -->
+            </div>
+            <!-- end col-4 -->
+            <!-- begin col-4 -->
+            <div class="col-md-4 col-sm-6">
+                <h3>Our Philosophy</h3>
+                <!-- begin about-author -->
+                <div class="about-author">
+                    <div class="quote bg-silver">
+                        <i class="fa fa-quote-left"></i>
+                        <h3>We work harder,<br><span>to let our user keep simple</span></h3>
+                        <i class="fa fa-quote-right"></i>
+                    </div>
+                    <div class="author">
+                        <div class="image">
+                            <img src="assets/img/user-1.jpg" alt="Sean Ngu">
+                        </div>
+                        <div class="info">
+                            Sean Ngu
+                            <small>Front End Developer</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- end about-author -->
+            </div>
+            <!-- end col-4 -->
+            <!-- begin col-4 -->
+            <div class="col-md-4 col-sm-12">
+                <h3>Our Experience</h3>
+                <!-- begin skills -->
+                <div class="skills">
+                    <div class="skills-name">Front End</div>
+                    <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-success" style="width: 95%">
+                            <span class="progress-number">95%</span>
+                        </div>
+                    </div>
+                    <div class="skills-name">Programming</div>
+                    <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-success" style="width: 90%">
+                            <span class="progress-number">90%</span>
+                        </div>
+                    </div>
+                    <div class="skills-name">Database Design</div>
+                    <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-success" style="width: 85%">
+                            <span class="progress-number">85%</span>
+                        </div>
+                    </div>
+                    <div class="skills-name">Wordpress</div>
+                    <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-success" style="width: 80%">
+                            <span class="progress-number">80%</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- end skills -->
+            </div>
+            <!-- end col-4 -->
+        </div>
+        <!-- end row -->
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    <!-- end container -->
 </div>

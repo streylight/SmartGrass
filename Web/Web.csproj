@@ -172,7 +172,13 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\content-bg-cover.png" />
+    <Content Include="Content\Images\CSE1in.png" />
+    <Content Include="Content\Images\Nuts&amp;Bolts.png" />
+    <Content Include="Content\Images\nutsandbolts-logo.png" />
+    <Content Include="Content\Images\sg-logo-trans.png" />
     <Content Include="Content\Images\sg-logo.png" />
+    <Content Include="Content\Images\sg-main-full.png" />
     <Content Include="Content\Images\smartGrassLogo.png" />
     <Content Include="Content\Images\sprinkler-1.jpg" />
     <Content Include="Content\Images\summer-lawn-1920x1080.jpg" />
@@ -180,9 +186,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\apps.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\pace.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -193,6 +201,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\scrollMonitor.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

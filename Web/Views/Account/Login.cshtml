@@ -193,22 +193,12 @@
     <div class="login-cover-bg"></div>
 </div>
 <div id="page-container" class="fade in">
-    <!-- begin login -->
     <div class="login login-v2">
-        <!-- begin brand -->
         <div class="login-header">
-            @*<div class="brand">
-                Smart Grass
-                <small style="font-size: 65%">smart irrigation controller</small>
-            </div>
-            <div class="icon">
-                <i class="fa fa-sign-in"></i>
-            </div>*@
         </div>
-        <!-- end brand -->
         <div class="login-content">
             <div class="form-group m-b-20" style="min-width: 370px">
-                <img src="~/Content/Images/smartGrassLogo.png" style="width: 100%; margin-left: auto; margin-right:auto; display:block;" />
+                <img src="~/Content/Images/sg-main-full.png" style="width: 100%; margin-left: auto; margin-right:auto; display:block;" />
             </div>
            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "registrationForm" })) {
                 @Html.AntiForgeryToken()

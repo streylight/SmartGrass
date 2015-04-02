@@ -2,6 +2,10 @@
     ViewBag.Title = "About";
 }
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
 <style>
     .widget.widget-stats {
         position: relative;
@@ -90,6 +94,13 @@
         opacity: .2;
         filter: alpha(opacity=20);
     }
+
+    .circle {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        /* width and height can be anything, as long as they're equal */
+    }
 </style>
 
 <div class="row" style="margin-top: 75px;">
@@ -134,8 +145,6 @@
             </div>
         </div>
     </div>
-    <!-- end col-3 -->
-    <!-- begin col-3 -->
     <div class="col-md-3 col-sm-6">
         <div class="widget widget-stats btn-primary">
             <div class="stats-icon"><i class="fa fa-clock-o"></i></div>
@@ -148,10 +157,119 @@
             </div>
         </div>
     </div>
-    <!-- end col-3 -->
 </div>
 <div class="collapse" id="viewDetails">
     <div class="well">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="circle">
+                    <i class="fa fa-map-marker fa-5x"></i>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <i class="fa fa-map-marker fa-5x"></i>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <i class="fa fa-map-marker fa-5x"></i>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <i class="fa fa-map-marker fa-5x"></i>
+            </div>
+        </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel" style="border: none">
+            <div class="panel-heading" style="background-color: #242a30; color: white">
+                <h3 class="panel-title" id="panel-title">Panel title<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div id="myfirstchart"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="donut-example"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel" style="border: none">
+            <div class="panel-heading" style="background-color: #242a30; color: white">
+                <h3 class="panel-title" id="panel-title">Panel title<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-hover">
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>23</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>22</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>221</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+    var line = new Morris.Line({
+        // ID of the element in which to draw the chart.
+        element: 'myfirstchart',
+        // Chart data records -- each entry in this array corresponds to a point on
+        // the chart.
+        data: [
+          { year: '2008', value: 20 },
+          { year: '2009', value: 10 },
+          { year: '2010', value: 5 },
+          { year: '2011', value: 5 },
+          { year: '2012', value: 20 }
+        ],
+        // The name of the data record attribute that contains x-values.
+        xkey: 'year',
+        // A list of names of data record attributes that contain y-values.
+        ykeys: ['value'],
+        // Labels for the ykeys -- will be displayed when you hover over the
+        // chart.
+        labels: ['Value']
+    });
+    Morris.Donut({
+        element: 'donut-example',
+        data: [
+          { label: "Zone 1", value: 12 },
+          { label: "Zone 2", value: 30 },
+          { label: "Zone 3", value: 20 }
+        ],
+        formatter: function (y, data) {
+            return y + '%';
+        }
+    });
+    $(document).ready(function () {
+    });
+</script>

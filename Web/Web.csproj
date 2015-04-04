@@ -184,6 +184,15 @@
     <Content Include="Content\Images\smartGrassLogo.png" />
     <Content Include="Content\Images\sprinkler-1.jpg" />
     <Content Include="Content\Images\summer-lawn-1920x1080.jpg" />
+    <Content Include="Content\tmpls\day.html" />
+    <Content Include="Content\tmpls\events-list.html" />
+    <Content Include="Content\tmpls\modal.html" />
+    <Content Include="Content\tmpls\month-day.html" />
+    <Content Include="Content\tmpls\month.html" />
+    <Content Include="Content\tmpls\week-days.html" />
+    <Content Include="Content\tmpls\week.html" />
+    <Content Include="Content\tmpls\year-month.html" />
+    <Content Include="Content\tmpls\year.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -192,6 +201,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\calendar.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\pace.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -204,6 +215,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\scrollMonitor.js" />
+    <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

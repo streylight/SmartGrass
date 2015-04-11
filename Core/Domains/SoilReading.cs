@@ -12,18 +12,18 @@ namespace Core.Domains {
         /// <summary>
         /// The soil moisture level
         /// </summary>
-        public float MoistureLevel { get; set; }
+        public double SoilMoisture { get; set; }
         /// <summary>
         /// The timestamp of the reading
         /// </summary>
-        public DateTime Timestamp { get; set; }
+        public DateTime DateTime { get; set; }
         /// <summary>
-        /// Foreign key for irrigation valve
+        /// Foreign key for unit
         /// </summary>
-        public int IrrigationValveId { get; set; }
+        public int UnitId { get; set; }
         /// <summary>
-        /// Virtual property for the irrigation valve object
+        /// Virtual property for the unit object
         /// </summary>
-        public IrrigationValve IrrigationValve { get; set; }
+        public Unit Unit { get; set; }
     }
 }

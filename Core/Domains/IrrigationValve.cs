@@ -12,18 +12,14 @@ namespace Core.Domains {
         /// <summary>
         /// Unique identifier used to distinguish valves
         /// </summary>
-        public string Identifier { get; set; }
+        public int ValveNumber { get; set; }
         /// <summary>
-        /// Foreign key for zone
+        /// Foreign key for unit
         /// </summary>
-        public int ZoneId { get; set; }
+        public int UnitId { get; set; }
         /// <summary>
-        /// Virtual property for the zone object
+        /// Virtual property for the unit object
         /// </summary>
-        public virtual Zone Zone { get; set; }
-        /// <summary>
-        /// Collection of soil readings for the valve
-        /// </summary>
-        public virtual ICollection<SoilReading> SoilReadings { get; set; }
+        public Unit Unit { get; set; }
     }
 }

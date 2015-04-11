@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.Domains {
     /// <summary>
-    /// The temperature reading class
+    /// The rain event class
     /// </summary>
-    public class TemperatureReading : BaseEntity {
+    public class RainEvent : BaseEntity {
         /// <summary>
-        /// The value of temperature reading
-        /// </summary>
-        public double Temperature { get; set; }
-        /// <summary>
-        /// DateTime of when the readings were taken
+        /// The timestamp of the event
         /// </summary>
         public DateTime DateTime { get; set; }
         /// <summary>
@@ -22,8 +18,8 @@ namespace Core.Domains {
         /// </summary>
         public int UnitId { get; set; }
         /// <summary>
-        /// Virtual reference to the unit object
+        /// Virtual property for the unit object
         /// </summary>
-        public virtual Unit Unit { get; set; }
+        public Unit Unit { get; set; }
     }
 }

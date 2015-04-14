@@ -5,6 +5,9 @@ using Core.Domains;
 using Map.Repo;
 
 namespace Service.Interfaces {
+    /// <summary>
+    /// The service for the unit class
+    /// </summary>
     public class UnitService : IUnitService{
 
         private readonly IRepository<Unit> _unitRepository;
@@ -41,6 +44,11 @@ namespace Service.Interfaces {
             } catch (Exception ex){
                 throw new Exception(ex.Message);
             }
+        }
+
+        public int ValidateProductKey(string productKey) {
+            var unit = _unitRepository.Table.FirstOrDefault(x => x.ProductKey == productKey);
+            return unit != null ? unit.Id : -1;
         }
     }
 }

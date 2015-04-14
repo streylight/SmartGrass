@@ -5,6 +5,9 @@ using Core.Domains;
 using Map.Repo;
 
 namespace Service.Interfaces {
+    /// <summary>
+    /// The service for the user class
+    /// </summary>
     public class UserService : IUserService{
 
         private readonly IRepository<User> _userRepository;

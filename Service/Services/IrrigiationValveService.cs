@@ -5,6 +5,9 @@ using Core.Domains;
 using Map.Repo;
 
 namespace Service.Interfaces {
+    /// <summary>
+    /// The service for the irrigation valve class
+    /// </summary>
     public class IrrigationValveService : IIrrigationValveService{
 
         private readonly IRepository<IrrigationValve> _irrigationValveRepository;

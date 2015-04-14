@@ -5,6 +5,9 @@ using Core.Domains;
 using Map.Repo;
 
 namespace Service.Interfaces {
+    /// <summary>
+    /// The service for the temperature reading class
+    /// </summary>
     public class TemperatureReadingService : ITemperatureReadingService{
 
         private readonly IRepository<TemperatureReading> _temperatureReadingRepository;

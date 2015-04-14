@@ -2,7 +2,9 @@
 using Core.Domains;
 
 namespace Service.Interfaces {
-
+    /// <summary>
+    /// The interface for the user service
+    /// </summary>
     public interface IUserService{
         User GetUserById(int id);
         IList<User> GetAllUsers();

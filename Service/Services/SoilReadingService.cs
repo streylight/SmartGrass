@@ -5,6 +5,9 @@ using Core.Domains;
 using Map.Repo;
 
 namespace Service.Interfaces {
+    /// <summary>
+    /// The service for the soil reading class
+    /// </summary>
     public class SoilReadingService : ISoilReadingService{
 
         private readonly IRepository<SoilReading> _soilReadingRepository;
@@ -21,13 +24,14 @@ namespace Service.Interfaces {
             return _soilReadingRepository.Table.ToList();
         }
 
-        public void Insert(SoilReading soilReading){
+        public void Insert(List<SoilReading> soilReadings){
             try{
-                if (soilReading.Id == 0)
-                    _soilReadingRepository.Insert(soilReading);
-                else
-                    _soilReadingRepository.Update(soilReading);    
-
+                foreach (var soilReading in soilReadings) {
+                    if (soilReading.Id == 0)
+                        _soilReadingRepository.Insert(soilReading);
+                    else
+                        _soilReadingRepository.Update(soilReading);  
+                }
             } catch (Exception ex){
                 throw new Exception(ex.Message);
             }

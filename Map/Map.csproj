@@ -48,7 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappings\DomainMaps.cs" />
+    <Compile Include="Mappings\IrrigationValveMap.cs" />
+    <Compile Include="Mappings\RainEventMap.cs" />
+    <Compile Include="Mappings\SoilReadingMap.cs" />
+    <Compile Include="Mappings\TemperatureReadingMap.cs" />
+    <Compile Include="Mappings\UnitMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="Mappings\WateringEventMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repo\AppContext.cs" />
     <Compile Include="Repo\IDbContext.cs" />

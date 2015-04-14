@@ -17,9 +17,14 @@ namespace Core.Domains {
         /// Foreign key for unit
         /// </summary>
         public int UnitId { get; set; }
+
         /// <summary>
         /// Virtual property for the unit object
         /// </summary>
         public Unit Unit { get; set; }
+        /// <summary>
+        /// Virtual property for the watering events
+        /// </summary>
+        public virtual ICollection<WateringEvent> WateringEvents { get; set; } 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Web.Models.RegisterViewModel
+﻿@model Web.Models.RegistrationViewModel
 
 @{
     ViewBag.Title = "Register";
@@ -196,16 +196,16 @@
                 @Html.ValidationSummary(true)
                 <h3>Registration</h3>
                 <div class="form-group m-b-20">
-                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
+                    @Html.TextBoxFor(model => model.Username, new { @class = "form-control input-lg", @placeholder = "Username" })
                 </div>
                 <div class="form-group m-b-20">
-                    @Html.PasswordFor(x => x.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
                 </div>
                 <div class="form-group m-b-20">
-                    @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control input-lg", @placeholder = "Confirm Password" })
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control input-lg", @placeholder = "Confirm Password" })
                 </div>
                 <div class="form-group m-b-20">
-                    @Html.TextBoxFor(x => x.ProductKey, new { @class = "form-control input-lg", @placeholder = "Product Key" })
+                    @Html.TextBoxFor(model => model.ProductKey, new { @class = "form-control input-lg", @placeholder = "Product Key" })
                 </div>
                 <div class="login-buttons">
                     <button type="submit" class="btn btn-success btn-block btn-lg">Register</button>

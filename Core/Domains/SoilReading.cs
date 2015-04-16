@@ -10,6 +10,10 @@ namespace Core.Domains {
     /// </summary>
     public class SoilReading : BaseEntity {
         /// <summary>
+        /// The soil sensor number
+        /// </summary>
+        public int SensorNumber { get; set; }
+        /// <summary>
         /// The soil moisture level
         /// </summary>
         public double SoilMoisture { get; set; }

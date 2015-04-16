@@ -20,7 +20,7 @@ namespace Core.Domains {
         /// <summary>
         /// End date time of the watering
         /// </summary>
-        public DateTime? EndDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
         /// <summary>
         /// Foreign key for irrigation valve
         /// </summary>

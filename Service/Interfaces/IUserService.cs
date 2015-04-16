@@ -10,5 +10,8 @@ namespace Service.Interfaces {
         IList<User> GetAllUsers();
         void Insert(User user);
         void Delete(int id);
+        bool ValidateLogin(string username, string password);
+        bool ValidateUsername(string username);
+        User GetByUsername(string username);
     }
 }

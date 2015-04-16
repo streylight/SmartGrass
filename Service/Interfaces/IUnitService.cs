@@ -11,5 +11,6 @@ namespace Service.Interfaces {
         void Insert(Unit unit);
         void Delete(int id);
         int ValidateProductKey(string productKey);
+        Dictionary<string, string> GetValveCommands(int id);
     }
 }

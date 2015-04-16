@@ -12,7 +12,7 @@ namespace Core.Domains {
         /// <summary>
         /// Unique username for login
         /// </summary>
-        public string UserName { get; set; }
+        public string Username { get; set; }
         /// <summary>
         /// The encrypted password
         /// </summary>
@@ -22,9 +22,13 @@ namespace Core.Domains {
         /// </summary>
         public string PasswordSalt { get; set; }
         /// <summary>
+        /// The role of the user
+        /// </summary>
+        public Role Role { get; set; }
+        /// <summary>
         /// Foreign key for the HICS unit
         /// </summary>
-        public Unit UnitId { get; set; }
+        public int UnitId { get; set; }
         /// <summary>
         /// Virtual reference to the HICS unit domain
         /// </summary>

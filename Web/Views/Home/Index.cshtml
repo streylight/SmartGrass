@@ -568,9 +568,36 @@ h1, h2, h3, h4, h5, h6 {
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $.getJSON("http://localhost:64623/api/Sensors", function (data) {
-            console.log("data: " + data);
+        //$.getJSON("http://localhost:64623/api/Sensors", function (data) {
+        //    console.log("data: " + data);
+        //});
+
+        var body = {
+            "SoilReadings": [
+                {
+                    "SensorNumber": 1,
+                    "SoilMoisture": 2.30
+                }, {
+                    "SensorNumber": 2,
+                    "SoilMoisture": 3.50
+                }
+            ],
+            "ProductKey": "1234",
+            "Temperature": 34.0,
+            "Rain": 0.41
+        };
+
+
+        $.ajax({
+            url: "http://localhost:64623/api/Sensors",
+            contentType: "application/json",
+            type: "POST",
+            data: JSON.stringify(body),
+            success: function (data) {
+                console.log(data);
+            }
         });
+
         App.init();
     });
 </script>

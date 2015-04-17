@@ -21,11 +21,18 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/bootstrap-datepicker.js",
+                      "~/Scripts/moment.min.js",
+                      "~/Scripts/respond.js",
+                      "~/Scripts/bootstrap-datetimepicker.js",
+                      "~/Scripts/select2.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/datepicker.css",
+                      "~/Content/bootstrap-datetimepicker.css",
+                      "~/Content/select2.css"));
         }
     }
 }

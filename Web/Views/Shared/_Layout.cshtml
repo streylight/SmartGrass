@@ -6,14 +6,13 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
     @Styles.Render("~/Content/css")
-    <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.css' rel='stylesheet' type='text/css'>
-    <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.print.css' rel='stylesheet' type='text/css'>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js"></script>
-    
+    <link href="~/Content/fullcalendar.css" rel="stylesheet" />
+    @*<link href="~/Content/fullcalendar.print.css" rel="stylesheet" />*@
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-
+    <script src="~/Scripts/fullcalendar.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top" style="box-shadow: 0 0 2px rgba(0,0,0,.3);">
@@ -35,11 +34,6 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a data-container="body" id="notifications" tabindex="0" data-placement="bottom" role="button" data-toggle="popover" data-trigger="focus" title="Notifications" data-content="No notifications">
-                            <span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="badge notification-count" style="background-color:red"></span>
-                        </a>
-                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">

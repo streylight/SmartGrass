@@ -158,11 +158,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ListHelper.cs" />
     <Compile Include="Infrastructure\AppAuthorizeAttribute.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\JsonManager.cs" />
     <Compile Include="Infrastructure\WebModule.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegistrationViewModel.cs" />
@@ -175,22 +177,41 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fullcalendar.css" />
     <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\Images\3804-green-trees-grass-parks-fresh-new-hd-wallpaper.jpg" />
+    <Content Include="Content\Images\back_disabled.png" />
+    <Content Include="Content\Images\back_enabled.png" />
+    <Content Include="Content\Images\back_enabled_hover.png" />
     <Content Include="Content\Images\content-bg-cover.png" />
     <Content Include="Content\Images\CSE1in.png" />
+    <Content Include="Content\Images\forward_disabled.png" />
+    <Content Include="Content\Images\forward_enabled.png" />
+    <Content Include="Content\Images\forward_enabled_hover.png" />
     <Content Include="Content\Images\leaf_in_lawn.jpg" />
     <Content Include="Content\Images\Nuts&amp;Bolts.png" />
     <Content Include="Content\Images\nutsandbolts-logo.png" />
+    <Content Include="Content\Images\select2-spinner.gif" />
+    <Content Include="Content\Images\select2.png" />
+    <Content Include="Content\Images\select2x2.png" />
     <Content Include="Content\Images\sg-logo-trans.png" />
     <Content Include="Content\Images\sg-logo.png" />
     <Content Include="Content\Images\sg-main-full.png" />
     <Content Include="Content\Images\smartGrassLogo.png" />
+    <Content Include="Content\Images\sort_asc.png" />
+    <Content Include="Content\Images\sort_asc_disabled.png" />
+    <Content Include="Content\Images\sort_both.png" />
+    <Content Include="Content\Images\sort_desc.png" />
+    <Content Include="Content\Images\sort_desc_disabled.png" />
     <Content Include="Content\Images\sprinkler-1.jpg" />
     <Content Include="Content\Images\summer-lawn-1920x1080.jpg" />
+    <Content Include="Content\select2.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -229,6 +250,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\apps.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\azure.pubxml" />
@@ -261,6 +285,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\scrollMonitor.js" />
+    <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">

@@ -63,18 +63,27 @@ namespace Service.Interfaces {
         }
 
         public Dictionary<string, string> GetValveCommands(int id) {
-            var unit = _unitRepository.GetById(id);
+            var irrigationValves = _irrigationValveRepository.Table.Where(x => x.UnitId == id).ToList();
             var commandDict = new Dictionary<string, string>();
             var now = DateTime.Now;
 
-            foreach (var valve in unit.IrrigationValves) {
+            foreach (var valve in irrigationValves) {
                 var command = "";
                 if (valve.WateringEvents.Any(x => x.Watering)) {
-                    var wateringEvent = valve.WateringEvents.Last(x => x.Watering);
-                    command = wateringEvent.EndDateTime > now ? "0" : "1";
-                } else if (valve.WateringEvents.Any(x => x.StartDateTime > now && now < x.EndDateTime)) {
-                    var wateringEvent = valve.WateringEvents.First(x => x.StartDateTime > now && now < x.EndDateTime);
+                    var wateringEvents = valve.WateringEvents.Where(x => x.Watering).OrderBy(x => x.EndDateTime);
+                    var wateringEvent = wateringEvents.First();
+                    if (wateringEvent.EndDateTime > now) {
+                        command = "0";
+                    } else {
+                        wateringEvent.Watering = false;
+                        wateringEvent.IrrigationValve = null;
+                        _wateringEventRepository.Update(wateringEvent);
+                        command = "1";
+                    }
+                } else if (valve.WateringEvents.Any(x => x.StartDateTime < now && now < x.EndDateTime)) {
+                    var wateringEvent = valve.WateringEvents.First(x => x.StartDateTime < now && now < x.EndDateTime);
                     wateringEvent.Watering = true;
+                    wateringEvent.IrrigationValve = null;
                     _wateringEventRepository.Update(wateringEvent);
                     command = "1";
                 } else {

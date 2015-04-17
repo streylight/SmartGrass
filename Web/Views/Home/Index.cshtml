@@ -574,29 +574,33 @@ h1, h2, h3, h4, h5, h6 {
 
         var body = {
             "SoilReadings": [
-                {
-                    "SensorNumber": 1,
-                    "SoilMoisture": 2.30
-                }, {
-                    "SensorNumber": 2,
-                    "SoilMoisture": 3.50
-                }
-            ],
+            {
+                "SensorNumber": 1,
+                "SoilMoisture": 2.30
+            }, {
+                "SensorNumber": 2,
+                "SoilMoisture": 3.50
+            },
+            {
+                "SensorNumber": 3,
+                "SoilMoisture": 3.50
+            }
+                        ],
             "ProductKey": "1234",
             "Temperature": 34.0,
             "Rain": 0.41
         };
 
 
-        //$.ajax({
-        //    url: "http://localhost:64623/api/Sensors",
-        //    contentType: "application/json",
-        //    type: "POST",
-        //    data: JSON.stringify(body),
-        //    success: function (data) {
-        //        console.log(data);
-        //    }
-        //});
+        $.ajax({
+            url: "http://localhost:64623/api/Sensors",
+            contentType: "application/json",
+            type: "POST",
+            data: JSON.stringify(body),
+            success: function (data) {
+                console.log(data);
+            }
+        });
 
         App.init();
     });

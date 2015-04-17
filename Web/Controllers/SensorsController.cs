@@ -10,10 +10,9 @@ using Core.Domains;
 using Service.Interfaces;
 using Web.Models;
 
-namespace Web.Controllers
-{
-    public class SensorsController : ApiController
-    {
+namespace Web.Controllers {
+
+    public class SensorsController : ApiController {
         // GET api/sensors
         public IEnumerable<string> Get()
         {
@@ -28,24 +27,24 @@ namespace Web.Controllers
 
         // POST api/sensors
         public string Post([FromBody]SensorDataModel sensorDataModel) {
-            var unitService = new UnitService();
-            var soilReadingService = new SoilReadingService();
-            var temperatureReadingService = new TemperatureReadingService();
             try {
+                var unitService = new UnitService();
+                var soilReadingService = new SoilReadingService();
+                var temperatureReadingService = new TemperatureReadingService();
+
                 var unitId = unitService.ValidateProductKey(sensorDataModel.ProductKey);
                 if (unitId == -1) {
                     return "Invalid product key.";
                 }
+                var commandDict = unitService.GetValveCommands(unitId);
 
                 soilReadingService.Insert(sensorDataModel.SoilReadings, unitId);
                 var tempReading = new TemperatureReading {
-                    UnitId = unitId,
+                    UnitId = 2,
                     DateTime = DateTime.Now,
                     Temperature = sensorDataModel.Temperature
                 };
                 temperatureReadingService.Insert(tempReading);
-
-                var commandDict = unitService.GetValveCommands(unitId);
 
                 var serializer = new JavaScriptSerializer();
                 var jsonString = serializer.Serialize(commandDict);

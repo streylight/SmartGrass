@@ -24,13 +24,14 @@ namespace Service.Interfaces {
             return _soilReadingRepository.Table.ToList();
         }
 
-        public void Insert(List<SoilReading> soilReadings){
+        public void Insert(List<SoilReading> soilReadings, int unitId){
             try{
                 foreach (var soilReading in soilReadings) {
-                    if (soilReading.Id == 0)
+                    if (soilReading.Id == 0) {
+                        soilReading.DateTime = DateTime.Now;
+                        soilReading.UnitId = unitId;
                         _soilReadingRepository.Insert(soilReading);
-                    else
-                        _soilReadingRepository.Update(soilReading);  
+                    }
                 }
             } catch (Exception ex){
                 throw new Exception(ex.Message);

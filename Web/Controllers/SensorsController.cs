@@ -28,25 +28,31 @@ namespace Web.Controllers
 
         // POST api/sensors
         public string Post([FromBody]SensorDataModel sensorDataModel) {
-            //var unitService = new UnitService();
-            //var unitId = unitService.ValidateProductKey(sensorDataModel.ProductKey);
-            //if (unitId == -1) {
-            //    return "Invalid product key.";
-            //}
+            var unitService = new UnitService();
+            var soilReadingService = new SoilReadingService();
+            var temperatureReadingService = new TemperatureReadingService();
+            try {
+                var unitId = unitService.ValidateProductKey(sensorDataModel.ProductKey);
+                if (unitId == -1) {
+                    return "Invalid product key.";
+                }
 
-            //var commandDict = unitService.GetValveCommands(unitId);
-            //Dictionary<string, object> dict = new Dictionary<string, object>();
-            Dictionary<string, object> commands = new Dictionary<string, object>();
-            commands.Add("0", "1");
-            commands.Add("1", "0");
-            commands.Add("2", "0");
-            for (var i = 3; i < 24; i++) {
-                commands.Add(i.ToString(), "0");
+                soilReadingService.Insert(sensorDataModel.SoilReadings, unitId);
+                var tempReading = new TemperatureReading {
+                    UnitId = unitId,
+                    DateTime = DateTime.Now,
+                    Temperature = sensorDataModel.Temperature
+                };
+                temperatureReadingService.Insert(tempReading);
+
+                var commandDict = unitService.GetValveCommands(unitId);
+
+                var serializer = new JavaScriptSerializer();
+                var jsonString = serializer.Serialize(commandDict);
+                return jsonString;
+            } catch (Exception ex) {
+                return ex.Message;
             }
-
-            var serializer = new JavaScriptSerializer();
-            var jsonString = serializer.Serialize(commands);
-            return jsonString;
         }
 
         // PUT api/sensors/5

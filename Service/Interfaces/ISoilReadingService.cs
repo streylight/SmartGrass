@@ -12,7 +12,7 @@ namespace Service.Interfaces {
     public interface ISoilReadingService {
         SoilReading GetSoilReadingById(int id);
         IList<SoilReading> GetAllSoilReadings();
-        void Insert(List<SoilReading> soilReadings);
+        void Insert(List<SoilReading> soilReadings, int unitId);
         void Delete(int id);
     }
 }

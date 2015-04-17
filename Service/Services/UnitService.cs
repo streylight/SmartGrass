@@ -71,7 +71,7 @@ namespace Service.Interfaces {
                 var command = "";
                 if (valve.WateringEvents.Any(x => x.Watering)) {
                     var wateringEvent = valve.WateringEvents.Last(x => x.Watering);
-                    command = wateringEvent.EndDateTime > now ? "1" : "0";
+                    command = wateringEvent.EndDateTime > now ? "0" : "1";
                 } else if (valve.WateringEvents.Any(x => x.StartDateTime > now && now < x.EndDateTime)) {
                     var wateringEvent = valve.WateringEvents.First(x => x.StartDateTime > now && now < x.EndDateTime);
                     wateringEvent.Watering = true;
@@ -80,7 +80,7 @@ namespace Service.Interfaces {
                 } else {
                     command = "0";
                 }
-                commandDict.Add("valve" + valve.ValveNumber, command);
+                commandDict.Add(valve.ValveNumber.ToString(), command);
             }
 
             return commandDict;

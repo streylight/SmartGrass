@@ -588,15 +588,15 @@ h1, h2, h3, h4, h5, h6 {
         };
 
 
-        $.ajax({
-            url: "http://localhost:64623/api/Sensors",
-            contentType: "application/json",
-            type: "POST",
-            data: JSON.stringify(body),
-            success: function (data) {
-                console.log(data);
-            }
-        });
+        //$.ajax({
+        //    url: "http://localhost:64623/api/Sensors",
+        //    contentType: "application/json",
+        //    type: "POST",
+        //    data: JSON.stringify(body),
+        //    success: function (data) {
+        //        console.log(data);
+        //    }
+        //});
 
         App.init();
     });

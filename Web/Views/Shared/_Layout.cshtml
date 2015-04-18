@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
     @Styles.Render("~/Content/css")
     <link href="~/Content/fullcalendar.css" rel="stylesheet" />
     @*<link href="~/Content/fullcalendar.print.css" rel="stylesheet" />*@
@@ -19,7 +20,7 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" style="padding: 5px 15px" href="index.html">
+                <a class="navbar-brand" style="padding: 5px 15px" href="@Url.Action("Index", "Home")">
                     <img src="~/Content/Images/sg-logo-trans.png" alt="" style="width: 35px" />
                 </a>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">

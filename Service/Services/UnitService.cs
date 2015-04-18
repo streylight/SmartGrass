@@ -65,7 +65,11 @@ namespace Service.Interfaces {
         public Dictionary<string, string> GetValveCommands(int id) {
             var irrigationValves = _irrigationValveRepository.Table.Where(x => x.UnitId == id).ToList();
             var commandDict = new Dictionary<string, string>();
-            var now = DateTime.Now;
+            //var now = DateTime.Now;
+
+            var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
+            
 
             foreach (var valve in irrigationValves) {
                 var command = "";
@@ -73,12 +77,12 @@ namespace Service.Interfaces {
                     var wateringEvents = valve.WateringEvents.Where(x => x.Watering).OrderBy(x => x.EndDateTime);
                     var wateringEvent = wateringEvents.First();
                     if (wateringEvent.EndDateTime > now) {
-                        command = "0";
+                        command = "1";
                     } else {
                         wateringEvent.Watering = false;
                         wateringEvent.IrrigationValve = null;
                         _wateringEventRepository.Update(wateringEvent);
-                        command = "1";
+                        command = "0";
                     }
                 } else if (valve.WateringEvents.Any(x => x.StartDateTime < now && now < x.EndDateTime)) {
                     var wateringEvent = valve.WateringEvents.First(x => x.StartDateTime < now && now < x.EndDateTime);

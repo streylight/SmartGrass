@@ -100,7 +100,7 @@ var App = function() {
     "use strict";
     return {
         init: function() {
-            handleHomeContentHeight();
+            //handleHomeContentHeight();
             handleHeaderNavigationState();
             handlePageContainerShow();
             handlePaceLoadingPlugins();

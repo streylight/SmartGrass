@@ -194,6 +194,7 @@
     <Content Include="Content\Images\forward_disabled.png" />
     <Content Include="Content\Images\forward_enabled.png" />
     <Content Include="Content\Images\forward_enabled_hover.png" />
+    <Content Include="Content\Images\green_grass_banner.jpg" />
     <Content Include="Content\Images\leaf_in_lawn.jpg" />
     <Content Include="Content\Images\Nuts&amp;Bolts.png" />
     <Content Include="Content\Images\nutsandbolts-logo.png" />

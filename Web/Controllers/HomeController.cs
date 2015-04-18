@@ -44,9 +44,17 @@ namespace Web.Controllers {
 
         public ActionResult Dashboard() {
             var user = _userService.GetUserById(UserId);
-            return View(new DashboardViewModel {
-                User = user
-            });
+            var wateringEvents = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).ToList();
+            var tempReadings = user.Unit.TemperatureReadings.ToList();
+            var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
+            var model = new DashboardViewModel {
+                User = user,
+                Watering = wateringEvents.Any(x => x.Watering),
+                CurrentTemperature = tempReadings.Any() ? string.Format("{0}°F", tempReadings.OrderBy(x => x.DateTime).First().Temperature + 33.8) : "N/A",
+                NextScheduledWatering = (wateringEvents.Any(x => x.StartDateTime > now) ? wateringEvents.First(x => x.StartDateTime > now).StartDateTime.ToString() : "None" )
+            };
+            return View(model);
         }
 
         public ActionResult CreateWateringEvent(List<int> irrigationValves, DateTime date, DateTime startTime, DateTime endTime) {

@@ -10,6 +10,8 @@
 <script src="~/Scripts/scrollMonitor.js"></script>
 <script src="~/Scripts/apps.js"></script>
 <script src="~/Scripts/pace.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
 <style>
     .header.navbar.navbar-transparent {
         border-bottom: 1px solid rgba(255,255,255,.2);
@@ -485,6 +487,59 @@ h1, h2, h3, h4, h5, h6 {
     vertical-align: middle;
     height: 100%;
 }
+
+/*.content.has-bg {
+  padding-bottom: 60px;
+  overflow: hidden;
+  position: relative;
+}*/
+.bg-black-darker {
+  background: #242a30!important;
+}
+.team {
+  text-align: center;
+  padding: 0 30px;
+}
+.team .image {
+  display: inline-block;
+  border-radius: 300px;
+  overflow: hidden;
+}
+.team .image img {
+  border-radius: 300px;
+}
+.team .info {
+  margin-top: 15px;
+}
+.team .name {
+  margin-bottom: 5px;
+}
+.team .title {
+  font-size: 12px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+.team p {
+  margin-bottom: 15px;
+}
+.team .social a {
+  border-radius: 300px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  line-height: 28px;
+  text-align: center;
+  display: inline-block;
+  color: #ccc;
+}
+.quote {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 300;
+  color: #fff;
+  color: rgba(255,255,255,.9);
+}
 </style>
 
 <div id="header" class="header navbar navbar-transparent navbar-fixed-top">
@@ -518,11 +573,11 @@ h1, h2, h3, h4, h5, h6 {
         </div>
     </div>
 </div>
-<div id="home" class="content has-bg home login-cover-bg">
+<div id="home" class="content has-bg home login-cover-bg" style="height: 1080px">
     <div class="content-bg">
         <img src="~/Content/Images/summer-lawn-1920x1080.jpg" alt="Home" />
     </div>
-    <div class="container home-content" style="margin-top: -250px">
+    <div class="container home-content" style="margin-top: -275px">
 
         <img src="~/Content/Images/sg-logo-trans.png" width="175"/>
         <h1>Welcome to Smart Grass</h1>
@@ -565,6 +620,99 @@ h1, h2, h3, h4, h5, h6 {
         </div>
     </div>
 </div>
+<div id="milestone" class="content bg-black-darker has-bg" data-scrollview="true">
+    <div class="content-bg">
+        <img src="~/Content/Images/green_grass_banner.jpg" alt="Milestone">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 quote">
+                <i class="fa fa-quote-left"></i> Smart Grass is the greatest thing <span class="text-theme">ever</span>!
+                <i class="fa fa-quote-right"></i>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<div id="team" class="content" data-scrollview="true">
+    <!-- begin container -->
+    <div class="container">
+        <h2 class="content-title">Our Team</h2>
+        <p class="content-desc">
+            Phasellus suscipit nisi hendrerit metus pharetra dignissim. Nullam nunc ante, viverra quis<br>
+            ex non, porttitor iaculis nisi.
+        </p>
+        <!-- begin row -->
+        <div class="row">
+            <!-- begin col-4 -->
+            <div class="col-md-4 col-sm-4">
+                <!-- begin team -->
+                <div class="team">
+                    <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
+                        <img src="assets/img/user-1.jpg" alt="Ryan Teller">
+                    </div>
+                    <div class="info">
+                        <h3 class="name">Ryan Teller</h3>
+                        <div class="title text-theme">FOUNDER</div>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                        <div class="social">
+                            <a href="#"><i class="fa fa-facebook fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-twitter fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-google-plus fa-lg fa-fw"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end team -->
+            </div>
+            <!-- end col-4 -->
+            <!-- begin col-4 -->
+            <div class="col-md-4 col-sm-4">
+                <!-- begin team -->
+                <div class="team">
+                    <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
+                        <img src="assets/img/user-2.jpg" alt="Jonny Cash">
+                    </div>
+                    <div class="info">
+                        <h3 class="name">Johnny Cash</h3>
+                        <div class="title text-theme">WEB DEVELOPER</div>
+                        <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                        <div class="social">
+                            <a href="#"><i class="fa fa-facebook fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-twitter fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-google-plus fa-lg fa-fw"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end team -->
+            </div>
+            <!-- end col-4 -->
+            <!-- begin col-4 -->
+            <div class="col-md-4 col-sm-4">
+                <!-- begin team -->
+                <div class="team">
+                    <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
+                        <img src="assets/img/user-3.jpg" alt="Mia Donovan">
+                    </div>
+                    <div class="info">
+                        <h3 class="name">Mia Donovan</h3>
+                        <div class="title text-theme">WEB DESIGNER</div>
+                        <p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. </p>
+                        <div class="social">
+                            <a href="#"><i class="fa fa-facebook fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-twitter fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-google-plus fa-lg fa-fw"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end team -->
+            </div>
+            <!-- end col-4 -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -592,15 +740,15 @@ h1, h2, h3, h4, h5, h6 {
         };
 
 
-        $.ajax({
-            url: "http://localhost:64623/api/Sensors",
-            contentType: "application/json",
-            type: "POST",
-            data: JSON.stringify(body),
-            success: function (data) {
-                console.log(data);
-            }
-        });
+        //$.ajax({
+        //    url: "http://localhost:64623/api/Sensors",
+        //    contentType: "application/json",
+        //    type: "POST",
+        //    data: JSON.stringify(body),
+        //    success: function (data) {
+        //        console.log(data);
+        //    }
+        //});
 
         App.init();
     });

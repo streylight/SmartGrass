@@ -48,10 +48,11 @@ namespace Web.Controllers {
             var tempReadings = user.Unit.TemperatureReadings.ToList();
             var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
             var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
+
             var model = new DashboardViewModel {
                 User = user,
                 Watering = wateringEvents.Any(x => x.Watering),
-                CurrentTemperature = tempReadings.Any() ? string.Format("{0}°F", tempReadings.OrderBy(x => x.DateTime).First().Temperature + 33.8) : "N/A",
+                TemperatureByDates = tempReadings.Where(x => x.DateTime > now.AddDays(-7)).GroupBy(x => x.DateTime.Date).ToDictionary(x => x.Key, x => x.Sum(y => y.Temperature) / x.Count()),
                 NextScheduledWatering = (wateringEvents.Any(x => x.StartDateTime > now) ? wateringEvents.First(x => x.StartDateTime > now).StartDateTime.ToString() : "None" )
             };
             return View(model);

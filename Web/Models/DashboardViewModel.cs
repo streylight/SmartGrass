@@ -8,7 +8,7 @@ namespace Web.Models {
     public class DashboardViewModel {
         public User User { get; set; }
         public bool Watering { get; set; }
-        public string CurrentTemperature { get; set; }
+        public Dictionary<DateTime, double> TemperatureByDates { get; set; }
         public string SoilMoisture { get; set; }
         public string NextScheduledWatering { get; set; }
     }

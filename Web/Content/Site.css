@@ -52,3 +52,32 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+@media (min-width: 768px){
+  .weekday-col .col-md-1,
+  .weekday-col .col-sm-1,
+  .weekday-col .col-lg-1  {
+    width: 100%;
+    *width: 100%;
+  }
+}
+
+
+@media (min-width: 992px) {
+  .weekday-col .col-md-1,
+  .weekday-col .col-sm-1,
+  .weekday-col .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .weekday-col .col-md-1,
+  .weekday-col .col-sm-1,
+  .weekday-col .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
+}

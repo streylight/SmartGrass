@@ -3,6 +3,8 @@
 
 @{
     ViewBag.Title = "Home";
+    var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+    var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
 }
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
@@ -106,6 +108,46 @@
         height: 200px;
         /* width and height can be anything, as long as they're equal */
     }
+
+    .weekday-col .col-md-1,
+    .weekday-col .col-sm-1,
+    .weekday-col .col-lg-1 {
+        border-right: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .weekday-col .col-md-1:last-child,
+    .weekday-col .col-sm-1:last-child,
+    .weekday-col .col-lg-1:last-child {
+        border-right: none;
+    }
+
+    .weekday-col {
+        margin-bottom: 20px;
+    }
+
+    .day-label {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .day-temp {
+        font-size: 22px;
+    }
+    .calendar-day > label {
+        width: 100%;
+    }
+    .calendar-day {
+        padding-left: 0px;
+        padding-right: 0px;    
+    }
+    .calendar-day > span {
+        display: block;
+        background-color: white;
+        color: #000000;
+        font-size: 20px;
+        padding: 10px;
+    }
 </style>
 
 <div class="row" style="margin-top: 75px;">
@@ -131,7 +173,7 @@
             </div>
             <div class="stats-info">
                 <h4>CURRENT TEMPERATURE</h4>
-                <p>@Model.CurrentTemperature</p>
+                <p>@(Model.TemperatureByDates.ContainsKey(now.Date) ? string.Format("{0}°F", Model.TemperatureByDates[now.Date] + 33.8) : "N/A")</p>
             </div>
             <div class="stats-link">
                 <a data-toggle="collapse" href="#viewDetails">View Details</a>
@@ -168,24 +210,38 @@
     </div>
 </div>
 <div class="collapse" id="viewDetails">
-    <div class="well">
-        <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <div class="circle">
-                    <i class="fa fa-map-marker fa-5x"></i>
+        <div class="row weekday-col">
+            <div class="col-md-12">
+                @{
+                    var previousWeek = ListHelper.GetPreviousWeekDates(now);
+                }
+                @foreach (var date in previousWeek) {
+                    <div class="col-md-1 btn-warning calendar-day">
+                        <label>@date.ToShortDateString()</label>
+                        <span>@(Model.TemperatureByDates.ContainsKey(date.Date) ? string.Format("{0:N2}°F", Model.TemperatureByDates[date.Date] + 33.8) : "N/A")</span>
+                    </div>
+                }
+                
+                @*<div class="col-md-1 btn-warning">
+                    Tuesday
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <i class="fa fa-map-marker fa-5x"></i>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <i class="fa fa-map-marker fa-5x"></i>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <i class="fa fa-map-marker fa-5x"></i>
+                <div class="col-md-1 btn-warning">
+                    Wednesday
+                </div>
+                <div class="col-md-1 btn-warning">
+                    Thursday
+                </div>
+                <div class="col-md-1 btn-warning">
+                    Friday
+                </div>
+                <div class="col-md-1 btn-warning">
+                    Saturday
+                </div>
+                <div class="col-md-1 btn-warning">
+                    Sunday
+                </div>*@
             </div>
         </div>
-    </div>
 </div>
 <div class="row">
     <div class="col-md-8">

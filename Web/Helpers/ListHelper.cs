@@ -12,5 +12,14 @@ namespace Web.Helpers {
             var irrigationValveService = new IrrigationValveService();
             return irrigationValveService.GetAllIrrigationValves().Take(3).ToList();
         }
+
+        public static List<DateTime> GetPreviousWeekDates(DateTime now) {
+            var startingDate = now.AddDays(-6);
+            var datesList = new List<DateTime> {startingDate};
+            for (var i = 0; i < 6; i++) {
+                datesList.Add(startingDate.AddDays(i));
+            }
+            return datesList;
+        } 
     }
 }

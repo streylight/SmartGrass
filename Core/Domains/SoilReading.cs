@@ -12,7 +12,7 @@ namespace Core.Domains {
         /// <summary>
         /// The soil sensor number
         /// </summary>
-        public int SensorNumber { get; set; }
+        public string SensorNumber { get; set; }
         /// <summary>
         /// The soil moisture level
         /// </summary>

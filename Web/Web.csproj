@@ -270,6 +270,7 @@
     <Content Include="Scripts\gcal.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.knob.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />

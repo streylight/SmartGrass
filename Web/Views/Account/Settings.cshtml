@@ -1,0 +1,197 @@
+﻿@model Web.Models.SettingsViewModel
+@{
+    ViewBag.Title = "Settings";
+}
+<style>
+    input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 13.8px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 50%;
+  height: 8.4px;
+  cursor: pointer;
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+  /*background: #D9E0E7;*/
+  border-radius: 1.3px;
+  /*border: 0.2px solid #010101;*/
+}
+input[type=range]::-webkit-slider-thumb {
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;*/
+  border: 1px solid silver;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: white;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -14px;
+}
+/*input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #428bca;
+}*/
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+  background: #428bca;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;*/
+  border: 1px solid silver;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #adffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  /*border: 0.2px solid #010101;*/
+  border-radius: 2.6px;
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+}
+input[type=range]::-ms-fill-upper {
+  background: #428bca;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+}
+input[type=range]::-ms-thumb {
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+  border: 1px solid silver;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #adffff;
+  cursor: pointer;
+  height: 8.4px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+
+.horizontal-center {
+          position: relative;
+          top: 50%;
+        transform: translateY(50%);
+        -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+    }
+
+.range-threshold,
+.range-threshold:focus {
+    background-color: transparent !important;
+    box-shadow: none;
+    cursor: default !important;
+    border: none;
+    font-size: 20px;
+}
+</style>
+<div class="row" style="margin-top: 75px;">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel" style="border: none">
+            <div class="panel-heading" style="background-color: #242a30; color: white">
+                <h3 class="panel-title" id="panel-title">
+                    Settings<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a>
+                </h3>
+            </div>
+            <div class="panel-body">
+                 @using (Html.BeginForm("SaveSettings", "Account", FormMethod.Post, new {@id = "settingsForm", @class = "form-horizontal"})) {
+                     @Html.HiddenFor(model => model.UnitSettings.Id)
+                     @Html.HiddenFor(model => model.UnitSettings.UnitId)
+                     <div class="form-group">
+                             @Html.LabelFor(model => model.Username, "Username", new {@class = "col-md-3 control-label"})
+                         <div class="col-md-8">
+                             @Html.TextBoxFor(model => model.Username, new {@class = "form-control"})
+                         </div>
+                     </div>
+                     <div class="form-group">
+                             @Html.LabelFor(model => model.Password, "Change Password", new {@class = "col-md-3 control-label"})
+                         <div class="col-md-8">
+                             @Html.PasswordFor(model => model.Password, new {@class = "form-control", @placeholder = "New password"})
+                         </div>
+                     </div>
+                     <div class="form-group">
+                             @Html.LabelFor(model => model.ConfirmPassword, "Confirm Password", new {@class = "col-md-3 control-label"})
+                         <div class="col-md-8">
+                             @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm new password" })
+                         </div>
+                     </div>
+                     <div class="form-group">
+                             @Html.LabelFor(model => model.UnitSettings.SoilMoistureLimit, "Soil Moisture Limit", new {@class = "col-md-3 control-label"})
+                         <div class="col-md-8">
+                             <div class="col-md-10">
+                                 <input class="range-slider" type="range" min="0" max="5" value="@Model.UnitSettings.SoilMoistureLimit" data-display="#soilLimit">
+                             </div>
+                             <div class="col-md-2">
+                                 @Html.TextBoxFor(model => model.UnitSettings.SoilMoistureLimit, new { @id = "soilLimit", @readonly = "readonly", @class = "form-control range-threshold" })
+                             </div>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         @Html.LabelFor(model => model.UnitSettings.RainLimit, "Rain Limit", new {@class = "col-md-3 control-label"})
+                         <div class="col-md-8">
+                             <div class="col-md-10">
+                                 <input class="range-slider" type="range" min="0" max="5" value="@Model.UnitSettings.RainLimit" data-display="#rainLimit">
+                             </div>
+                             <div class="col-md-2">
+                                 @Html.TextBoxFor(model => model.UnitSettings.RainLimit, new {@id = "rainLimit", @readonly = "readonly", @class = "form-control range-threshold"})
+                             </div>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         @Html.LabelFor(model => model.UnitSettings.StopOnFreeze, "Stop on Freezing Conditions", new {@class = "col-md-3 control-label"})
+                         <div class="col-md-8">
+                            @Html.CheckBoxFor(model => model.UnitSettings.StopOnFreeze, new {@id = "", @class = "form-control"})
+                         </div>
+                     </div>
+                     <div class="col-md-3 col-md-offset-9">
+                         <button type="submit" class="btn btn-success btn-block">Save</button>
+                     </div>
+                }
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+    function UpdateSlider() {
+        var percent = Math.ceil(((this.value - this.min) / (this.max - this.min)) * 100);
+        $(this).css('background', '-webkit-linear-gradient(left, #428bca 0%, #428bca ' + percent + '%, #D9E0E7 ' + percent + '%)');
+    }
+
+    $(document).ready(function () {
+        $('.range-slider').each(UpdateSlider);
+
+        $('.range-slider').on('change', function () {
+            console.log("ping");
+            var ele = $(this).data('display');
+            $(ele).val($(this).val());
+        });
+        $('input[type="range"]').on('input', UpdateSlider);
+    });
+</script>

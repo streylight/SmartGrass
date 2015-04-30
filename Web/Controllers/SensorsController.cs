@@ -40,8 +40,7 @@ namespace Web.Controllers {
                 var commandDict = unitService.GetValveCommands(unitId);
 
                 soilReadingService.Insert(sensorDataModel.SoilReadings, unitId);
-                var tempReading = new TemperatureReading
-                {
+                var tempReading = new TemperatureReading {
                     UnitId = 2,
                     DateTime = DateTime.Now,
                     Temperature = sensorDataModel.Temperature

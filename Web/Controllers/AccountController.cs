@@ -19,13 +19,14 @@ namespace Web.Controllers {
     /// </summary>
     public class AccountController : BaseController {
 
-        private readonly int SG_COUNT = 24;
         private readonly IUserService _userService;
         private readonly IUnitService _unitService;
+        private readonly ISettingsService _settingsService;
 
-        public AccountController(IUserService userService, IUnitService unitService) {
+        public AccountController(IUserService userService, IUnitService unitService, ISettingsService settingsService) {
             _userService = userService;
             _unitService = unitService;
+            _settingsService = settingsService;
         }
 
         //
@@ -98,6 +99,24 @@ namespace Web.Controllers {
                 return RedirectToAction("Dashboard", "Home");
             } catch (Exception ex) {
                 return View(model);
+            }
+        }
+
+        public ActionResult Settings() {
+            try {
+                var user = _userService.GetUserById(UserId);
+                return View(new SettingsViewModel(user));
+            } catch (Exception ex) {
+                return View();
+            }
+        }
+
+        public ActionResult SaveSettings(SettingsViewModel model) {
+            try {
+                _settingsService.Insert(model.UnitSettings);
+                return RedirectToAction("Dashboard", "Home");
+            } catch (Exception ex) {
+                return View();
             }
         }
 

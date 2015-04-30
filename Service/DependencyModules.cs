@@ -18,6 +18,7 @@ namespace Service {
             Bind<IRepository<RainEvent>>().To<Repository<RainEvent>>();
             Bind<IRepository<Unit>>().To<Repository<Unit>>();
             Bind<IRepository<WateringEvent>>().To<Repository<WateringEvent>>();
+            Bind<IRepository<Settings>>().To<Repository<Settings>>();
         }
     }
 }

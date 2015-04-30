@@ -46,8 +46,7 @@ namespace Web.Controllers {
             var user = _userService.GetUserById(UserId);
             var wateringEvents = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).ToList();
             var tempReadings = user.Unit.TemperatureReadings.ToList();
-            var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
-            var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
+            var now = GetLocalTime();
             var soilReadings = user.Unit.SoilReadings.OrderBy(x => x.DateTime).ToList();
 
             var model = new DashboardViewModel {
@@ -91,6 +90,11 @@ namespace Web.Controllers {
             var user = _userService.GetUserById(UserId);
             var events = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).Select(x => new EventData(x)).ToList();
             return Json(new {eventData = events}, JsonRequestBehavior.AllowGet);
+        }
+
+        private DateTime GetLocalTime() {
+            var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
         }
     }
 }

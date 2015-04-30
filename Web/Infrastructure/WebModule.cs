@@ -15,6 +15,7 @@ namespace Web.Infrastructure {
             Bind<IUserService>().To<UserService>();
             Bind<IWateringEventService>().To<WateringEventService>();
             Bind<ITemperatureReadingService>().To<TemperatureReadingService>();
+            Bind<ISettingsService>().To<SettingsService>();
         }
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Domains\BaseEntity.cs" />
     <Compile Include="Domains\IrrigationValve.cs" />
     <Compile Include="Domains\RainEvent.cs" />
+    <Compile Include="Domains\Settings.cs" />
     <Compile Include="Domains\TemperatureReading.cs" />
     <Compile Include="Domains\SoilReading.cs" />
     <Compile Include="Domains\User.cs" />

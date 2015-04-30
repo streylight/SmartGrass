@@ -31,6 +31,9 @@ namespace Map.Mappings {
             HasMany(x => x.TemperatureReadings)
                 .WithRequired()
                 .HasForeignKey(x => x.UnitId);
+
+            //HasOptional(x => x.Settings);
+
         }
     }
 }

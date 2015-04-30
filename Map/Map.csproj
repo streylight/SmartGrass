@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Mappings\IrrigationValveMap.cs" />
     <Compile Include="Mappings\RainEventMap.cs" />
+    <Compile Include="Mappings\SettingsMap.cs" />
     <Compile Include="Mappings\SoilReadingMap.cs" />
     <Compile Include="Mappings\TemperatureReadingMap.cs" />
     <Compile Include="Mappings\UnitMap.cs" />

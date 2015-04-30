@@ -51,12 +51,14 @@
   <ItemGroup>
     <Compile Include="DependencyModules.cs" />
     <Compile Include="Interfaces\IRainEventService.cs" />
+    <Compile Include="Interfaces\ISettingsService.cs" />
     <Compile Include="Interfaces\IUnitService.cs" />
     <Compile Include="Interfaces\IIrrigationValveService.cs" />
     <Compile Include="Interfaces\ITemperatureReadingService.cs" />
     <Compile Include="Interfaces\ISoilReadingService.cs" />
     <Compile Include="Interfaces\IWateringEventService.cs" />
     <Compile Include="Services\RainEventService.cs" />
+    <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\UnitService.cs" />
     <Compile Include="Services\IrrigiationValveService.cs" />
     <Compile Include="Services\TemperatureReadingService.cs" />

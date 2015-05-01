@@ -16,8 +16,9 @@ namespace Map.Mappings {
             HasKey(u => u.Id);
 
             // Relationships
-            HasRequired(x => x.Unit)
-                .WithOptional(x => x.Settings);
+
+            //HasRequired(x => x.Unit)
+            //    .WithOptional(x => x.Settings);
         }
     }
 }

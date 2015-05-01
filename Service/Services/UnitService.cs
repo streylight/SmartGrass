@@ -62,22 +62,28 @@ namespace Service.Interfaces {
             return unit != null ? unit.Id : -1;
         }
 
-        public Dictionary<string, string> GetValveCommands(int id) {
+        public Dictionary<string, string> GetValveCommands(int id, Dictionary<int, bool> limitDict, bool temp, bool rain) {
             var irrigationValves = _irrigationValveRepository.Table.Where(x => x.UnitId == id).ToList();
             var commandDict = new Dictionary<string, string>();
-            //var now = DateTime.Now;
-
             var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
             var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
-            
 
             foreach (var valve in irrigationValves) {
                 var command = "";
                 if (valve.WateringEvents.Any(x => x.Watering)) {
                     var wateringEvents = valve.WateringEvents.Where(x => x.Watering).OrderBy(x => x.EndDateTime);
                     var wateringEvent = wateringEvents.First();
+                    
                     if (wateringEvent.EndDateTime > now) {
-                        command = "1";
+                        if (temp || rain || (limitDict.ContainsKey(valve.ValveNumber) && limitDict[valve.ValveNumber])) {
+                            wateringEvent.Watering = false;
+                            wateringEvent.IrrigationValve = null;
+                            wateringEvent.EndDateTime = now;
+                            _wateringEventRepository.Update(wateringEvent);
+                            command = "0";
+                        } else {
+                            command = "1";
+                        }
                     } else {
                         wateringEvent.Watering = false;
                         wateringEvent.IrrigationValve = null;
@@ -86,10 +92,17 @@ namespace Service.Interfaces {
                     }
                 } else if (valve.WateringEvents.Any(x => x.StartDateTime < now && now < x.EndDateTime)) {
                     var wateringEvent = valve.WateringEvents.First(x => x.StartDateTime < now && now < x.EndDateTime);
-                    wateringEvent.Watering = true;
-                    wateringEvent.IrrigationValve = null;
+                    if (temp || rain || (limitDict.ContainsKey(valve.ValveNumber) && limitDict[valve.ValveNumber])) {
+                        wateringEvent.Watering = false;
+                        wateringEvent.IrrigationValve = null;
+                        wateringEvent.EndDateTime = now;
+                        command = "0";
+                    } else {
+                        wateringEvent.Watering = true;
+                        wateringEvent.IrrigationValve = null;
+                        command = "1";
+                    }
                     _wateringEventRepository.Update(wateringEvent);
-                    command = "1";
                 } else {
                     command = "0";
                 }

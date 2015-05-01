@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Domains;
 using Map.Repo;
+using Service.Interfaces;
 
-namespace Service.Interfaces {
+namespace Service.Services {
     /// <summary>
     /// The service for the soil reading class
     /// </summary>
-    public class SettingsService : ISettingsService{
+    public class SettingsService : ISettingsService {
 
         private readonly IRepository<Settings> _settingsRepository;
 

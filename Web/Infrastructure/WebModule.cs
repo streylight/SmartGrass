@@ -1,6 +1,7 @@
 ﻿using Ninject.Modules;
 using Service;
 using Service.Interfaces;
+using Service.Services;
 
 namespace Web.Infrastructure {
     public class WebModule : NinjectModule {

@@ -251,7 +251,7 @@
                 <p>@Model.NextScheduledWatering</p>
             </div>
             <div class="stats-link">
-                <a data-toggle="collapse" href="#viewDetails">View Details</a>
+                <a data-toggle="collapse" href="#viewDetails" style="display: list-item; background: none"></a>
             </div>
         </div>
     </div>
@@ -333,7 +333,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+@*<div class="row">
     <div class="col-md-12">
         <div class="panel" style="border: none">
             <div class="panel-heading" style="background-color: #242a30; color: white">
@@ -374,7 +374,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
 
@@ -416,25 +416,10 @@
     </div>
 </div>
 
-<script src="~/Scripts/jquery.knob.js"></script>
 <script type="text/javascript">
 
-    Morris.Area({
-        element: 'myfirstchart',
-        data: [
-          { y: '2006', a: 100, b: 90 },
-          { y: '2007', a: 75, b: 65 },
-          { y: '2008', a: 50, b: 40 },
-          { y: '2009', a: 75, b: 65 },
-          { y: '2010', a: 50, b: 40 },
-          { y: '2011', a: 75, b: 65 },
-          { y: '2012', a: 100, b: 90 }
-        ],
-        xkey: 'y',
-        ykeys: ['a', 'b'],
-        labels: ['Series A', 'Series B']
-    });
-
+    
+    
 
     
 
@@ -444,8 +429,28 @@
         $('#startTime, #endTime').datetimepicker({
             format: 'LT'
         });
-        
 
+        $.ajax({
+            url: "@Url.Action("GenerateSoilMoistureGraph", "Home")",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                console.log("data: " + JSON.stringify(data.results));
+                Morris.Area({
+                    element: 'myfirstchart',
+                    data: data.results,
+                    xkey: 'd',
+                    ykeys: ['max', 'min'],
+                    labels: ['Max', 'Min'],
+                    fillOpacity: 0.6,
+                    hideHover: 'auto',
+                    behaveLikeLine: true,
+                    resize: true,
+                });
+            }
+        });
+
+        
         
 
         for (var i = 0; i < 3; i++) {

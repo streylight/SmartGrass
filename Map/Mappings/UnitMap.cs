@@ -32,7 +32,9 @@ namespace Map.Mappings {
                 .WithRequired()
                 .HasForeignKey(x => x.UnitId);
 
-            //HasOptional(x => x.Settings);
+            HasOptional(x => x.Settings)
+                .WithMany()
+                .HasForeignKey(x => x.SettingsId);
 
         }
     }

@@ -86,6 +86,22 @@ namespace Web.Controllers {
             }
         }
 
+        public ActionResult GenerateSoilMoistureGraph() {
+            var user = _userService.GetUserById(UserId);
+            var soilReadings = user.Unit.SoilReadings.GroupBy(x => x.DateTime.Date).ToDictionary(x => x.Key, x => x);
+            var date = DateTime.Today.AddDays(-30);
+            var data = new List<object>();
+            for (var i = 0; i < 30; i++) {
+                data.Add(new {
+                    d = date.Date.ToString("yyyy-MM-dd"),
+                    max = soilReadings.ContainsKey(date.Date) ? soilReadings[date.Date].Max(x => x.SoilMoisture) : 0,
+                    min = soilReadings.ContainsKey(date.Date) ? soilReadings[date.Date].Min(x => x.SoilMoisture) : 0,
+                });
+                date = date.AddDays(1);
+            }
+            return Json(new { results = data }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetWateringEvents() {
             var user = _userService.GetUserById(UserId);
             var events = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).Select(x => new EventData(x)).ToList();

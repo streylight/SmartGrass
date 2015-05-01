@@ -120,7 +120,7 @@ input[type=range]:focus::-ms-fill-upper {
             <div class="panel-body">
                  @using (Html.BeginForm("SaveSettings", "Account", FormMethod.Post, new {@id = "settingsForm", @class = "form-horizontal"})) {
                      @Html.HiddenFor(model => model.UnitSettings.Id)
-                     @Html.HiddenFor(model => model.UnitSettings.UnitId)
+                     
                      <div class="form-group">
                              @Html.LabelFor(model => model.Username, "Username", new {@class = "col-md-3 control-label"})
                          <div class="col-md-8">
@@ -163,7 +163,7 @@ input[type=range]:focus::-ms-fill-upper {
                      </div>
                      <div class="form-group">
                          @Html.LabelFor(model => model.UnitSettings.StopOnFreeze, "Stop on Freezing Conditions", new {@class = "col-md-3 control-label"})
-                         <div class="col-md-8">
+                         <div class="col-md-1">
                             @Html.CheckBoxFor(model => model.UnitSettings.StopOnFreeze, new {@id = "", @class = "form-control"})
                          </div>
                      </div>

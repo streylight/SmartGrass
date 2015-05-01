@@ -114,6 +114,16 @@ namespace Web.Controllers {
         public ActionResult SaveSettings(SettingsViewModel model) {
             try {
                 _settingsService.Insert(model.UnitSettings);
+                
+                var user = _userService.GetUserById(UserId);
+                if (!user.Unit.SettingsId.HasValue) {
+                    user.Unit.SettingsId = model.UnitSettings.Id;
+                }
+                if (!string.IsNullOrEmpty(model.Password) && model.Password == model.ConfirmPassword && _userService.ValidateLogin(model.Username, model.Password)) {
+                    _userService.ChangePassword(user, model.Password);
+                } else {
+                    _userService.Insert(user);
+                }
                 return RedirectToAction("Dashboard", "Home");
             } catch (Exception ex) {
                 return View();

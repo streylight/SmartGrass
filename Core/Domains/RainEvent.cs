@@ -13,6 +13,7 @@ namespace Core.Domains {
         /// The timestamp of the event
         /// </summary>
         public DateTime DateTime { get; set; }
+        public bool New { get; set; }
         /// <summary>
         /// Foreign key for unit
         /// </summary>

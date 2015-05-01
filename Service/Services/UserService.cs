@@ -64,6 +64,13 @@ namespace Service.Interfaces {
             return user.PasswordHash == pwHash;
         }
 
+        public void ChangePassword(User account, string newPassword) {
+            var salt = "";
+            account.PasswordHash = SecurityHelper.HashPassword(newPassword, ref salt);
+            account.PasswordSalt = salt;
+            _userRepository.Update(account);
+        }
+
         public bool ValidateUsername(string username) {
             return !_userRepository.Table.Any(x => x.Username == username.ToLower());
         }

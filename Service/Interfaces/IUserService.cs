@@ -13,5 +13,6 @@ namespace Service.Interfaces {
         bool ValidateLogin(string username, string password);
         bool ValidateUsername(string username);
         User GetByUsername(string username);
+        void ChangePassword(User account, string newPassword);
     }
 }

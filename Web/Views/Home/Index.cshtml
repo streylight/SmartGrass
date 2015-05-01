@@ -2,14 +2,14 @@
     ViewBag.Title = "Home Page";
     Layout = null;
 }
-
+<!DOCTYPE html>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-<script src="~/Scripts/scrollMonitor.js"></script>
-<script src="~/Scripts/apps.js"></script>
-<script src="~/Scripts/pace.js"></script>
+@*<script src="~/Scripts/scrollMonitor.js"></script>*@
+@*<script src="~/Scripts/apps.js"></script>
+<script src="~/Scripts/pace.js"></script>*@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 <style>
@@ -536,173 +536,173 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(255,255,255,.9);
 }
 </style>
-
+<body data-spy="scroll" data-offset="500" data-target="#header-navbar">
 <div id="header" class="header navbar navbar-transparent navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
             <a href="@Url.Action("Index", "Home")" class="navbar-brand" style="padding-bottom: 5px">
                 <span class="brand-logo sg-logo">
-                    <img src="~/Content/Images/sg-logo-trans.png" alt="" style="width: 35px" />
-                </span>
+                        <img src="~/Content/Images/sg-logo-trans.png" alt="" style="width: 35px" />
+                    </span>
                 <span class="brand-text">
-                     Smart <span class="text-theme">Grass</span>
-                </span>
+                        Smart <span class="text-theme">Grass</span>
+                    </span>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="header-navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown active">
+                <li>
                     <a href="#home" data-click="scroll-to-target" data-toggle="dropdown">HOME</a>
                 </li>
-                <li class=""><a href="#about" data-click="scroll-to-target">ABOUT</a></li>
+                <li><a href="#about" data-click="scroll-to-target">ABOUT</a></li>
                 <li><a href="#team" data-click="scroll-to-target">TEAM</a></li>
-                <li><a href="#service" data-click="scroll-to-target">SERVICES</a></li>
-                <li><a href="#contact" data-click="scroll-to-target">CONTACT</a></li>
-                <li><a href="@Url.Action("Login","Account")">LOGIN</a></li>
+                <li><a href="@Url.Action("Login", "Account")">LOGIN</a></li>
             </ul>
         </div>
     </div>
 </div>
-<div id="home" class="content has-bg home login-cover-bg" style="height: 1080px">
-    <div class="content-bg">
-        <img src="~/Content/Images/summer-lawn-1920x1080.jpg" alt="Home" />
-    </div>
-    <div class="container home-content" style="margin-top: -275px">
+    <div class="clearfix"></div>
+        <div id="home" class="content has-bg home login-cover-bg" style="height: 1080px">
+            <div class="content-bg">
+                <img src="~/Content/Images/summer-lawn-1920x1080.jpg" alt="Home" />
+            </div>
+            <div class="container home-content" style="margin-top: -275px">
 
-        <img src="~/Content/Images/sg-logo-trans.png" width="175"/>
-        <h1>Welcome to Smart Grass</h1>
-        <h3>Home Irrigation Control System</h3>
-        <p>
-            The Smart Grass home irrigation control system is the smart way to control any home's irrigation system remotely.<br>
-            Check out our <a href="#">services page</a> to learn more.
-        </p>
-        <a href="#" class="btn btn-success">Explore More</a> 
-        <a href="@Url.Action("Register", "Account")" class="btn btn-outline">Register Now</a><br>
-        <br>
-        or <a href="@Url.Action("Login", "Account")">login</a> if you are already registered
-    </div>
-</div>
-<div id="about" class="content" data-scrollview="true">
-    <div class="container fadeInDown contentAnimated" data-animation="true" data-animation-type="fadeInDown">
-        <h1 class="content-title">About Us</h1>
-        <p class="content-desc">
-            HICS is an intelligent home irrigation control system that utilizes soil moisture sensors to measure the amount of moisture present in the user’s lawn and use this information to water the lawn in an efficient way.  Its purpose is to replace an existing sprinkler control system and allow users to control their home irrigation remotely through a web application that will scale to fit on a computer or mobile device.
-            <br/>
-            <br/>
-            HICS uses a central control unit to read soil moisture levels and set watering schedules accordingly by interfacing directly with the users existing irrigation valves.  The control unit allows users to remotely schedule or monitor their lawns by communicating with the HICS web application over the internet.  Through the web application, users will be granted complete access to all the features that HICS offers while providing an intuitive and easy to use interface.
-        </p>
-        <div class="row">
-            <div class="col-md-12 col-sm-6">
-                <div class="about">
-                    <h3>Our Sponsors</h3>
-                    <p class="content-desc">
-                        Team SmartGrass is sponsored by the owner of <a href="http://www.nutsandboltstexas.com/">Nuts and Bolts Hardware</a>, Keith Aholt. SmartGrass is a project for
-                        the Computer Science and Engineering department at the <a href="http://www.uta.edu/uta/">University of Texas at Arlington.</a>
-                    </p>
-                    <div class="col-md-6 col-sm-6 sponsor-logo">
-                        <img src="~/Content/Images/Nuts&Bolts.png" />
-                    </div>
-                    <div class="col-md-6 col-sm-6 sponsor-logo">
-                        <img src="~/Content/Images/CSE1in.png" width="300" />
-                    </div>
-                </div>
+                <img src="~/Content/Images/sg-logo-trans.png" width="175" />
+                <h1>Welcome to Smart Grass</h1>
+                <h3>Home Irrigation Control System</h3>
+                <p>
+                    The Smart Grass home irrigation control system is the smart way to control any home's irrigation system remotely.<br>
+                    Check out our <a href="#">services page</a> to learn more.
+                </p>
+                <a href="#" class="btn btn-success">Explore More</a>
+                <a href="@Url.Action("Register", "Account")" class="btn btn-outline">Register Now</a><br>
+                <br>
+                or <a href="@Url.Action("Login", "Account")">login</a> if you are already registered
             </div>
         </div>
-    </div>
-</div>
-<div id="milestone" class="content bg-black-darker has-bg" data-scrollview="true">
-    <div class="content-bg">
-        <img src="~/Content/Images/green_grass_banner.jpg" alt="Milestone">
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 quote">
-                <i class="fa fa-quote-left"></i> Smart Grass is the greatest thing <span class="text-theme">ever</span>!
-                <i class="fa fa-quote-right"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="team" class="content" data-scrollview="true">
-    <div class="container">
-        <h2 class="content-title">Our Team</h2>
-        <div class="row">
-            <div class="col-md-3 col-sm-3">
-                <div class="team">
-                    <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
-                        <img src="~/Content/Images/billy-display.png" alt="Billy Haile-Mariam">
-                    </div>
-                    <div class="info">
-                        <h3 class="name">Billy Haile-Mariam</h3>
-                        <div class="title text-theme">Team Leader, Hardware</div>
-                        <p>Computer Engineering</p>
-                        <div class="social">
-                            <a href="https://www.linkedin.com/pub/belachew-haile-mariam/65/591/22"><i class="fa fa-linkedin-square fa-4"></i></a>
-                            <a href="#"><i class="fa fa-github-square"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="team">
-                    <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
-                        <img src="~/Content/Images/jeremiah-display.png" alt="Jeremiah O'Connor'">
-                    </div>
-                    <div class="info">
-                        <h3 class="name">Jeremiah O'Connor</h3>
-                        <div class="title text-theme">Web Developer, Document Master</div>
-                        <p>Computer Science</p>
-                        <div class="social">
-                            <a href="https://www.linkedin.com/pub/jeremiah-o-connor/93/434/8b2"><i class="fa fa-linkedin-square fa-4"></i></a>
-                            <a href="https://github.com/streylight"><i class="fa fa-github-square"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="team">
-                    <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
-                        <img src="~/Content/Images/gautam-display.png" alt="Gautam Adhikari">
-                    </div>
-                    <div class="info">
-                        <h3 class="name">Gautam Adhikari</h3>
-                        <div class="title text-theme">Risk Manager, Software Developer</div>
-                        <p>Software Engineering</p>
-                        <div class="social">
-                            <a href="#"><i class="fa fa-linkedin-square fa-4"></i></a>
-                            <a href="#"><i class="fa fa-github-square"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="team">
-                    <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
-                        <img src="~/Content/Images/tung-display.png" alt="Tung Vo">
-                    </div>
-                    <div class="info">
-                        <h3 class="name">Tung Vo</h3>
-                        <div class="title text-theme">Embeded Software Developer</div>
-                        <p>Computer Science</p>
-                        <div class="social">
-                            <a href="#"><i class="fa fa-linkedin-square fa-4"></i></a>
-                            <a href="https://github.com/ngoctung4him"><i class="fa fa-github-square"></i></a>
+        <div id="about" class="content">
+            <div class="container fadeInDown contentAnimated" data-animation="true" data-animation-type="fadeInDown">
+                <h1 class="content-title">About Us</h1>
+                <p class="content-desc">
+                    HICS is an intelligent home irrigation control system that utilizes soil moisture sensors to measure the amount of moisture present in the user’s lawn and use this information to water the lawn in an efficient way. Its purpose is to replace an existing sprinkler control system and allow users to control their home irrigation remotely through a web application that will scale to fit on a computer or mobile device.
+                    <br />
+                    <br />
+                    HICS uses a central control unit to read soil moisture levels and set watering schedules accordingly by interfacing directly with the users existing irrigation valves. The control unit allows users to remotely schedule or monitor their lawns by communicating with the HICS web application over the internet. Through the web application, users will be granted complete access to all the features that HICS offers while providing an intuitive and easy to use interface.
+                </p>
+                <div class="row">
+                    <div class="col-md-12 col-sm-6">
+                        <div class="about">
+                            <h3>Our Sponsors</h3>
+                            <p class="content-desc">
+                                Team SmartGrass is sponsored by the owner of <a href="http://www.nutsandboltstexas.com/">Nuts and Bolts Hardware</a>, Keith Aholt. SmartGrass is a project for
+                                the Computer Science and Engineering department at the <a href="http://www.uta.edu/uta/">University of Texas at Arlington.</a>
+                            </p>
+                            <div class="col-md-6 col-sm-6 sponsor-logo">
+                                <img src="~/Content/Images/Nuts&Bolts.png" />
+                            </div>
+                            <div class="col-md-6 col-sm-6 sponsor-logo">
+                                <img src="~/Content/Images/CSE1in.png" width="300" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
+        <div id="milestone" class="content bg-black-darker has-bg">
+            <div class="content-bg">
+                <img src="~/Content/Images/green_grass_banner.jpg" alt="Milestone">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 quote">
+                        <i class="fa fa-quote-left"></i> Smart Grass is the greatest thing <span class="text-theme">ever</span>!
+                        <i class="fa fa-quote-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="team" class="content">
+            <div class="container">
+                <h2 class="content-title">Our Team</h2>
+                <div class="row">
+                    <div class="col-md-3 col-sm-3">
+                        <div class="team">
+                            <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
+                                <img src="~/Content/Images/billy-display.png" alt="Billy Haile-Mariam">
+                            </div>
+                            <div class="info">
+                                <h3 class="name">Billy Haile-Mariam</h3>
+                                <div class="title text-theme">Team Leader, Hardware</div>
+                                <p>Computer Engineering</p>
+                                <div class="social">
+                                    <a href="https://www.linkedin.com/pub/belachew-haile-mariam/65/591/22"><i class="fa fa-linkedin-square fa-4"></i></a>
+                                    <a href="#"><i class="fa fa-github-square"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="team">
+                            <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
+                                <img src="~/Content/Images/jeremiah-display.png" alt="Jeremiah O'Connor'">
+                            </div>
+                            <div class="info">
+                                <h3 class="name">Jeremiah O'Connor</h3>
+                                <div class="title text-theme">Web Developer, Document Master</div>
+                                <p>Computer Science</p>
+                                <div class="social">
+                                    <a href="https://www.linkedin.com/pub/jeremiah-o-connor/93/434/8b2"><i class="fa fa-linkedin-square fa-4"></i></a>
+                                    <a href="https://github.com/streylight"><i class="fa fa-github-square"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="team">
+                            <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
+                                <img src="~/Content/Images/gautam-display.png" alt="Gautam Adhikari">
+                            </div>
+                            <div class="info">
+                                <h3 class="name">Gautam Adhikari</h3>
+                                <div class="title text-theme">Risk Manager, Software Developer</div>
+                                <p>Software Engineering</p>
+                                <div class="social">
+                                    <a href="#"><i class="fa fa-linkedin-square fa-4"></i></a>
+                                    <a href="#"><i class="fa fa-github-square"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="team">
+                            <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
+                                <img src="~/Content/Images/tung-display.png" alt="Tung Vo">
+                            </div>
+                            <div class="info">
+                                <h3 class="name">Tung Vo</h3>
+                                <div class="title text-theme">Embeded Software Developer</div>
+                                <p>Computer Science</p>
+                                <div class="social">
+                                    <a href="#"><i class="fa fa-linkedin-square fa-4"></i></a>
+                                    <a href="https://github.com/ngoctung4him"><i class="fa fa-github-square"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
 <script type="text/javascript">
     $(document).ready(function () {
-
+        //$('body').scrollspy({ target: '#header-navbar' });
         var body = {
             "SoilReadings": [
             {
@@ -733,6 +733,6 @@ h1, h2, h3, h4, h5, h6 {
         //    }
         //});
 
-        App.init();
+        //App.init();
     });
 </script>

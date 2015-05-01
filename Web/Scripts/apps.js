@@ -101,14 +101,14 @@ var App = function() {
     return {
         init: function() {
             //handleHomeContentHeight();
-            handleHeaderNavigationState();
-            handlePageContainerShow();
-            handlePaceLoadingPlugins();
-            handlePageScrollContentAnimation();
-            handleHeaderScrollToAction();
-            handleTooltipActivation();
-            handleThemePanelExpand();
-            handleThemePageControl()
+            //handleHeaderNavigationState();
+            //handlePageContainerShow();
+            //handlePaceLoadingPlugins();
+            //handlePageScrollContentAnimation();
+            //handleHeaderScrollToAction();
+            //handleTooltipActivation();
+            //handleThemePanelExpand();
+            //handleThemePageControl()
         }
     }
 }()

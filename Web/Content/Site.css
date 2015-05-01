@@ -3,6 +3,7 @@
   font-size: 12px;
   font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif !important;
   color: #707478;
+    position: relative;
 }
 
 .navbar.navbar-default {

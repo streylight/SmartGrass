@@ -16,7 +16,7 @@
     <script src="~/Scripts/fullcalendar.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-<body>
+<body data-spy="scroll" data-target="#header-navbar">
     <nav class="navbar navbar-default navbar-fixed-top" style="box-shadow: 0 0 2px rgba(0,0,0,.3);">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -60,7 +60,7 @@
             $('#notifications').popover();
         });
     </script>
-    
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

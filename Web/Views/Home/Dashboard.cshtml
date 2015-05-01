@@ -220,7 +220,7 @@
             </div>
             <div class="stats-info">
                 <h4>CURRENT TEMPERATURE</h4>
-                <p>@(Model.TemperatureByDates.ContainsKey(now.Date) ? string.Format("{0}°F", Model.TemperatureByDates[now.Date] + 33.8) : "N/A")</p>
+                <p>@(Model.TemperatureByDates.ContainsKey(now.Date) ? string.Format("{0}°F", Math.Floor(Model.TemperatureByDates[now.Date])) : "N/A")</p>
             </div>
             <div class="stats-link">
                 <a data-toggle="collapse" href="#viewTempDetails">View Details</a>
@@ -539,6 +539,10 @@
                 success: function (data) {
                     for (var i = 0; i < data.eventData.length; i++) {
                         $('#calendar').fullCalendar('renderEvent', data.eventData[i], true);
+                        console.log("date: " + data.obj.date);
+                        console.log("start time: " + data.obj.st);
+                        console.log("end time: " + data.obj.et);
+
                     }
                     //$.each(data.eventData, function (eventData) {
                     //    debugger

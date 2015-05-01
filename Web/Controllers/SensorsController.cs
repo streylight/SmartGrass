@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Core.Domains;
 using Service.Interfaces;
+using Service.Services;
 using Web.Models;
 
 namespace Web.Controllers {
@@ -57,7 +58,7 @@ namespace Web.Controllers {
                 soilReadingService.Insert(sensorDataModel.SoilReadings, unitId);
                 var tempReading = new TemperatureReading {
                     UnitId = unitId,
-                    DateTime = DateTime.Now,
+                    DateTime = now,
                     Temperature = sensorDataModel.Temperature
                 };
                 temperatureReadingService.Insert(tempReading);

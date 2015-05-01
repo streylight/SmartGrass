@@ -47,14 +47,14 @@ namespace Web.Controllers {
             var wateringEvents = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).ToList();
             var tempReadings = user.Unit.TemperatureReadings.ToList();
             var now = GetLocalTime();
-            var soilReadings = user.Unit.SoilReadings.OrderBy(x => x.DateTime).ToList();
+            var soilReadings = user.Unit.SoilReadings.OrderByDescending(x => x.DateTime).ToList();
 
             var model = new DashboardViewModel {
                 User = user,
                 Watering = wateringEvents.Any(x => x.Watering),
                 TemperatureByDates = tempReadings.Where(x => x.DateTime > now.AddDays(-7)).GroupBy(x => x.DateTime.Date).ToDictionary(x => x.Key, x => x.Sum(y => y.Temperature) / x.Count()),
-                NextScheduledWatering = (wateringEvents.Any(x => x.StartDateTime > now) ? wateringEvents.First(x => x.StartDateTime > now).StartDateTime.ToString() : "None" ),
-                SensorDetails = soilReadings.OrderBy(x => x.DateTime).GroupBy(x => x.SensorNumber).Select(grp => new SensorDetail(grp.Key, grp.First().SoilMoisture, grp.First().DateTime)).ToList()
+                NextScheduledWatering = (wateringEvents.Any(x => x.StartDateTime > now) ? wateringEvents.First(x => x.StartDateTime > now).StartDateTime.ToString("MMM dd hh:mm tt") : "None" ),
+                SensorDetails = soilReadings.GroupBy(x => x.SensorNumber).Select(grp => new SensorDetail(grp.Key, grp.First().SoilMoisture, grp.First().DateTime)).ToList()
             };
             return View(model);
         }
@@ -62,6 +62,12 @@ namespace Web.Controllers {
         public ActionResult CreateWateringEvent(List<int> irrigationValves, DateTime date, DateTime startTime, DateTime endTime) {
             try {
                 var events = new List<EventData>();
+                date = date.Date;
+                var obj = new {
+                    date = date,
+                    st = startTime,
+                    et = endTime
+                };
                 foreach (var irrigationValveId in irrigationValves) {
                     var newWateringEvent = new WateringEvent {
                         StartDateTime = date.Add(startTime.TimeOfDay),
@@ -80,7 +86,7 @@ namespace Web.Controllers {
                     //events.Add(newObj);
                 }
 
-                return Json(new { error = false, eventData = events }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = false, eventData = events, obj = obj }, JsonRequestBehavior.AllowGet);
             } catch (Exception ex) {
                 return Json(new { error = true, message = ex.Message }, JsonRequestBehavior.AllowGet);
             }

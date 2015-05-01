@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Domains;
 using Map.Repo;
+using Service.Interfaces;
 
-namespace Service.Interfaces {
+namespace Service.Services {
     /// <summary>
     /// The service for the unit class
     /// </summary>

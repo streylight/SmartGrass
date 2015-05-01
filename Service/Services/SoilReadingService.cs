@@ -26,9 +26,11 @@ namespace Service.Interfaces {
 
         public void Insert(List<SoilReading> soilReadings, int unitId){
             try{
+                var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+                var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
                 foreach (var soilReading in soilReadings) {
                     if (soilReading.Id == 0) {
-                        soilReading.DateTime = DateTime.Now;
+                        soilReading.DateTime = now;
                         soilReading.UnitId = unitId;
                         _soilReadingRepository.Insert(soilReading);
                     }

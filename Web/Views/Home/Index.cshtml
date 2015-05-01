@@ -284,7 +284,7 @@ transparent .brand-text {
         top: -14px;
     }
 
-    .fa {
+    /*.fa {
         display: inline-block;
         font: normal normal normal 14px/1 FontAwesome;
         font-size: inherit;
@@ -292,7 +292,7 @@ transparent .brand-text {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         transform: translate(0, 0);
-    }
+    }*/
 
     .about-author .quote h3 {
         margin: 0;
@@ -328,7 +328,7 @@ transparent .brand-text {
         top: -14px;
     }
 
-    .fa {
+    /*.fa {
         display: inline-block;
         font: normal normal normal 14px/1 FontAwesome;
         font-size: inherit;
@@ -336,7 +336,7 @@ transparent .brand-text {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         transform: translate(0, 0);
-    }
+    }*/
 
     * {
         -webkit-box-sizing: border-box;
@@ -523,15 +523,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 15px;
 }
 .team .social a {
-  border-radius: 300px;
-  border: 1px solid #ccc;
-  padding: 5px;
-  width: 40px;
-  height: 40px;
-  line-height: 28px;
+    font-size: 24px;
   text-align: center;
   display: inline-block;
-  color: #ccc;
+  color: #242a30;
 }
 .quote {
   text-align: center;
@@ -631,22 +626,13 @@ h1, h2, h3, h4, h5, h6 {
                 <i class="fa fa-quote-right"></i>
             </div>
         </div>
-        <!-- end row -->
     </div>
-    <!-- end container -->
 </div>
 <div id="team" class="content" data-scrollview="true">
-    <!-- begin container -->
     <div class="container">
         <h2 class="content-title">Our Team</h2>
-        <!-- begin row -->
         <div class="row">
-            <!-- begin col-4 -->
-            
-            <!-- end col-4 -->
-            <!-- begin col-4 -->
             <div class="col-md-3 col-sm-3">
-                <!-- begin team -->
                 <div class="team">
                     <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
                         <img src="~/Content/Images/billy-display.png" alt="Billy Haile-Mariam">
@@ -656,14 +642,13 @@ h1, h2, h3, h4, h5, h6 {
                         <div class="title text-theme">Team Leader, Hardware</div>
                         <p>Computer Engineering</p>
                         <div class="social">
-                            <a href="#"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="https://www.linkedin.com/pub/belachew-haile-mariam/65/591/22"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="#"><i class="fa fa-github-square"></i></a>
                         </div>
                     </div>
                 </div>
-                <!-- end team -->
             </div>
             <div class="col-md-3 col-sm-3">
-                <!-- begin team -->
                 <div class="team">
                     <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
                         <img src="~/Content/Images/jeremiah-display.png" alt="Jeremiah O'Connor'">
@@ -673,16 +658,13 @@ h1, h2, h3, h4, h5, h6 {
                         <div class="title text-theme">Web Developer, Document Master</div>
                         <p>Computer Science</p>
                         <div class="social">
-                            <a href="#"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="https://www.linkedin.com/pub/jeremiah-o-connor/93/434/8b2"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="https://github.com/streylight"><i class="fa fa-github-square"></i></a>
                         </div>
                     </div>
                 </div>
-                <!-- end team -->
             </div>
-            <!-- end col-4 -->
-            <!-- begin col-4 -->
             <div class="col-md-3 col-sm-3">
-                <!-- begin team -->
                 <div class="team">
                     <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
                         <img src="~/Content/Images/gautam-display.png" alt="Gautam Adhikari">
@@ -693,40 +675,33 @@ h1, h2, h3, h4, h5, h6 {
                         <p>Software Engineering</p>
                         <div class="social">
                             <a href="#"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="#"><i class="fa fa-github-square"></i></a>
                         </div>
                     </div>
                 </div>
-                <!-- end team -->
             </div>
             <div class="col-md-3 col-sm-3">
-                <!-- begin team -->
                 <div class="team">
                     <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
                         <img src="~/Content/Images/tung-display.png" alt="Tung Vo">
                     </div>
                     <div class="info">
                         <h3 class="name">Tung Vo</h3>
-                        <div class="title text-theme">Microcontroller Developer</div>
+                        <div class="title text-theme">Embeded Software Developer</div>
                         <p>Computer Science</p>
                         <div class="social">
                             <a href="#"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="https://github.com/ngoctung4him"><i class="fa fa-github-square"></i></a>
                         </div>
                     </div>
                 </div>
-                <!-- end team -->
             </div>
-            <!-- end col-4 -->
         </div>
-        <!-- end row -->
     </div>
-    <!-- end container -->
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        //$.getJSON("http://localhost:64623/api/Sensors", function (data) {
-        //    console.log("data: " + data);
-        //});
 
         var body = {
             "SoilReadings": [
@@ -744,7 +719,7 @@ h1, h2, h3, h4, h5, h6 {
                         ],
             "ProductKey": "1234",
             "Temperature": 34.0,
-            "Rain": 0.41
+            "Rain": 5.0
         };
 
 

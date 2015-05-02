@@ -535,6 +535,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
   color: rgba(255,255,255,.9);
 }
+
 </style>
 <body data-spy="scroll" data-offset="500" data-target="#header-navbar">
 <div id="header" class="header navbar navbar-transparent navbar-fixed-top">
@@ -568,11 +569,11 @@ h1, h2, h3, h4, h5, h6 {
     </div>
 </div>
     <div class="clearfix"></div>
-        <div id="home" class="content has-bg home login-cover-bg" style="height: 1080px">
+        <div id="home" class="content has-bg home login-cover-bg">
             <div class="content-bg">
                 <img src="~/Content/Images/summer-lawn-1920x1080.jpg" alt="Home" />
             </div>
-            <div class="container home-content" style="margin-top: -275px">
+            <div class="container home-content" style="margin-top: -230px">
 
                 <img src="~/Content/Images/sg-logo-trans.png" width="175" />
                 <h1>Welcome to Smart Grass</h1>
@@ -608,7 +609,7 @@ h1, h2, h3, h4, h5, h6 {
                                 <img src="~/Content/Images/Nuts&Bolts.png" />
                             </div>
                             <div class="col-md-6 col-sm-6 sponsor-logo">
-                                <img src="~/Content/Images/CSE1in.png" width="300" />
+                                <img src="~/Content/Images/CSE1in.png" />
                             </div>
                         </div>
                     </div>
@@ -703,6 +704,19 @@ h1, h2, h3, h4, h5, h6 {
 <script type="text/javascript">
     $(document).ready(function () {
         //$('body').scrollspy({ target: '#header-navbar' });
+        var windowHeight = $(window).height();
+        $('#home').height(windowHeight);
+        
+        $(window).scroll(function (event) {
+            var scroll = $(window).scrollTop();
+            console.log("height: " + windowHeight);
+            if (scroll > 50) {
+                $('#header').addClass('navbar-small');
+            } else {
+                $('#header').removeClass('navbar-small');
+            }
+            // Do something
+        });
         var body = {
             "SoilReadings": [
             {

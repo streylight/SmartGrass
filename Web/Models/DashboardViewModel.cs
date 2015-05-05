@@ -6,8 +6,8 @@ using Core.Domains;
 
 namespace Web.Models {
     public class DashboardViewModel {
-        public User User { get; set; }
-        public bool Watering { get; set; }
+        public Unit Unit { get; set; }
+        public List<IrrigationValve> IrrigationValves { get; set; }
         public Dictionary<DateTime, double> TemperatureByDates { get; set; }
         public string SoilMoisture { get; set; }
         public string NextScheduledWatering { get; set; }
@@ -27,11 +27,13 @@ namespace Web.Models {
 
     public class EventData {
         public EventData(WateringEvent wateringEvent) {
-            title = wateringEvent.StartDateTime.ToString("HH:mm") + "-" + wateringEvent.EndDateTime.ToString("HH:mm");
+            title = wateringEvent.StartDateTime.ToString("hh:mm tt");
             start = wateringEvent.StartDateTime.ToString("yyyy-MM-ddTHH:mm:ssK");
             end = wateringEvent.EndDateTime.ToString("yyyy-MM-ddTHH:mm:ssK");
+            id = wateringEvent.Id;
         }
 
+        public int id { get; set; }
         public string title { get; set; }
         public string start { get;set; }
         public string end { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Core;
 using Core.Domains;
 
 namespace Service.Interfaces {
@@ -12,5 +13,6 @@ namespace Service.Interfaces {
         void Delete(int id);
         int ValidateProductKey(string productKey);
         Dictionary<string, string> GetValveCommands(int id, Dictionary<int, bool> limitDict, bool temp, bool rain);
+        List<object> FilterSoilReadings(FilterType filterBy, int unitId);
     }
 }

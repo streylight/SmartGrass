@@ -14,9 +14,9 @@ namespace Web.Helpers {
         }
 
         public static List<DateTime> GetPreviousWeekDates(DateTime now) {
-            var startingDate = now.AddDays(-6);
+            var startingDate = now.AddDays(-7);
             var datesList = new List<DateTime> {startingDate};
-            for (var i = 0; i < 6; i++) {
+            for (var i = 1; i < 7; i++) {
                 datesList.Add(startingDate.AddDays(i));
             }
             return datesList;

@@ -82,3 +82,10 @@ input[type="checkbox"].input-validation-error {
     *width: 14.285714285714285714285714285714%;
   }
 }
+
+@media (max-width: 1200px) {
+    .content.has-bg .content-bg img {
+        max-height: 100%;
+        max-width: inherit;
+    }
+}

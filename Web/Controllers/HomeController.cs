@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Core;
 using Core.Domains;
+using Core.Helpers;
 using Service.Interfaces;
 using Web.Infrastructure;
 using Web.Models;
@@ -13,10 +15,14 @@ namespace Web.Controllers {
 
         private readonly IWateringEventService _wateringEventService;
         private readonly IUserService _userService;
+        private readonly IIrrigationValveService _irrigationValveService;
+        private readonly IUnitService _unitService;
 
-        public HomeController(IWateringEventService wateringEventService, IUserService userService) {
+        public HomeController(IWateringEventService wateringEventService, IUserService userService, IIrrigationValveService irrigationValveService, IUnitService unitService) {
             _wateringEventService = wateringEventService;
             _userService = userService;
+            _irrigationValveService = irrigationValveService;
+            _unitService = unitService;
         }
 
         [AllowAnonymous]
@@ -46,12 +52,12 @@ namespace Web.Controllers {
             var user = _userService.GetUserById(UserId);
             var wateringEvents = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).ToList();
             var tempReadings = user.Unit.TemperatureReadings.ToList();
-            var now = GetLocalTime();
+            var now = DateTimeHelper.GetLocalTime();
             var soilReadings = user.Unit.SoilReadings.OrderByDescending(x => x.DateTime).ToList();
 
             var model = new DashboardViewModel {
-                User = user,
-                Watering = wateringEvents.Any(x => x.Watering),
+                Unit = user.Unit,
+                IrrigationValves = user.Unit.IrrigationValves.ToList(),
                 TemperatureByDates = tempReadings.Where(x => x.DateTime > now.AddDays(-7)).GroupBy(x => x.DateTime.Date).ToDictionary(x => x.Key, x => x.Sum(y => y.Temperature) / x.Count()),
                 NextScheduledWatering = (wateringEvents.Any(x => x.StartDateTime > now) ? wateringEvents.First(x => x.StartDateTime > now).StartDateTime.ToString("MMM dd hh:mm tt") : "None" ),
                 SensorDetails = soilReadings.GroupBy(x => x.SensorNumber).Select(grp => new SensorDetail(grp.Key, grp.First().SoilMoisture, grp.First().DateTime)).ToList()
@@ -92,19 +98,55 @@ namespace Web.Controllers {
             }
         }
 
-        public ActionResult GenerateSoilMoistureGraph() {
+        public ActionResult LoadWateringEvent(int id) {
             var user = _userService.GetUserById(UserId);
-            var soilReadings = user.Unit.SoilReadings.GroupBy(x => x.DateTime.Date).ToDictionary(x => x.Key, x => x);
-            var date = DateTime.Today.AddDays(-30);
-            var data = new List<object>();
-            for (var i = 0; i < 30; i++) {
-                data.Add(new {
-                    d = date.Date.ToString("yyyy-MM-dd"),
-                    max = soilReadings.ContainsKey(date.Date) ? soilReadings[date.Date].Max(x => x.SoilMoisture) : 0,
-                    min = soilReadings.ContainsKey(date.Date) ? soilReadings[date.Date].Min(x => x.SoilMoisture) : 0,
-                });
-                date = date.AddDays(1);
+            var model = new WateringEventViewModel {
+                UnitId = user.UnitId,
+                WateringEvent = id != 0 ?_wateringEventService.GetWateringEventById(id) : new WateringEvent()
+            };
+            
+            return View("_WateringEventForm", model);
+        }
+
+        public ActionResult SetWateringEventAction(int valveId, bool status) {
+            var valve = _irrigationValveService.GetIrrigationValveById(valveId);
+            var activeWatering = valve.WateringEvents.LastOrDefault(x => x.Watering);
+            var user = _userService.GetUserById(UserId);
+            var now = DateTimeHelper.GetLocalTime();
+            var error = false;
+
+            var message = "";
+            if (activeWatering != null && !status) {
+                activeWatering.Watering = false;
+                activeWatering.EndDateTime = now;
+                //_wateringEventService.Insert(activeWatering);
+                message = "Watering for valve " + valve.ValveNumber + " has been stopped";
+            } else {
+                if (valve.WateringEvents.Any(x => x.StartDateTime > now && x.StartDateTime < now.AddMinutes(10))) {
+                    message = "Cannot start a watering event when a scheduled watering is about to start";
+                    error = true;
+                } else {
+                    var newWateringEvent = new WateringEvent {
+                        IrrigationValveId = valveId,
+                        StartDateTime = now,
+                        EndDateTime = now.AddMinutes(10),
+                        Watering = true
+                    };
+                    //_wateringEventService.Insert(newWateringEvent);
+                    return Json(new {
+                        msg = "Watering event started for 10 minutes", jsonEvent = new EventData(newWateringEvent), watering = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).Any(x => x.Watering)
+                    }, JsonRequestBehavior.AllowGet);
+                }
             }
+            return Json(new {
+                msg = message, watering = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).Any(x => x.Watering), error = error
+            }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult GenerateSoilMoistureGraph(FilterType filterBy) {
+            var user = _userService.GetUserById(UserId);
+            var data = _unitService.FilterSoilReadings(filterBy, user.UnitId);
             return Json(new { results = data }, JsonRequestBehavior.AllowGet);
         }
 
@@ -112,11 +154,6 @@ namespace Web.Controllers {
             var user = _userService.GetUserById(UserId);
             var events = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).Select(x => new EventData(x)).ToList();
             return Json(new {eventData = events}, JsonRequestBehavior.AllowGet);
-        }
-
-        private DateTime GetLocalTime() {
-            var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
-            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
         }
     }
 }

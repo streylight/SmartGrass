@@ -1,4 +1,5 @@
-﻿@using Web.Helpers
+﻿@using Core
+@using Web.Helpers
 @model Web.Models.DashboardViewModel
 
 @{
@@ -6,11 +7,14 @@
     var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
     var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
 }
-
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-switch.min.css" rel="stylesheet" />
+<link href="~/Content/weather-icons/css/weather-icons.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-
+<script src="~/Scripts/bootstrap-switch.min.js"></script>
+<script src="~/Scripts/toastr.min.js"></script>
 <style>
     .widget.widget-stats {
         position: relative;
@@ -138,15 +142,14 @@
         width: 100%;
     }
     .calendar-day {
-        padding-left: 0px;
-        padding-right: 0px;    
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px 0 10px 0;
     }
-    .calendar-day > span {
-        display: block;
-        background-color: white;
-        color: #000000;
-        font-size: 20px;
-        padding: 10px;
+    .calendar-day > .col-md-12 > i {
+        font-size: 30px;
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
 
     .chart-icon {
@@ -194,6 +197,27 @@
     .sensor-details > .input-group {
         margin-bottom: 5px;
     }
+
+    .watering-status {
+        text-align: center;
+    }
+    .watering-status > h4 {
+          font-size: 20px;
+        font-weight: 800;
+        width: 100%;
+    }
+    .watering-status > i {
+        font-size: 65px;
+        color: #707478;
+    }
+    .watering-status.active > i {
+        color: #428bca;
+    }
+
+    /*.watering-status.active {
+        color: #428bca;
+    }*/
+
 </style>
 
 <div class="row" style="margin-top: 75px;">
@@ -235,10 +259,10 @@
             </div>
             <div class="stats-info">
                 <h4>WATERING STATUS</h4>
-                <p>@(Model.Watering ? "On" : "Off")</p>
+                <p id="wateringStatus">@(Model.IrrigationValves.SelectMany(x => x.WateringEvents).Any(x => x.Watering) ? "On" : "Off")</p>
             </div>
             <div class="stats-link">
-                <a data-toggle="collapse" href="#viewDetails">View Details</a>
+                <a data-toggle="collapse" href="#viewWateringDetails">View Details</a>
             </div>
         </div>
     </div>
@@ -256,24 +280,6 @@
         </div>
     </div>
 </div>
-
-<div class="collapse" id="viewTempDetails">
-    <div class="row weekday-col">
-        <div class="col-md-12">
-            @{
-                var previousWeek = ListHelper.GetPreviousWeekDates(now);
-            }
-            @foreach (var date in previousWeek) {
-                <div class="col-md-1 btn-warning calendar-day">
-                    <label>@date.ToShortDateString()</label>
-                    <span>@(Model.TemperatureByDates.ContainsKey(date.Date) ? string.Format("{0:N2}°F", Model.TemperatureByDates[date.Date] + 33.8) : "N/A")</span>
-                </div>
-            }
-        </div>
-    </div>
-</div>
-
-
 
 <div class="collapse moistureChart well" id="viewSoilDetails">
     <div class="row">
@@ -307,6 +313,57 @@
         }
     </div>
 </div>
+
+<div class="collapse" id="viewTempDetails">
+    <div class="row weekday-col">
+        <div class="col-md-12">
+            @{
+                var previousWeek = ListHelper.GetPreviousWeekDates(now);
+            }
+            @foreach (var date in previousWeek) {
+                var temp = Model.TemperatureByDates.ContainsKey(date.Date) ? Model.TemperatureByDates[date.Date] : 999; // 999 signifies invalid temp
+                <div class="col-md-1 btn-warning calendar-day">
+                    <div class="col-md-12">@date.DayOfWeek</div>
+                    <div class="col-md-12">
+                        @if (temp != 999) {
+                            if (temp > 80) {
+                                <i class="wi wi-day-sunny"></i>
+                            } else if (temp <= 80 && temp > 60) {
+                                <i class="wi wi-day-sunny-overcast"></i>
+                            } else if (temp <= 60 && temp > 34) {
+                                <i class="wi-cloudy-windy"></i>
+                            } else {
+                                <i class="wi-snowflake-cold"></i>
+                            }
+                        } else {
+                            <i class="fa fa-exclamation-triangle"></i>
+                        }
+                    </div>
+                    <div class="col-md-12">@(temp != 999 ? string.Format("{0}°F", Math.Floor(temp)) : "N/A")</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="collapse well" id="viewWateringDetails">
+    <div class="row">
+        @foreach (var valve in Model.IrrigationValves.Take(3)) {
+            var active = valve.WateringEvents.Any(x => x.Watering);
+            <div class="col-md-4 watering-status@(active ? " active" : "")">
+                <i class="fa fa-tint waterdrop"></i>
+                <h4>Valve @valve.ValveNumber</h4>
+                @if (active) {
+                    <input class="watering-switch" data-valveid="@valve.Id" type="checkbox" name="my-checkbox" checked>
+                } else {
+                    <input class="watering-switch" data-valveid="@valve.Id" type="checkbox" name="my-checkbox">
+                }
+            </div>
+        }
+    </div>
+    
+</div>
+    
 <div class="row">
     <div class="col-md-5">
         <div class="panel" style="border: none">
@@ -315,9 +372,23 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div id="myfirstchart"></div>
+                    <div class="col-md-4">
+                        <h4>Filter by</h4>
                     </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <select class="s2Init" id="soilReportFilter" style="width: 100%; margin-top: 10px; margin-bottom: 10px">
+                            <option value="@FilterType.Week">Week</option>
+                            <option value="@FilterType.Month">Month</option>
+                            <option value="@FilterType.Year">Year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="soilMoistureChart"></div>
+                    </div>
+                    
+
                 </div>
             </div>
         </div>
@@ -333,125 +404,156 @@
         </div>
     </div>
 </div>
-@*<div class="row">
-    <div class="col-md-12">
-        <div class="panel" style="border: none">
-            <div class="panel-heading" style="background-color: #242a30; color: white">
-                <h3 class="panel-title" id="panel-title">Panel title<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a>
-                </h3>
-            </div>
-            <div class="panel-body">
-                <table class="table table-bordered table-responsive">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                    </thead>
-                    <tbody class="table-hover">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>22</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>221</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>*@
-
-
-
-<div id="newEventModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">Schedule Watering</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Select Irrigation Valve(s)</label>
-                        @Html.DropDownList("IrrigationValveS2", new SelectList(ListHelper.GetListOfIrrigationValves(Model.User.UnitId).Select(x => new { x.Id, Name = "Valve " + (x.ValveNumber + 1)}), "Id", "Name"), null, new {@id = "irrigationValveS2", @class = "s2Init", @style = "width: 100%", @multiple = "multiple"})
+    @*<div class="row">
+            <div class="col-md-12">
+                <div class="panel" style="border: none">
+                    <div class="panel-heading" style="background-color: #242a30; color: white">
+                        <h3 class="panel-title" id="panel-title">Panel title<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a>
+                        </h3>
                     </div>
-                    <br/>
-                    <div class="col-md-6">
-                        <label>Start Time</label>
-                    </div>
-                    <div class="col-md-6">
-                        <label>End Time</label>
-                    </div>
-                    <div class="input-group col-md-6">
-                        <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-                        <input id="startTime" type="text" class="form-control" aria-describedby="sizing-addon1">
-                    </div>
-                    <div class="input-group col-md-6">
-                        <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-                        <input id="endTime" type="text" class="form-control" aria-describedby="sizing-addon2">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Username</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table-hover">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>23</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>22</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>221</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button id="createEvent" type="button" class="btn btn-primary">Create event</button>
+        </div>*@
+
+
+
+    <div id="newEventModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Schedule Watering</h4>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="createEvent" type="button" class="btn btn-primary">Create event</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <script type="text/javascript">
-
     
-    
-
-    
-
-    $(document).ready(function() {
-        var selectedDate;
-        $('.s2Init').select2();
-        $('#startTime, #endTime').datetimepicker({
-            format: 'LT'
-        });
-
+    function LoadEventModal(id) {
         $.ajax({
-            url: "@Url.Action("GenerateSoilMoistureGraph", "Home")",
+            url: "@Url.Action("LoadWateringEvent", "Home")?Id=" + id,
             type: 'GET',
-            dataType: 'json',
+            contentType: 'html',
             success: function (data) {
-                console.log("data: " + JSON.stringify(data.results));
-                Morris.Area({
-                    element: 'myfirstchart',
-                    data: data.results,
-                    xkey: 'd',
-                    ykeys: ['max', 'min'],
-                    labels: ['Max', 'Min'],
-                    fillOpacity: 0.6,
-                    hideHover: 'auto',
-                    behaveLikeLine: true,
-                    resize: true,
-                });
+                $('.modal-body').html(data);
+                $('#newEventModal').modal('show');
             }
         });
+    }
 
-        
-        
+    $(document).ready(function () {
+        $(".watering-switch").bootstrapSwitch();
+
+        $('.watering-switch').on('switchChange.bootstrapSwitch', function (event, state) {
+            var valveId = $(this).data('valveid');
+            var waterSwitch = $(this);
+            waterSwitch.closest('.watering-status').toggleClass('active');
+                
+                
+            waterSwitch.bootstrapSwitch("toggleDisabled");
+            $.ajax({
+                url: '@Url.Action("SetWateringEventAction", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    valveId: valveId,
+                    status: state
+                },
+                success: function (data) {
+                    if (data.error) {
+                        toastr.error(data.msg, '');
+                        waterSwitch.bootstrapSwitch("toggleState");
+                    } else {
+                        toastr.success(data.msg, '');
+                        console.log("jsonevent: " + data.jsonEvent);
+                        if (data.jsonEvent) {
+                            $('#calendar').fullCalendar('renderEvent', data.jsonEvent, true);
+                        }
+                    }
+                    waterSwitch.bootstrapSwitch("toggleDisabled");
+                    console.log("watering: " + data.watering);
+                    $('#wateringStatus').html(data.watering ? "On" : "Off");
+                }
+            });
+        });
+
+        var selectedDate;
+        $('.s2Init').select2();
+            
+
+        var soilMoistureChart = Morris.Area({
+            element: 'soilMoistureChart',
+            data: [],
+            xkey: 'd',
+            ykeys: ['max', 'min'],
+            labels: ['Max', 'Min'],
+            fillOpacity: 0.6,
+            xLabelFormat: function (x) { return moment(x).format("MMM D"); },
+            dateFormat: function (x) { return moment(x).format("dddd, MMMM Do YYYY"); },
+            hideHover: 'auto',
+            behaveLikeLine: true,
+            resize: true,
+        });
+
+            
+        $('#soilReportFilter').on('change', function(v) {
+            console.log('change' + $(this).val());
+            $.ajax({
+                url: "@Url.Action("GenerateSoilMoistureGraph", "Home")",
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    filterBy: $(this).val()  
+                },
+                success: function (data) {
+                    soilMoistureChart.setData(data.results);
+                }
+            });
+        }).trigger('change');
+            
+
+
+
 
         for (var i = 0; i < 3; i++) {
             var graph = 'graph' + (i + 1);
@@ -462,8 +564,8 @@
                 rotate: 0
             }
 
-            
-            var el = document.getElementById('graph' + (i+1));
+
+            var el = document.getElementById('graph' + (i + 1));
             var canvas = document.createElement('canvas');
             canvas.className = "chart-canvas";
             var span = document.createElement('span');
@@ -473,7 +575,7 @@
             canvas.width = canvas.height = options.size;
             el.appendChild(canvas);
             el.appendChild(span);
-        
+
 
             ctx.translate(options.size / 2, options.size / 2); // change center
             ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI); // rotate -90 deg
@@ -489,7 +591,7 @@
                 ctx.lineWidth = lineWidth;
                 ctx.stroke();
             };
-        
+
             drawCircle('#D9E0E7', options.lineWidth, 100 / 100);
             drawCircle('#5bc0de', options.lineWidth, options.percent / 100);
         }
@@ -501,12 +603,15 @@
         $('#calendar').fullCalendar({
             selectable: true,
             selectHelper: true,
-            editable: true,
+           // editable: true,
             eventLimit: true,
-            dayClick: function(date, jsEvent, view) {
+            dayClick: function (date, jsEvent, view) {
                 console.log(date.toISOString());
                 selectedDate = date.toISOString();
-                $('#newEventModal').modal('show');
+                LoadEventModal(0);
+            },
+            eventClick: function (calEvent, jsEvent, view) {
+                LoadEventModal(calEvent.id);
             }
         });
 
@@ -522,10 +627,13 @@
 
         $('#newEventModal').on('hide.bs.modal', function (e) {
             console.log("unselecte");
+            $('.modal-body').html('');
             $('#calendar').fullCalendar('unselect');
         });
 
-        $('#createEvent').on('click', function() {
+        $('#createEvent').on('click', function () {
+            console.log("click");
+            return false;
             $.ajax({
                 url: "@Url.Action("CreateWateringEvent", "Home")",
                 data: {

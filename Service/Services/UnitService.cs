@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core;
 using Core.Domains;
+using Core.Helpers;
 using Map.Repo;
 using Service.Interfaces;
 
@@ -111,6 +113,40 @@ namespace Service.Services {
             }
 
             return commandDict;
+        }
+
+        public List<object> FilterSoilReadings(FilterType filterBy, int unitId) {
+            var unit = _unitRepository.GetById(unitId);
+            var data = new List<object>();
+            var date = DateTimeHelper.GetLocalTime();
+            switch (filterBy) {
+                    case FilterType.Week:
+                    case FilterType.Month:
+                        var soilReadingsByDay = unit.SoilReadings.GroupBy(x => x.DateTime.Date).ToDictionary(x => x.Key, x => x.ToList());
+                        var cnt = (int)filterBy;
+                        date = date.AddDays((cnt * -1));
+                        for (var i = 0; i < cnt; i++) {
+                            data.Add(new {
+                                d = date.Date.ToString("yyyy-MM-dd"),
+                                max = soilReadingsByDay.ContainsKey(date.Date) ? soilReadingsByDay[date.Date].Max(x => x.SoilMoisture) : 0,
+                                min = soilReadingsByDay.ContainsKey(date.Date) ? soilReadingsByDay[date.Date].Min(x => x.SoilMoisture) : 0
+                            });
+                            date = date.AddDays(1);
+                        }
+                        break;
+                    case FilterType.Year:
+                        var soilReadingsByMonth = unit.SoilReadings.GroupBy(x => x.DateTime.Month).ToDictionary(x => x.Key, x => x.ToList());
+                        for (var i = 1; i <= 12; i++) {
+                            data.Add(new {
+                                d = new DateTime(date.Year, i, 1),
+                                max = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Max(x => x.SoilMoisture) : 0,
+                                min = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Min(x => x.SoilMoisture) : 0
+                            });
+                            
+                        }
+                    break;
+            }
+            return data;
         }
     }
 }

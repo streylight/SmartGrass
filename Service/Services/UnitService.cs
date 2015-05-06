@@ -138,9 +138,9 @@ namespace Service.Services {
                         var soilReadingsByMonth = unit.SoilReadings.GroupBy(x => x.DateTime.Month).ToDictionary(x => x.Key, x => x.ToList());
                         for (var i = 1; i <= 12; i++) {
                             data.Add(new {
-                                d = new DateTime(date.Year, i, 1),
-                                max = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Max(x => x.SoilMoisture) * 10 : 0,
-                                min = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Min(x => x.SoilMoisture) * 10 : 0
+                                d = new DateTime(date.Year, i, 1).ToString("yyy-MM-dd"),
+                                max = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Max(x => x.SoilMoisture) * 20 : 0,
+                                min = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Min(x => x.SoilMoisture) * 20 : 0
                             });
                             
                         }

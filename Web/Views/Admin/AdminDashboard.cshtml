@@ -8,6 +8,7 @@
         cursor: pointer;
     }
 </style>
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
 <link href='//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <div class="row" style="margin-top: 75px;">
@@ -22,7 +23,7 @@
                     <table id="userTable" class="table striped table-responsive">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Id</th>
                             <th>Username</th>
                             <th>Unit Id</th>
                             <th>Product Key</th>
@@ -69,7 +70,7 @@
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#userTable').DataTable({
             "aoColumnDefs": [
                 { 'bSortable': false, 'aTargets': [4, 5] }
@@ -94,7 +95,27 @@
         });
 
         $("#userTable").on('click', '.fa-trash-o', function (e) {
-            
+            var userId = $(this).data('id');
+            var row = $('#userTable tr.selected');
+            var resp = confirm("Are you sure you wish to delete this user?");
+            if (resp == true) {
+                $.ajax({
+                    url: '@Url.Action("DeleteUserAccount", "Admin")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: userId
+                    },
+                    success: function (data) {
+                        if (data.error) {
+                            toastr.error(data.msg, 'Error!');
+                        } else {
+                            $('#userTable').DataTable().row(row.index()).remove().draw();
+                            toastr.success(data.msg, 'Success!');
+                        }
+                    }
+                });
+            }
         });
 
         $("#modalSave").click(function (e) {
@@ -102,16 +123,20 @@
             var formSerialize = $("#userAccountForm").serialize();
 
             $.post(actionUrl, formSerialize, function (data) {
+                
                 if (!data.error) {
                     var row = $('#userTable tr.selected');
                     var rowData = $('#userTable').DataTable().row(row.index()).data();
+                    rowData[1] = data.username;
+                    rowData[3] = data.pkey;
+                    $('#userTable').DataTable().row(row.index()).data(rowData).draw();
                     //rowData[1] = data.
                     $('#userAccountModal').modal('hide');
                     $('#userAccountModal').find('modal-body').empty();
-                    toastr.success(data.msg, '');
+                    toastr.success(data.msg, 'Success!');
                 } else if (data.error || data === 'Error') {
                     $('#errorDiv').empty().html(data).removeClass('hidden');
-                    toastr.error(data.msg, '');
+                    toastr.error(data.msg, 'Error!');
                 }
             }, 'json');
 

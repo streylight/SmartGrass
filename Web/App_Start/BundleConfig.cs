@@ -8,6 +8,15 @@ namespace Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css",
+                      "~/Content/bootstrap-datetimepicker.css",
+                      "~/Content/select2.css",
+                      "~/Content/toastr.min.css",
+                      "~/Content/bootstrap-switch.min.css",
+                      "~/Content/fullcalendar.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -21,10 +30,10 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/moment.min.js",
                       "~/Scripts/respond.js",
-                      "~/Scripts/bootstrap-datetimepicker.js"));
+                      "~/Scripts/bootstrap-datetimepicker.js",
+                      "~/Scripts/bootstrap-switch.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/select2").Include(
                 "~/Scripts/select2.js"));
@@ -32,13 +41,8 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
                 "~/Scripts/toastr.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/datepicker.css",
-                      "~/Content/bootstrap-datetimepicker.css",
-                      "~/Content/select2.css," +
-                      "~/Content/toastr.min.css"));
+            bundles.Add(new ScriptBundle("~/bundles/fullcalendar").Include(
+                "~/Scripts/fullcalendar.js"));
         }
     }
 }

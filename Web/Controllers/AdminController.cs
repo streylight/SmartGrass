@@ -31,6 +31,16 @@ namespace Web.Controllers {
             }
         }
 
+        [HttpPost]
+        public ActionResult DeleteUserAccount(int id) {
+            try {
+                _userService.Delete(id);
+                return Json(new {msg = "User account successfully deleted"});
+            } catch (Exception ex) {
+                return Json(new {msg = ex.Message, error = true});
+            } 
+        }
+
         public ActionResult UpdateUserAccount(UserAccountViewModel model) {
             try {
                 var user = _userService.GetUserById(model.User.Id);
@@ -46,13 +56,8 @@ namespace Web.Controllers {
                 } else {
                     _userService.Insert(user);
                 }
-                var row = new {
-                    id = user.Id,
-                    username = user.Username,
-                    unitId = user.UnitId,
-                    pkey = user.Unit.ProductKey
-                };
-                return Json(new { row = row, msg = "User account successfully updated" });
+
+                return Json(new { username = user.Username, pkey = user.Unit.ProductKey, msg = "User account successfully updated" });
             } catch (Exception ex) {
                 
             }

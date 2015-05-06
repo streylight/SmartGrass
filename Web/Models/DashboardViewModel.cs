@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using Core.Domains;
@@ -27,7 +28,11 @@ namespace Web.Models {
 
     public class EventData {
         public EventData(WateringEvent wateringEvent) {
-            title = wateringEvent.StartDateTime.ToString("%h:mm tt") + "-" + wateringEvent.EndDateTime.ToString("%h:mm tt");
+            var fi = new DateTimeFormatInfo {
+                AMDesignator = "a",
+                PMDesignator = "p"
+            };
+            title = wateringEvent.StartDateTime.ToString("%h:mmtt", fi) + "-" + wateringEvent.EndDateTime.ToString("%h:mmtt", fi);
             start = wateringEvent.StartDateTime.ToString("yyyy-MM-ddTHH:mm:ssK");
             end = wateringEvent.EndDateTime.ToString("yyyy-MM-ddTHH:mm:ssK");
             id = wateringEvent.Id;

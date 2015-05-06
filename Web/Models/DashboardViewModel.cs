@@ -27,15 +27,17 @@ namespace Web.Models {
 
     public class EventData {
         public EventData(WateringEvent wateringEvent) {
-            title = wateringEvent.StartDateTime.ToString("hh:mm tt");
+            title = wateringEvent.StartDateTime.ToString("%h:mm tt") + "-" + wateringEvent.EndDateTime.ToString("%h:mm tt");
             start = wateringEvent.StartDateTime.ToString("yyyy-MM-ddTHH:mm:ssK");
             end = wateringEvent.EndDateTime.ToString("yyyy-MM-ddTHH:mm:ssK");
             id = wateringEvent.Id;
+            valve = string.Format("{0}", wateringEvent.IrrigationValve.ValveNumber + 1);
         }
 
         public int id { get; set; }
         public string title { get; set; }
         public string start { get;set; }
         public string end { get; set; }
+        public string valve { get; set; }
     }
 }

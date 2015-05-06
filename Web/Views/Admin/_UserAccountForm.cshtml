@@ -1,0 +1,40 @@
+﻿@using Web.Helpers
+@model Web.Models.UserAccountViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    @using (Html.BeginForm("UpdateUserAccount", "Admin", FormMethod.Post, new { @id = "userAccountForm", @class = "form-horizontal" })) {
+        @Html.HiddenFor(model => model.User.Id)
+        @Html.HiddenFor(model => model.Unit.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.Username, "Username", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.User.Username, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.PasswordHash, "Password", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.PasswordFor(model => model.User.PasswordHash, new { @class = "form-control", @placeholder = "Change password" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.Role, "Role", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(model => model.User.Role, new SelectList(ListHelper.GetListRoles(), "Key", "Value", Model.User.Role), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Unit.ProductKey, "Product Key", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Unit.ProductKey, new { @class = "form-control" })
+            </div>
+        </div>
+        @*<div class="col-md-3 col-md-offset-9">
+            <button type="submit" class="btn btn-success btn-block">Save</button>
+        </div>*@
+    }
+</div>

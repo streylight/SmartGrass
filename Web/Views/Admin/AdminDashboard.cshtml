@@ -1,0 +1,120 @@
+﻿@model List<Core.Domains.User>
+
+@{
+    ViewBag.Title = "Admin Home";
+}
+<style>
+    .fa-pencil-square-o:hover, .fa-trash-o:hover {
+        cursor: pointer;
+    }
+</style>
+<link href='//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<div class="row" style="margin-top: 75px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel" style="border: none">
+                <div class="panel-heading" style="background-color: #242a30; color: white">
+                    <h3 class="panel-title" id="panel-title">User Accounts<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table id="userTable" class="table striped table-responsive">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>Unit Id</th>
+                            <th>Product Key</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-hover">
+                        @foreach (var user in Model) {
+                            <tr>
+                                <th scope="row">@user.Id</th>
+                                <td>@user.Username</td>
+                                <td>@user.UnitId</td>
+                                <td>@user.Unit.ProductKey</td>
+                                <td><i data-id="@user.Id" class="fa fa-pencil-square-o"></i></td>
+                                <td><i data-id="@user.Id" class="fa fa-trash-o"></i></td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="userAccountModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Edit User Account</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <input id="modalSave" type="button" value="Save" class="btn btn-success" />
+                <div id="errorDiv" class="hidden"></div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#userTable').DataTable({
+            "aoColumnDefs": [
+                { 'bSortable': false, 'aTargets': [4, 5] }
+            ]
+        });
+        $('#userTable tbody').on('click', 'tr', function() {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            } else {
+                $('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+
+        $("#userTable").on('click', '.fa-pencil-square-o', function(e) {
+            e.preventDefault();
+            var resourceUrl = "@Url.Action("LoadUserAccountDetails", "Admin")?userId=" + $(this).data('id');
+            $.get(resourceUrl, function(data) {
+                $('#userAccountModal').find('.modal-body').html(data);
+                $('#userAccountModal').modal('show');
+            });
+        });
+
+        $("#userTable").on('click', '.fa-trash-o', function (e) {
+            
+        });
+
+        $("#modalSave").click(function (e) {
+            var actionUrl = $("#userAccountForm").attr('action');
+            var formSerialize = $("#userAccountForm").serialize();
+
+            $.post(actionUrl, formSerialize, function (data) {
+                if (!data.error) {
+                    var row = $('#userTable tr.selected');
+                    var rowData = $('#userTable').DataTable().row(row.index()).data();
+                    //rowData[1] = data.
+                    $('#userAccountModal').modal('hide');
+                    $('#userAccountModal').find('modal-body').empty();
+                    toastr.success(data.msg, '');
+                } else if (data.error || data === 'Error') {
+                    $('#errorDiv').empty().html(data).removeClass('hidden');
+                    toastr.error(data.msg, '');
+                }
+            }, 'json');
+
+        });
+    });
+</script>

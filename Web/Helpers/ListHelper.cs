@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using Core;
 using Core.Domains;
 using Service.Interfaces;
 
@@ -20,6 +22,20 @@ namespace Web.Helpers {
                 datesList.Add(startingDate.AddDays(i));
             }
             return datesList;
-        } 
+        }
+
+        public static Dictionary<Role, string> GetListRoles() {
+            return Enum.GetValues(typeof(Role)).Cast<object>().ToDictionary(at => (Role)at, at => GetEnumDescription((Role)at));
+        }
+
+        private static string GetEnumDescription(Enum value) {
+            var fi = value.GetType().GetField(value.ToString());
+            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes != null && attributes.Length > 0)
+                return attributes[0].Description;
+            
+            return value.ToString();
+        }
     }
 }

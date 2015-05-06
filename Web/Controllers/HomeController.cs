@@ -79,11 +79,6 @@ namespace Web.Controllers {
         public ActionResult CreateWateringEvent(DateTime selectedDate, DateTime startTime, DateTime endTime, List<int> irrigationValveIds) {
             try {
                 var events = new List<EventData>();
-                var obj = new {
-                    date = selectedDate.Date,
-                    st = startTime,
-                    et = endTime
-                };
 
                 foreach (var irrigationValveId in irrigationValveIds) {
                     var newWateringEvent = new WateringEvent {
@@ -96,7 +91,7 @@ namespace Web.Controllers {
                     events.Add(new EventData(newWateringEvent));
                 }
 
-                return Json(new { error = false, eventData = events.Take(1), obj = obj }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = false, eventData = events }, JsonRequestBehavior.AllowGet);
             } catch (Exception ex) {
                 return Json(new { error = true, message = ex.Message }, JsonRequestBehavior.AllowGet);
             }

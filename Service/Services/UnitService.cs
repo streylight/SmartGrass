@@ -128,8 +128,8 @@ namespace Service.Services {
                         for (var i = 0; i < cnt; i++) {
                             data.Add(new {
                                 d = date.Date.ToString("yyyy-MM-dd"),
-                                max = soilReadingsByDay.ContainsKey(date.Date) ? soilReadingsByDay[date.Date].Max(x => x.SoilMoisture) : 0,
-                                min = soilReadingsByDay.ContainsKey(date.Date) ? soilReadingsByDay[date.Date].Min(x => x.SoilMoisture) : 0
+                                max = soilReadingsByDay.ContainsKey(date.Date) ? soilReadingsByDay[date.Date].Max(x => x.SoilMoisture) * 20 : 0,
+                                min = soilReadingsByDay.ContainsKey(date.Date) ? soilReadingsByDay[date.Date].Min(x => x.SoilMoisture) * 20 : 0
                             });
                             date = date.AddDays(1);
                         }
@@ -139,8 +139,8 @@ namespace Service.Services {
                         for (var i = 1; i <= 12; i++) {
                             data.Add(new {
                                 d = new DateTime(date.Year, i, 1),
-                                max = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Max(x => x.SoilMoisture) : 0,
-                                min = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Min(x => x.SoilMoisture) : 0
+                                max = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Max(x => x.SoilMoisture) * 10 : 0,
+                                min = soilReadingsByMonth.ContainsKey(i) ? soilReadingsByMonth[i].Min(x => x.SoilMoisture) * 10 : 0
                             });
                             
                         }

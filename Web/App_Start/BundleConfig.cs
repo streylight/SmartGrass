@@ -24,15 +24,21 @@ namespace Web
                       "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/moment.min.js",
                       "~/Scripts/respond.js",
-                      "~/Scripts/bootstrap-datetimepicker.js",
-                      "~/Scripts/select2.js"));
+                      "~/Scripts/bootstrap-datetimepicker.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/select2").Include(
+                "~/Scripts/select2.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
+                "~/Scripts/toastr.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/datepicker.css",
                       "~/Content/bootstrap-datetimepicker.css",
-                      "~/Content/select2.css"));
+                      "~/Content/select2.css," +
+                      "~/Content/toastr.min.css"));
         }
     }
 }

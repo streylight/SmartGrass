@@ -7,17 +7,13 @@
     var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
     var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
 }
-<link href="~/Content/toastr.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-switch.min.css" rel="stylesheet" />
 <link href="~/Content/weather-icons/css/weather-icons.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script src="~/Scripts/bootstrap-switch.min.js"></script>
-<script src="~/Scripts/toastr.min.js"></script>
-<link href="~/Content/select2.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-<script src="~/Scripts/select2.js"></script>
 <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
 <style>
@@ -223,6 +219,11 @@
         color: #428bca;
     }*/
 
+    .loading {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
 </style>
 
 <div class="row" style="margin-top: 75px;">
@@ -377,15 +378,19 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-4">
-                        <h4>Filter by</h4>
+                    <div class="col-md-12">
+                        <h4 style="margin-top: 0; margin-bottom: 0">Filter by</h4>
                     </div>
-                    <div class="col-md-4 col-md-offset-4">
+
+                    <div class="col-md-6">
                         <select class="s2Init" id="soilReportFilter" style="width: 100%; margin-top: 10px; margin-bottom: 10px">
                             <option value="@FilterType.Week">Week</option>
                             <option value="@FilterType.Month">Month</option>
                             <option value="@FilterType.Year">Year</option>
                         </select>
+                    </div>
+                    <div class="col-md-1 loading">
+                        <i id="loadingSpinner" class="fa fa-spinner fa-pulse" style="display: none; margin-left: -20px"></i>
                     </div>
                 </div>
                 <div class="row">
@@ -409,48 +414,7 @@
         </div>
     </div>
 </div>
-    @*<div class="row">
-            <div class="col-md-12">
-                <div class="panel" style="border: none">
-                    <div class="panel-heading" style="background-color: #242a30; color: white">
-                        <h3 class="panel-title" id="panel-title">Panel title<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                            </thead>
-                            <tbody class="table-hover">
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>23</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>22</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>221</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+    
 
 
 
@@ -570,17 +534,19 @@
             data: [],
             xkey: 'd',
             ykeys: ['max', 'min'],
-            labels: ['Max', 'Min'],
+            labels: ['Max Moisture', 'Min Moisture'],
             fillOpacity: 0.6,
             xLabelFormat: function (x) { return moment(x).format("MMM D"); },
             dateFormat: function (x) { return moment(x).format("dddd, MMMM Do YYYY"); },
+            yLabelFormat: function(y) { return y + "%"; },
             hideHover: 'auto',
             behaveLikeLine: true,
             resize: true,
         });
 
             
-        $('#soilReportFilter').on('change', function(v) {
+        $('#soilReportFilter').on('change', function (v) {
+            $('#loadingSpinner').show();
             console.log('change' + $(this).val());
             $.ajax({
                 url: "@Url.Action("GenerateSoilMoistureGraph", "Home")",
@@ -590,6 +556,7 @@
                     filterBy: $(this).val()  
                 },
                 success: function (data) {
+                    $('#loadingSpinner').hide();
                     soilMoistureChart.setData(data.results);
                 }
             });
@@ -601,8 +568,9 @@
 
         for (var i = 0; i < 3; i++) {
             var graph = 'graph' + (i + 1);
+            var percentage = $('#' + graph).data('percent');
             var options = {
-                percent: $('#' + graph).data('percent'),
+                percent: percentage == 0 ? 0.1 : percentage,
                 size: 150,
                 lineWidth: 25,
                 rotate: 0
@@ -670,11 +638,10 @@
                             toastr.success(data.msg, 'Success!');
                         }
                     });
-                } 
-                
-                //LoadEventModal(calEvent.id);
-                //ToastrConfirm('Test', 'Would you like to know more?<br /><br /><button type="button" class="btn clear">Yes</button>');
-                
+                }
+            },
+            eventRender: function (event, element) {
+                $(element).tooltip({ title: 'Valve: ' + event.valve, placement: 'right', container: 'body' });
             }
         });
 

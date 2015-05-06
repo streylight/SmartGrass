@@ -717,35 +717,35 @@ h1, h2, h3, h4, h5, h6 {
             }
             // Do something
         });
-        var body = {
-            "SoilReadings": [
-            {
-                "SensorNumber": 1,
-                "SoilMoisture": 2.30
-            }, {
-                "SensorNumber": 2,
-                "SoilMoisture": 3.50
-            },
-            {
-                "SensorNumber": 3,
-                "SoilMoisture": 3.50
-            }
-                        ],
-            "ProductKey": "1234",
-            "Temperature": 34.0,
-            "Rain": 5.0
-        };
-
-
-        //$.ajax({
-        //    url: "http://localhost:64623/api/Sensors",
-        //    contentType: "application/json",
-        //    type: "POST",
-        //    data: JSON.stringify(body),
-        //    success: function (data) {
-        //        console.log(data);
+        //var body = {
+        //    "SoilReadings": [
+        //    {
+        //        "SensorNumber": 1,
+        //        "SoilMoisture": 1.0
+        //    }, {
+        //        "SensorNumber": 2,
+        //        "SoilMoisture": 1.5
+        //    },
+        //    {
+        //        "SensorNumber": 3,
+        //        "SoilMoisture": 0.5
         //    }
-        //});
+        //                ],
+        //    "ProductKey": "1234",
+        //    "Temperature": 75.0,
+        //    "Rain": 0
+        //};
+
+
+        $.ajax({
+            url: "http://localhost:64623/api/Sensors",
+            contentType: "application/json",
+            type: "POST",
+            data: JSON.stringify(body),
+            success: function (data) {
+                console.log(data);
+            }
+        });
 
         //App.init();
     });

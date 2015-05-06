@@ -345,7 +345,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
-    <Content Include="Views\Home\_WateringEventForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -65,47 +65,41 @@ namespace Web.Controllers {
             return View(model);
         }
 
-        public ActionResult CreateWateringEvent(List<int> irrigationValves, DateTime date, DateTime startTime, DateTime endTime) {
+        [HttpPost]
+        public ActionResult DeleteWateringEvent(int id) {
             try {
-                var events = new List<EventData>();
-                date = date.Date;
-                var obj = new {
-                    date = date,
-                    st = startTime,
-                    et = endTime
-                };
-                foreach (var irrigationValveId in irrigationValves) {
-                    var newWateringEvent = new WateringEvent {
-                        StartDateTime = date.Add(startTime.TimeOfDay),
-                        EndDateTime = date.Add(endTime.TimeOfDay),
-                        IrrigationValveId = irrigationValveId
-                    };
-
-                    _wateringEventService.Insert(newWateringEvent);
-
-                    events.Add(new EventData(newWateringEvent));
-                    //var newObj = new EventData {
-                    //    title = startTime.ToString("HH:mm") + "-" + endTime.ToString("HH:mm"),
-                    //    start = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK"),
-                    //    end = DateTime.Now.AddHours(1).ToString("yyyy-MM-ddTHH:mm:ssK")
-                    //};
-                    //events.Add(newObj);
-                }
-
-                return Json(new { error = false, eventData = events, obj = obj }, JsonRequestBehavior.AllowGet);
+                _wateringEventService.Delete(id);
+                return Json(new {msg = "Watering event successfully removed", error = false});
             } catch (Exception ex) {
-                return Json(new { error = true, message = ex.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new {msg = ex.Message, error = true});
             }
         }
 
-        public ActionResult LoadWateringEvent(int id) {
-            var user = _userService.GetUserById(UserId);
-            var model = new WateringEventViewModel {
-                UnitId = user.UnitId,
-                WateringEvent = id != 0 ?_wateringEventService.GetWateringEventById(id) : new WateringEvent()
-            };
-            
-            return View("_WateringEventForm", model);
+        [HttpPost]
+        public ActionResult CreateWateringEvent(DateTime selectedDate, DateTime startTime, DateTime endTime, List<int> irrigationValveIds) {
+            try {
+                var events = new List<EventData>();
+                var obj = new {
+                    date = selectedDate.Date,
+                    st = startTime,
+                    et = endTime
+                };
+
+                foreach (var irrigationValveId in irrigationValveIds) {
+                    var newWateringEvent = new WateringEvent {
+                        StartDateTime = selectedDate.Date.Add(startTime.TimeOfDay),
+                        EndDateTime = selectedDate.Date.Add(endTime.TimeOfDay),
+                        IrrigationValveId = irrigationValveId
+                    };
+                    _wateringEventService.Insert(newWateringEvent);
+
+                    events.Add(new EventData(newWateringEvent));
+                }
+
+                return Json(new { error = false, eventData = events.Take(1), obj = obj }, JsonRequestBehavior.AllowGet);
+            } catch (Exception ex) {
+                return Json(new { error = true, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult SetWateringEventAction(int valveId, bool status) {
@@ -119,7 +113,7 @@ namespace Web.Controllers {
             if (activeWatering != null && !status) {
                 activeWatering.Watering = false;
                 activeWatering.EndDateTime = now;
-                //_wateringEventService.Insert(activeWatering);
+                _wateringEventService.Insert(activeWatering);
                 message = "Watering for valve " + valve.ValveNumber + " has been stopped";
             } else {
                 if (valve.WateringEvents.Any(x => x.StartDateTime > now && x.StartDateTime < now.AddMinutes(10))) {
@@ -132,7 +126,7 @@ namespace Web.Controllers {
                         EndDateTime = now.AddMinutes(10),
                         Watering = true
                     };
-                    //_wateringEventService.Insert(newWateringEvent);
+                    _wateringEventService.Insert(newWateringEvent);
                     return Json(new {
                         msg = "Watering event started for 10 minutes", jsonEvent = new EventData(newWateringEvent), watering = user.Unit.IrrigationValves.SelectMany(x => x.WateringEvents).Any(x => x.Watering)
                     }, JsonRequestBehavior.AllowGet);

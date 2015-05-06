@@ -15,6 +15,11 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script src="~/Scripts/bootstrap-switch.min.js"></script>
 <script src="~/Scripts/toastr.min.js"></script>
+<link href="~/Content/select2.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
 <style>
     .widget.widget-stats {
         position: relative;
@@ -457,7 +462,31 @@
                     <h4 class="modal-title" id="gridSystemModalLabel">Schedule Watering</h4>
                 </div>
                 <div class="modal-body">
-                    
+                    <form id="wateringEventForm">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Select Irrigation Valve(s)</label>
+                                @Html.DropDownList("IrrigationValveS2", new SelectList(ListHelper.GetListOfIrrigationValves(Model.Unit.Id).Select(x => new { x.Id, Name = "Valve " + (x.ValveNumber + 1) }), "Id", "Name"), null, new { @id = "irrigationValveS2", @class = "s2Init", @style = "width: 100%", @multiple = "multiple" })
+                            </div>
+                            <br />
+                            <div class="col-md-6">
+                                <label>Start Time</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>End Time</label>
+                            </div>
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+                                @*@Html.TextBox("StartTime", new { @class = "form-control", @id = "startTime" })*@
+                                <input id="startTime" class="form-control"/>
+                            </div>
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+                                @*@Html.TextBox("EndTime", new { @class = "form-control", @id = "endTime" })*@
+                                <input id="endTime" class="form-control" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -468,17 +497,29 @@
     </div>
 
 <script type="text/javascript">
-    
-    function LoadEventModal(id) {
-        $.ajax({
-            url: "@Url.Action("LoadWateringEvent", "Home")?Id=" + id,
-            type: 'GET',
-            contentType: 'html',
-            success: function (data) {
-                $('.modal-body').html(data);
-                $('#newEventModal').modal('show');
-            }
-        });
+
+    function ToastrConfirm(title, text) {
+
+
+        toastr.options = {
+            "closeButton": true,
+            "newestOnTop": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": function(val) {
+                console.log('clicked: ' + val);
+            },
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": 0,
+            "extendedTimeOut": 0,
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "tapToDismiss": false
+        };
+        toastr["warning"](text, title);
     }
 
     $(document).ready(function () {
@@ -520,6 +561,9 @@
         var selectedDate;
         $('.s2Init').select2();
             
+        $('#startTime, #endTime').datetimepicker({
+            format: 'LT'
+        });
 
         var soilMoistureChart = Morris.Area({
             element: 'soilMoistureChart',
@@ -608,10 +652,29 @@
             dayClick: function (date, jsEvent, view) {
                 console.log(date.toISOString());
                 selectedDate = date.toISOString();
-                LoadEventModal(0);
+                $('#newEventModal').modal('show');
             },
             eventClick: function (calEvent, jsEvent, view) {
-                LoadEventModal(calEvent.id);
+                var resp = confirm("Are you sure you wish to remove this event?");
+                var eventId = calEvent.id;
+                if (resp == true) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteWateringEvent", "Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            id: eventId
+                        },
+                        success: function(data) {
+                            $('#calendar').fullCalendar('removeEvents', [eventId]);
+                            toastr.success(data.msg, 'Success!');
+                        }
+                    });
+                } 
+                
+                //LoadEventModal(calEvent.id);
+                //ToastrConfirm('Test', 'Would you like to know more?<br /><br /><button type="button" class="btn clear">Yes</button>');
+                
             }
         });
 
@@ -626,36 +689,26 @@
         });
 
         $('#newEventModal').on('hide.bs.modal', function (e) {
-            console.log("unselecte");
-            $('.modal-body').html('');
             $('#calendar').fullCalendar('unselect');
         });
 
         $('#createEvent').on('click', function () {
             console.log("click");
-            return false;
+            
             $.ajax({
                 url: "@Url.Action("CreateWateringEvent", "Home")",
                 data: {
-                    irrigationValves: $('#irrigationValveS2').val(),
-                    date: selectedDate,
+                    irrigationValveIds: $('#irrigationValveS2').val(),
+                    selectedDate: selectedDate,
                     startTime: $('#startTime').val(),
-                    endTime: $('#endTime').val(),
+                    endTime: $('#endTime').val()
                 },
                 traditional: true,
                 type: 'POST',
                 success: function (data) {
                     for (var i = 0; i < data.eventData.length; i++) {
                         $('#calendar').fullCalendar('renderEvent', data.eventData[i], true);
-                        console.log("date: " + data.obj.date);
-                        console.log("start time: " + data.obj.st);
-                        console.log("end time: " + data.obj.et);
-
                     }
-                    //$.each(data.eventData, function (eventData) {
-                    //    debugger
-                    //    $('#calendar').fullCalendar('renderEvent', eventData, true);
-                    //});
                     $('#newEventModal').modal('hide');
                 }
             });

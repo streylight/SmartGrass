@@ -36,14 +36,12 @@ namespace Service.Interfaces {
             }
         }
 
-        public void Delete(int id){
-            try{
-                var wateringEvent = _wateringEventRepository.GetById(id);
-                _wateringEventRepository.Delete(wateringEvent);
-
-            } catch (Exception ex){
-                throw new Exception(ex.Message);
+        public void Delete(int id) {
+            var wateringEvent = _wateringEventRepository.GetById(id);
+            if (wateringEvent == null) {
+                throw new Exception("No watering events for the given id");
             }
+            _wateringEventRepository.Delete(wateringEvent);
         }
     }
 }

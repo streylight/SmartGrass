@@ -7,6 +7,7 @@ using Core.Domains;
 namespace Web.Models {
     public class WateringEventViewModel {
         public WateringEvent WateringEvent { get; set; }
+        public DateTime SelectedDate { get; set; }
         public int UnitId { get; set; }
     }
 }

@@ -51,7 +51,7 @@ namespace Web.Controllers {
                     rainEventService.Insert(rainEvent);
                     rainFlag = true;
                 }
-                var soilLimitsDict = sensorDataModel.SoilReadings.ToDictionary(x => int.Parse(x.SensorNumber), x => (unitSettings != null && x.SoilMoisture > unitSettings.SoilMoistureLimit));
+                var soilLimitsDict = sensorDataModel.SoilReadings.ToDictionary(x => (int.Parse(x.SensorNumber) - 1), x => (unitSettings != null && x.SoilMoisture > unitSettings.SoilMoistureLimit));
                 var tempFlag = unitSettings != null && unitSettings.StopOnFreeze && sensorDataModel.Temperature < 34.0;
                 var commandDict = unitService.GetValveCommands(unitId, soilLimitsDict, tempFlag, rainFlag);
 

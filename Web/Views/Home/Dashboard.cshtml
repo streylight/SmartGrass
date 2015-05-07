@@ -228,6 +228,12 @@
 </style>
 
 <div class="row" style="margin-top: 75px;">
+    @*<div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li><a href="@Url.Action("Dashboard", "Home")">Dashboard</a></li>
+        </ol>    
+    </div>*@
     <div class="col-md-3 col-sm-6">
         <div class="widget widget-stats btn-success">
             <div class="stats-icon">
@@ -235,7 +241,7 @@
             </div>
             <div class="stats-info">
                 <h4>SOIL MOISTURE LEVEL</h4>
-                <p>@string.Format("{0:N2} %", (Model.SensorDetails.Sum(x => x.MoistureLevel) / 3))</p>
+                <p>@string.Format("{0:N2} %", (Model.SensorDetails.Sum(x => x.MoistureLevel)/3))</p>
             </div>
             <div class="stats-link">
                 <a data-toggle="collapse" href="#viewSoilDetails">View Details</a>

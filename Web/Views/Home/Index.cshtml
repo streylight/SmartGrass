@@ -7,536 +7,8 @@
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@*<script src="~/Scripts/scrollMonitor.js"></script>*@
-@*<script src="~/Scripts/apps.js"></script>
-<script src="~/Scripts/pace.js"></script>*@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<style>
-    .header.navbar.navbar-transparent {
-        border-bottom: 1px solid rgba(255,255,255,.2);
-    }
-
-    .header.navbar {
-        border-bottom: none;
-        -webkit-transition: all .2s linear;
-        -moz-transition: all .2s linear;
-        transition: all .2s linear;
-    }
-
-    .navbar-inverse .navbar-toggle, .navbar-transparent .navbar-toggle {
-  border-color: #8F8E8E;
-}
-.navbar-toggle {
-  margin-top: 18px;
-  margin-bottom: 18px;
-  -webkit-transition: all .2s linear;
-  -moz-transition: all .2s linear;
-  transition: all .2s linear;
-}
-
-.navbar-inverse .navbar-toggle .icon-bar, .navbar-transparent .navbar-toggle .icon-bar {
-  background: #8f8e8e;
-}
-
-.header.navbar .navbar-nav>li.active>a, .header.navbar .navbar-nav>li>a:focus, .header.navbar .navbar-nav>li>a:hover {
-  background: 0 0;
-}
-.header.navbar .navbar-nav>li>a {
-  font-size: 12px;
-  line-height: 20px;
-  font-weight: 600;
-  padding: 25px 15px;
-}
-.nav>li>a {
-  color: #6e7179;
-}
-
-.header.navbar .navbar-nav > li.active > a, .header.navbar .navbar-nav > li > a:hover, .header.navbar .navbar-nav > li > a:focus, .header.navbar.navbar-default .navbar-nav > li.active > a, .header.navbar.navbar-default .navbar-nav > li > a:hover, .header.navbar.navbar-default .navbar-nav > li > a:focus, .header.navbar.navbar-transparent .navbar-nav > li.active > a, .header.navbar.navbar-transparent .navbar-nav > li > a:hover, .header.navbar.navbar-transparent .navbar-nav > li > a:focus, .header.navbar.navbar-inverse .navbar-nav > li.active > a, .header.navbar.navbar-inverse .navbar-nav > li > a:hover, .header.navbar.navbar-inverse .navbar-nav > li > a:focus, .header.navbar.navbar-transparent.navbar-small .navbar-nav > li.active > a, .header.navbar.navbar-transparent.navbar-small .navbar-nav > li > a:hover, .header.navbar.navbar-transparent.navbar-small .navbar-nav > li > a:focus, .text-theme, .navbar-nav .dropdown-menu > li.active > a, .navbar-nav .dropdown-menu > li > a:hover, .navbar-nav .dropdown-menu > li > a:focus, .pricing-table .price .price-number, a {
-  color: #5cb85c;
-}
-
-.navbar-nav>li>.dropdown-menu {
-  margin-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.header .navbar-brand {
-  padding: 20px 15px;
-}
-
-transparent .brand-text {
-  color: #fff;
-}
-.brand-logo+.brand-text {
-  margin-left: 10px;
-  color: #6e7179;
-  font-size: 24px;
-  line-height: 20px;
-  /*display: block;*/
-}
-
-.navbar-small .navbar-toggle {
-  border-color: #ddd;
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-
-.header.navbar.navbar-transparent.navbar-small .brand-logo+.brand-text, .header.navbar.navbar-transparent.navbar-small .navbar-nav>li>a {
-  color: #2d353c;
-}
-
-.header.navbar .navbar-nav>li.active>a, .header.navbar .navbar-nav>li>a:focus, .header.navbar .navbar-nav>li>a:hover {
-  background: 0 0;
-}
-
-.header.navbar.navbar-transparent.navbar-small .brand-logo+.brand-text, .header.navbar.navbar-transparent.navbar-small .navbar-nav>li>a {
-  color: #2d353c;
-}
-
-.navbar-small .navbar-toggle .icon-bar {
-  background: #888;
-}
-
-/*.header.navbar.navbar-small .navbar-brand, .header.navbar.navbar-small .navbar-nav>li>a {
-  padding: 15px;
-}*/
-
-.navbar-toggle {
-  margin-top: 18px;
-  margin-bottom: 18px;
-  -webkit-transition: all .2s linear;
-  -moz-transition: all .2s linear;
-  transition: all .2s linear;
-}
-
-.header.navbar.navbar-transparent.navbar-small {
-  background: #fff;
-}
-.header.navbar.navbar-small {
-  border-bottom: none;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-  box-shadow: 0 1px 2px rgba(0,0,0,.2);
-}
-
-    .content {
-        padding: 60px 15px 75px;
-    }
-
-        .content.has-bg {
-            padding-bottom: 60px;
-            overflow: hidden;
-            position: relative;
-        }
-
-    .home {
-        padding: 0 !important;
-        color: #fff;
-    }
-
-    .content.has-bg .content-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-    }
-
-    .home {
-        padding: 0 !important;
-        color: #fff;
-    }
-
-    .content.has-bg .container {
-        position: relative;
-    }
-
-    .home-content {
-        z-index: 1020;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        color: #8F8E8E;
-        margin-top: -120px;
-        padding: 0 15px;
-        text-align: center;
-    }
-
-        .home-content h1 {
-            font-size: 64px;
-            font-weight: 600;
-        }
-
-        .home-content h1, .home-content h2, .home-content h3, .home-content h4 {
-            color: #fff;
-            margin: 0 0 30px;
-            font-weight: 300;
-        }
-
-    .content.has-bg h1, .content.has-bg h2, .content.has-bg h3, .content.has-bg h4, .content.has-bg h5, .content.has-bg h6 {
-        color: #fff;
-    }
-
-    p {
-        
-          font-size: 1.4em;
-        line-height: 20px;
-    }
-
-    .home-content .btn + .btn {
-        margin-left: 15px;
-    }
-
-    .btn.btn-outline {
-        color: #fff;
-        border-width: 2px;
-        border-color: #8F8E8E;
-        background: 0 0;
-    }
-
-    .btn.btn-outline:hover {
-          border-color: #fff;
-    }
-    .btn {
-        padding: 15px 30px;
-        font-size: 14px;
-        font-weight: 500;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
-
-    .contentAnimated {
-        -webkit-animation-duration: 1.5s;
-        animation-duration: 1.5s;
-        -webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
-    }
-
-    .fadeInDown {
-        -webkit-animation-name: fadeInDown;
-        animation-name: fadeInDown;
-    }
-
-    .content.has-bg .content-bg:before {
-        content: '';
-        background: url(/Content/images/content-bg-cover.png);
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-    }
-
-    .content .content-desc {
-        text-align: left;
-        margin-bottom: 60px;
-        color: #242a30;
-    }
-
-    .row {
-        margin: 0 -10px;
-    }
-
-        .row > [class*=col-] {
-            padding: 0 10px;
-        }
-
-    .about-author {
-        position: relative;
-    }
-
-        .about-author .quote {
-            position: relative;
-            padding: 30px 60px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-
-    .bg-silver {
-        background: #f0f3f4 !important;
-    }
-
-    .quote {
-        text-align: center;
-        font-size: 28px;
-        font-weight: 300;
-        color: #fff;
-        color: rgba(255,255,255,.9);
-    }
-
-    .about-author .fa.fa-quote-left, .about-author .fa.fa-quote-right {
-        font-size: 14px;
-        position: absolute;
-        left: 30px;
-        margin-top: -14px;
-        line-height: 28px;
-        top: 30px;
-        color: #D5D9DA;
-    }
-
-    .quote .fa-quote-left, .quote .fa-quote-right {
-        color: #fff;
-        font-size: 14px;
-        position: relative;
-        top: -14px;
-    }
-
-    /*.fa {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        transform: translate(0, 0);
-    }*/
-
-    .about-author .quote h3 {
-        margin: 0;
-        font-weight: 300;
-        color: #707478;
-        font-style: italic;
-        line-height: 30px;
-    }
-
-    about-author .fa.fa-quote-right {
-        left: auto;
-        right: 30px;
-        bottom: 30px;
-        margin-top: 0;
-        margin-bottom: -14px;
-        top: auto;
-    }
-
-    .about-author .fa.fa-quote-left, .about-author .fa.fa-quote-right {
-        font-size: 14px;
-        position: absolute;
-        left: 30px;
-        margin-top: -14px;
-        line-height: 28px;
-        top: 30px;
-        color: #D5D9DA;
-    }
-
-    .quote .fa-quote-left, .quote .fa-quote-right {
-        color: #fff;
-        font-size: 14px;
-        position: relative;
-        top: -14px;
-    }
-
-    /*.fa {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        transform: translate(0, 0);
-    }*/
-
-    * {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-    user agent stylesheeti, cite, em, var, address, dfn {
-        font-style: italic;
-    }
-
-    Inherited from div.quote.bg-silver .quote {
-        text-align: center;
-        font-size: 28px;
-        font-weight: 300;
-        color: #fff;
-        color: rgba(255,255,255,.9);
-    }
-
-    .about-author .author {
-        position: relative;
-        text-align: right;
-        padding-left: 100px;
-        margin-bottom: 15px;
-    }
-
-        .about-author .author .image {
-            position: absolute;
-            left: -10px;
-            top: -40px;
-            background: #fff;
-            border: 5px solid #fff;
-            border-radius: 50%;
-            width: 100px;
-            overflow: hidden;
-        }
-
-            .about-author .author .image img {
-                max-width: 100%;
-            }
-
-        .about-author .author .info {
-            color: #242a30;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-            .about-author .author .info small {
-                display: block;
-                color: #999;
-                font-size: 12px;
-                font-weight: 400;
-            }
-
-    .skills .skills-name {
-        font-size: 12px;
-        color: #242a30;
-        margin-bottom: 5px;
-        font-weight: 600;
-    }
-
-    .progress {
-        -webkit-border-radius: 15px;
-        -moz-border-radius: 15px;
-        border-radius: 15px;
-        height: 15px;
-        overflow: visible;
-        background: #e2e7eb;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
-
-    .login-cover-bg {
-        background: #666;
-        background: -moz-radial-gradient(center,ellipse cover,#666 0,#000 100%);
-        background: -webkit-gradient(radial,center center,0,center center,100%,color-stop(0%,#666),color-stop(100%,#000));
-        background: -webkit-radial-gradient(center,ellipse cover,#666 0,#000 100%);
-        background: -o-radial-gradient(center,ellipse cover,#666 0,#000 100%);
-        background: -ms-radial-gradient(center,ellipse cover,#666 0,#000 100%);
-        background: radial-gradient(ellipse at center,#666 0,#000 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#000000', GradientType=1);
-        opacity: 1;
-        filter: alpha(opacity=60);
-    }
-
-    .login-cover, .login-cover-bg, .login-cover-image {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-    .login-cover, .login-cover-bg, .login-cover-image {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-    .sg-logo {
-        position: relative;
-        top: -5px;
-    }
-    .home-content a:focus, .home-content a:hover {
-  color: #fff;
-}
-
-    .content .content-title {
-  text-align: center;
-  position: relative;
-  margin-bottom: 30px;
-  padding-bottom: 15px;
-        font-size: 55px;
-
-  margin-top: 0;
-}
-    .content .content-title:after {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 40px;
-  background: #242a30;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  margin-left: -20px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
-  color: #242a30;
-  margin-top: 0;
-  margin-bottom: 15px;
-  line-height: 1.25;
-}
-
-.sponsor-logo {
-    /*height: 115px;*/
-    text-align: center;
-    font: 0/0 a;
-}
-
-.sponsor-logo:before {
-    content: ' ';
-    display: inline-block;
-    vertical-align: middle;
-    height: 100%;
-}
-
-/*.content.has-bg {
-  padding-bottom: 60px;
-  overflow: hidden;
-  position: relative;
-}*/
-.bg-black-darker {
-  background: #242a30!important;
-}
-.team {
-  text-align: center;
-  padding: 0 30px;
-}
-.team .image {
-  display: inline-block;
-  border-radius: 300px;
-  overflow: hidden;
-}
-.team .image img {
-  border-radius: 300px;
-}
-.team .info {
-  margin-top: 15px;
-}
-.team .name {
-  margin-bottom: 5px;
-}
-.team .title {
-  font-size: 12px;
-  margin-bottom: 15px;
-  font-weight: 600;
-}
-.team p {
-  margin-bottom: 15px;
-}
-.team .social a {
-    font-size: 24px;
-  text-align: center;
-  display: inline-block;
-  color: #242a30;
-}
-.quote {
-  text-align: center;
-  font-size: 28px;
-  font-weight: 300;
-  color: #fff;
-  color: rgba(255,255,255,.9);
-}
-
-</style>
 <body data-spy="scroll" data-offset="500" data-target="#header-navbar">
 <div id="header" class="header navbar navbar-transparent navbar-fixed-top">
     <div class="container">
@@ -549,18 +21,16 @@ h1, h2, h3, h4, h5, h6 {
             </button>
             <a href="@Url.Action("Index", "Home")" class="navbar-brand" style="padding-bottom: 5px">
                 <span class="brand-logo sg-logo">
-                        <img src="~/Content/Images/sg-logo-trans.png" alt="" style="width: 35px" />
-                    </span>
-                <span class="brand-text">
-                        Smart <span class="text-theme">Grass</span>
-                    </span>
+                    <img src="~/Content/Images/sg-logo-trans.png" alt="" style="width: 35px" />
+                </span>
+                <span class="brand-name">
+                    Smart<span class="font-primary">Grass</span>
+                </span>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="header-navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#home" data-click="scroll-to-target" data-toggle="dropdown">HOME</a>
-                </li>
+                <li><a href="#home" data-click="scroll-to-target" data-toggle="dropdown">HOME</a></li>
                 <li><a href="#about" data-click="scroll-to-target">ABOUT</a></li>
                 <li><a href="#team" data-click="scroll-to-target">TEAM</a></li>
                 <li><a href="@Url.Action("Login", "Account")">LOGIN</a></li>
@@ -568,154 +38,144 @@ h1, h2, h3, h4, h5, h6 {
         </div>
     </div>
 </div>
-    <div class="clearfix"></div>
-        <div id="home" class="content has-bg home login-cover-bg">
-            <div class="content-bg">
-                <img src="~/Content/Images/summer-lawn-1920x1080.jpg" alt="Home" />
-            </div>
-            <div class="container home-content" style="margin-top: -230px">
-
-                <img src="~/Content/Images/sg-logo-trans.png" width="175" />
-                <h1>Welcome to Smart Grass</h1>
-                <h3>Home Irrigation Control System</h3>
-                <p>
-                    The Smart Grass home irrigation control system is the smart way to control any home's irrigation system remotely.<br>
-                    Check out our <a href="#about" data-click="scroll-to-target">about</a> section to learn more.
+<div class="clearfix"></div>
+<div id="home" class="content has-bg home backdrop-overlay">
+    <div class="content-bg">
+        <img src="~/Content/Images/summer-lawn-1920x1080.jpg" alt="Home"/>
+    </div>
+    <div class="container container-home" style="margin-top: -230px">
+        <img src="~/Content/Images/sg-logo-trans.png" width="175"/>
+        <h1>Welcome to SmartGrass</h1>
+        <h3>Home Irrigation Control System</h3>
+        <p>
+            The SmartGrass home irrigation control system is the smart way to control any home's irrigation system remotely.<br>
+            Would you like to know <a href="#about" data-click="scroll-to-target">more?</a>
+        </p>
+        <a href="#about" class="btn btn-success">Learn More</a>
+        <a href="@Url.Action("Register", "Account")" class="btn btn-empty">Get Started</a><br>
+        <br>
+        or <a href="@Url.Action("Login", "Account")">login</a> if you are already registered
+    </div>
+</div>
+<div id="about" class="content">
+    <div class="container">
+        <h1 class="header-content">About Us</h1>
+        <p class="details">
+            HICS is an intelligent home irrigation control system that utilizes soil moisture sensors to measure the amount of moisture present in the user’s lawn and use this information to water the lawn in an efficient way. Its purpose is to replace an existing sprinkler control system and allow users to control their home irrigation remotely through a web application that will scale to fit on a computer or mobile device.
+            <br/>
+            <br/>
+            HICS uses a central control unit to read soil moisture levels and set watering schedules accordingly by interfacing directly with the users existing irrigation valves. The control unit allows users to remotely schedule or monitor their lawns by communicating with the HICS web application over the internet. Through the web application, users will be granted complete access to all the features that HICS offers while providing an intuitive and easy to use interface.
+        </p>
+        <div class="row">
+            <div class="col-md-12 col-sm-6">
+                <h3>Team Sponsors</h3>
+                <p class="details">
+                    Team SmartGrass is sponsored by the owner of <a href="http://www.nutsandboltstexas.com/">Nuts and Bolts Hardware</a>, Keith Aholt. SmartGrass is directed by Mike O'Dell and is a project for
+                    the Computer Science and Engineering department at the <a href="http://www.uta.edu/uta/">University of Texas at Arlington.</a>
                 </p>
-                <a href="#" class="btn btn-success">Explore More</a>
-                <a href="@Url.Action("Register", "Account")" class="btn btn-outline">Register Now</a><br>
-                <br>
-                or <a href="@Url.Action("Login", "Account")">login</a> if you are already registered
+            </div>
+            <div class="col-md-6 col-sm-6 sponsor-logo">
+                <a href="http://www.nutsandboltstexas.com/">
+                    <img src="~/Content/Images/Nuts&Bolts.png" style="margin-top: 25px"/>
+                </a>
+            </div>
+            <div class="col-md-6 col-sm-6 sponsor-logo">
+                <a href="http://www.cse.uta.edu/"><img src="~/Content/Images/CSE1in.png"/></a>
             </div>
         </div>
-        <div id="about" class="content">
-            <div class="container fadeInDown contentAnimated" data-animation="true" data-animation-type="fadeInDown">
-                <h1 class="content-title">About Us</h1>
-                <p class="content-desc">
-                    HICS is an intelligent home irrigation control system that utilizes soil moisture sensors to measure the amount of moisture present in the user’s lawn and use this information to water the lawn in an efficient way. Its purpose is to replace an existing sprinkler control system and allow users to control their home irrigation remotely through a web application that will scale to fit on a computer or mobile device.
-                    <br />
-                    <br />
-                    HICS uses a central control unit to read soil moisture levels and set watering schedules accordingly by interfacing directly with the users existing irrigation valves. The control unit allows users to remotely schedule or monitor their lawns by communicating with the HICS web application over the internet. Through the web application, users will be granted complete access to all the features that HICS offers while providing an intuitive and easy to use interface.
-                </p>
-                <div class="row">
-                    <div class="col-md-12 col-sm-6">
-                        <div class="about">
-                            <h3>Our Sponsors</h3>
-                            <p class="content-desc">
-                                Team SmartGrass is sponsored by the owner of <a href="http://www.nutsandboltstexas.com/">Nuts and Bolts Hardware</a>, Keith Aholt. SmartGrass is a project for
-                                the Computer Science and Engineering department at the <a href="http://www.uta.edu/uta/">University of Texas at Arlington.</a>
-                            </p>
+    </div>
+</div>
+<div class="content has-bg">
+    <div class="content-bg">
+        <img src="~/Content/Images/green_grass_banner.jpg" alt="SmartGrass Banner">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 quote">
+                @*<i class="fa fa-quote-left"></i> SmartGrass is the greatest thing <span class="font-primary">ever</span>!
+                <i class="fa fa-quote-right"></i> - Darth Vader*@
+                <i class="fa fa-quote-left"></i> SmartGrass is my <span class="font-primary">favorite</span> product on the Citadel.
+                <i class="fa fa-quote-right"></i> <span style="font-size: 14px; color: #ddd">- Commander Shepard</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="team" class="content">
+    <div class="container">
+        <h2 class="header-content">The Team</h2>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <div class="team-member">
+                    <img src="~/Content/Images/billy-display.png" alt="Billy Haile-Mariam">
+                    <div class="info">
+                        <h3 class="member-name">Billy Haile-Mariam</h3>
+                        <div class="role font-primary">Team Leader, Hardware</div>
+                        <p>Computer Engineering</p>
+                        <div class="profile">
+                            <a href="https://www.linkedin.com/pub/belachew-haile-mariam/65/591/22"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="https://github.com/belachewhm"><i class="fa fa-github-square"></i></a>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 sponsor-logo">
-                        <a href="http://www.nutsandboltstexas.com/">
-                            <img src="~/Content/Images/Nuts&Bolts.png" />
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-sm-6 sponsor-logo">
-                        <a href="http://www.cse.uta.edu/"><img src="~/Content/Images/CSE1in.png" /></a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="milestone" class="content bg-black-darker has-bg">
-            <div class="content-bg">
-                <img src="~/Content/Images/green_grass_banner.jpg" alt="Milestone">
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 quote">
-                        <i class="fa fa-quote-left"></i> Smart Grass is the greatest thing <span class="text-theme">ever</span>!
-                        <i class="fa fa-quote-right"></i>
+            <div class="col-md-3 col-sm-3">
+                <div class="team-member">
+                    <img src="~/Content/Images/jeremiah-display.png" alt="Jeremiah O'Connor'">
+                    <div class="info">
+                        <h3 class="member-name">Jeremiah O'Connor</h3>
+                        <div class="role font-primary">Web Developer, Document Master</div>
+                        <p>Computer Science</p>
+                        <div class="profile">
+                            <a href="https://www.linkedin.com/pub/jeremiah-o-connor/93/434/8b2"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="https://github.com/streylight"><i class="fa fa-github-square"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="team" class="content">
-            <div class="container">
-                <h2 class="content-title">Our Team</h2>
-                <div class="row">
-                    <div class="col-md-3 col-sm-3">
-                        <div class="team">
-                            <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
-                                <img src="~/Content/Images/billy-display.png" alt="Billy Haile-Mariam">
-                            </div>
-                            <div class="info">
-                                <h3 class="name">Billy Haile-Mariam</h3>
-                                <div class="title text-theme">Team Leader, Hardware</div>
-                                <p>Computer Engineering</p>
-                                <div class="social">
-                                    <a href="https://www.linkedin.com/pub/belachew-haile-mariam/65/591/22"><i class="fa fa-linkedin-square fa-4"></i></a>
-                                    <a href="https://github.com/belachewhm"><i class="fa fa-github-square"></i></a>
-                                </div>
-                            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="team-member">
+                    <img src="~/Content/Images/gautam-display.png" alt="Gautam Adhikari">
+                    <div class="info">
+                        <h3 class="member-name">Gautam Adhikari</h3>
+                        <div class="role font-primary">Risk Manager, Software Developer</div>
+                        <p>Software Engineering</p>
+                        <div class="profile">
+                            <a href="https://www.linkedin.com/pub/gautam-adhikari/6b/156/3ab"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="https://github.com/gautamadh"><i class="fa fa-github-square"></i></a>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="team">
-                            <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
-                                <img src="~/Content/Images/jeremiah-display.png" alt="Jeremiah O'Connor'">
-                            </div>
-                            <div class="info">
-                                <h3 class="name">Jeremiah O'Connor</h3>
-                                <div class="title text-theme">Web Developer, Document Master</div>
-                                <p>Computer Science</p>
-                                <div class="social">
-                                    <a href="https://www.linkedin.com/pub/jeremiah-o-connor/93/434/8b2"><i class="fa fa-linkedin-square fa-4"></i></a>
-                                    <a href="https://github.com/streylight"><i class="fa fa-github-square"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="team">
-                            <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
-                                <img src="~/Content/Images/gautam-display.png" alt="Gautam Adhikari">
-                            </div>
-                            <div class="info">
-                                <h3 class="name">Gautam Adhikari</h3>
-                                <div class="title text-theme">Risk Manager, Software Developer</div>
-                                <p>Software Engineering</p>
-                                <div class="social">
-                                    <a href="https://www.linkedin.com/pub/gautam-adhikari/6b/156/3ab"><i class="fa fa-linkedin-square fa-4"></i></a>
-                                    <a href="#"><i class="fa fa-github-square"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="team">
-                            <div class="image flipInX contentAnimated" data-animation="true" data-animation-type="flipInX">
-                                <img src="~/Content/Images/tung-display.png" alt="Tung Vo">
-                            </div>
-                            <div class="info">
-                                <h3 class="name">Tung Vo</h3>
-                                <div class="title text-theme">Embeded Software Developer</div>
-                                <p>Computer Science</p>
-                                <div class="social">
-                                    <a href="#"><i class="fa fa-linkedin-square fa-4"></i></a>
-                                    <a href="https://github.com/ngoctung4him"><i class="fa fa-github-square"></i></a>
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="team-member">
+                    <img src="~/Content/Images/tung-display.png" alt="Tung Vo">
+                    <div class="info">
+                        <h3 class="member-name">Tung Vo</h3>
+                        <div class="role font-primary">Embeded Software Developer</div>
+                        <p>Computer Science</p>
+                        <div class="profile">
+                            <a href="https://www.linkedin.com/pub/timothy-vo/b9/1a6/160"><i class="fa fa-linkedin-square fa-4"></i></a>
+                            <a href="https://github.com/ngoctung4him"><i class="fa fa-github-square"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 </body>
+
 <script type="text/javascript">
     $(document).ready(function () {
-        //$('body').scrollspy({ target: '#header-navbar' });
         var windowHeight = $(window).height();
         $('#home').height(windowHeight);
         
         $(window).scroll(function (event) {
             var scroll = $(window).scrollTop();
-            console.log("height: " + windowHeight);
             if (scroll > 50) {
-                $('#header').addClass('navbar-small');
+                $('#header').addClass('navbar-full');
             } else {
-                $('#header').removeClass('navbar-small');
+                $('#header').removeClass('navbar-full');
             }
             // Do something
         });
@@ -739,16 +199,14 @@ h1, h2, h3, h4, h5, h6 {
         //};
 
 
-        $.ajax({
-            url: "http://localhost:64623/api/Sensors",
-            contentType: "application/json",
-            type: "POST",
-            data: JSON.stringify(body),
-            success: function (data) {
-                console.log(data);
-            }
-        });
-
-        //App.init();
+        //$.ajax({
+        //    url: "http://localhost:64623/api/Sensors",
+        //    contentType: "application/json",
+        //    type: "POST",
+        //    data: JSON.stringify(body),
+        //    success: function (data) {
+        //        console.log(data);
+        //    }
+        //});
     });
 </script>

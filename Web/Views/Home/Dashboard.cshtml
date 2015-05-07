@@ -414,9 +414,6 @@
         </div>
     </div>
 </div>
-    
-
-
 
     <div id="newEventModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
@@ -487,7 +484,8 @@
     }
 
     $(document).ready(function () {
-        $(".watering-switch").bootstrapSwitch();
+        $('.watering-switch').bootstrapSwitch();
+        $('.watering-switch').tooltip({ title: 'Valve: ', placement: 'right', container: 'body' });
 
         $('.watering-switch').on('switchChange.bootstrapSwitch', function (event, state) {
             var valveId = $(this).data('valveid');
@@ -608,20 +606,31 @@
             drawCircle('#5bc0de', options.lineWidth, options.percent / 100);
         }
 
-        //$('.moistureChart').on('shown.bs.collapse', function () {
-
-        //});
-
         $('#calendar').fullCalendar({
+            lang: 'en',
             selectable: true,
             selectHelper: true,
            // editable: true,
-            eventLimit: true,
+            eventLimit: 4,
+            eventLimitText: "Something",
             dayClick: function (date, jsEvent, view) {
+                var check = $.fullCalendar.formatDate(date, 'yyyy-MM-dd');
+                var today = $.fullCalendar.formatDate(new Date(), 'yyyy-MM-dd');
+                if (check < today) {
+                    return;
+                }
+
                 selectedDate = date.toISOString();
                 $('#newEventModal').modal('show');
             },
             eventClick: function (calEvent, jsEvent, view) {
+                var check = $.fullCalendar.formatDate(calEvent.start, 'yyyy-MM-dd');
+                var today = $.fullCalendar.formatDate(new Date(), 'yyyy-MM-dd');
+                
+                if (check < today) {
+                    console.log("invalid date");
+                    return;
+                }
                 var resp = confirm("Are you sure you wish to remove this event?");
                 var eventId = calEvent.id;
                 if (resp == true) {

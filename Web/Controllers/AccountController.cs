@@ -51,7 +51,7 @@ namespace Web.Controllers {
 
                     SaveUserState(user, model.RememberMe);
                     if (user.Role == Core.Role.Admin)
-                        return RedirectToAction("AdminDashboard", "Home");
+                        return RedirectToAction("AdminDashboard", "Admin");
 
                     return RedirectToAction("Dashboard", "Home");
                 }

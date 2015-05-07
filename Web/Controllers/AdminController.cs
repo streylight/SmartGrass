@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Core;
 using Service.Interfaces;
 using Web.Infrastructure;
 using Web.Models;
@@ -24,7 +25,7 @@ namespace Web.Controllers {
 
         public ActionResult AdminDashboard() {
             try {
-                var model = _userService.GetAllUsers().ToList();
+                var model = _userService.GetAllUsers().Where(x => x.Role == Role.User).ToList();
                 return View(model);
             } catch (Exception) {
                 return View();
@@ -59,9 +60,8 @@ namespace Web.Controllers {
 
                 return Json(new { username = user.Username, pkey = user.Unit.ProductKey, msg = "User account successfully updated" });
             } catch (Exception ex) {
-                
+                return Json(new { msg = ex.Message, error = true });
             }
-            return Json("Success");
         }
 
         public ActionResult LoadUserAccountDetails(int userId) {

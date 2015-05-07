@@ -42,15 +42,17 @@ namespace Web.Controllers {
                     return "Invalid product key.";
                 }
                 var unitSettings = unitService.GetUnitById(unitId).Settings;
-                var rainFlag = false;
-                if (unitSettings != null && unitSettings.RainLimit < sensorDataModel.Rain) {
-                    var rainEvent = new RainEvent {
-                        DateTime = now,
-                        UnitId = unitId
-                    };
-                    rainEventService.Insert(rainEvent);
-                    rainFlag = true;
-                }
+                var rainFlag = (unitSettings != null && unitSettings.RainLimit < sensorDataModel.Rain);
+                //if (unitSettings != null && unitSettings.RainLimit < sensorDataModel.Rain) {
+                var rainEvent = new RainEvent {
+                    DateTime = now,
+                    UnitId = unitId,
+                    RainAmount = sensorDataModel.Rain
+                };
+                rainEventService.Insert(rainEvent);
+
+                //rainFlag = true;
+                //}
                 var soilLimitsDict = sensorDataModel.SoilReadings.ToDictionary(x => (int.Parse(x.SensorNumber) - 1), x => (unitSettings != null && x.SoilMoisture > unitSettings.SoilMoistureLimit));
                 var tempFlag = unitSettings != null && unitSettings.StopOnFreeze && sensorDataModel.Temperature < 34.0;
                 var commandDict = unitService.GetValveCommands(unitId, soilLimitsDict, tempFlag, rainFlag);

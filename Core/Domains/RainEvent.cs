@@ -14,6 +14,10 @@ namespace Core.Domains {
         /// </summary>
         public DateTime DateTime { get; set; }
         /// <summary>
+        /// The amount of rain collected
+        /// </summary>
+        public double RainAmount { get; set; }
+        /// <summary>
         /// Foreign key for unit
         /// </summary>
         public int UnitId { get; set; }

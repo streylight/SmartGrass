@@ -359,7 +359,7 @@
             var active = valve.WateringEvents.Any(x => x.Watering);
             <div class="col-md-4 watering-status@(active ? " active" : "")">
                 <i class="fa fa-tint waterdrop"></i>
-                <h4>Valve @valve.ValveNumber</h4>
+                <h4>Valve @(valve.ValveNumber + 1)</h4>
                 @if (active) {
                     <input class="watering-switch" data-valveid="@valve.Id" type="checkbox" name="my-checkbox" checked>
                 } else {
@@ -493,8 +493,7 @@
             var valveId = $(this).data('valveid');
             var waterSwitch = $(this);
             waterSwitch.closest('.watering-status').toggleClass('active');
-                
-                
+
             waterSwitch.bootstrapSwitch("toggleDisabled");
             $.ajax({
                 url: '@Url.Action("SetWateringEventAction", "Home")',
@@ -506,17 +505,15 @@
                 },
                 success: function (data) {
                     if (data.error) {
-                        toastr.error(data.msg, '');
+                        toastr.error(data.msg, 'Error!');
                         waterSwitch.bootstrapSwitch("toggleState");
                     } else {
-                        toastr.success(data.msg, '');
-                        console.log("jsonevent: " + data.jsonEvent);
+                        toastr.success(data.msg, 'Success!');
                         if (data.jsonEvent) {
                             $('#calendar').fullCalendar('renderEvent', data.jsonEvent, true);
                         }
                     }
                     waterSwitch.bootstrapSwitch("toggleDisabled");
-                    console.log("watering: " + data.watering);
                     $('#wateringStatus').html(data.watering ? "On" : "Off");
                 }
             });
@@ -551,7 +548,6 @@
         
         $('#soilReportFilter').on('change', function (v) {
             $('#loadingSpinner').show();
-            console.log('change' + $(this).val());
             $.ajax({
                 url: "@Url.Action("GenerateSoilMoistureGraph", "Home")",
                 type: 'GET',
@@ -561,7 +557,6 @@
                 },
                 success: function (data) {
                     $('#loadingSpinner').hide();
-                    soilMoistureChart
                     soilMoistureChart.setData(data.results);
                 }
             });
@@ -623,7 +618,6 @@
            // editable: true,
             eventLimit: true,
             dayClick: function (date, jsEvent, view) {
-                console.log(date.toISOString());
                 selectedDate = date.toISOString();
                 $('#newEventModal').modal('show');
             },
@@ -665,8 +659,6 @@
         });
 
         $('#createEvent').on('click', function () {
-            console.log("click");
-            
             $.ajax({
                 url: "@Url.Action("CreateWateringEvent", "Home")",
                 data: {
@@ -686,14 +678,5 @@
             });
         });
     });
-    //if (title) {
-    //    eventData = {
-    //        title: title,
-    //        start: start,
-    //        end: end
-    //    };
-    //    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-    //}
-    //$('#calendar').fullCalendar('unselect');
 </script>
 

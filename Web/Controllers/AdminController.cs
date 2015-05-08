@@ -18,11 +18,12 @@ namespace Web.Controllers {
         }
 
         // GET: Admin
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
+        [AppAuthorize(Role.Admin)]
         public ActionResult AdminDashboard() {
             try {
                 var model = _userService.GetAllUsers().Where(x => x.Role == Role.User).ToList();
@@ -33,6 +34,7 @@ namespace Web.Controllers {
         }
 
         [HttpPost]
+        [AppAuthorize(Role.Admin)]
         public ActionResult DeleteUserAccount(int id) {
             try {
                 _userService.Delete(id);
@@ -42,6 +44,8 @@ namespace Web.Controllers {
             } 
         }
 
+        [HttpPost]
+        [AppAuthorize(Role.Admin)]
         public ActionResult UpdateUserAccount(UserAccountViewModel model) {
             try {
                 var user = _userService.GetUserById(model.User.Id);
@@ -64,6 +68,8 @@ namespace Web.Controllers {
             }
         }
 
+        [AppAuthorize(Role.Admin)]
+        [HttpGet]
         public ActionResult LoadUserAccountDetails(int userId) {
             try {
                 var user = _userService.GetUserById(userId);

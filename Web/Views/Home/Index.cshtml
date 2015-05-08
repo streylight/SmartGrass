@@ -8,12 +8,13 @@
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link href="~/Content/landing.css" rel="stylesheet" />
 
 <body data-spy="scroll" data-offset="500" data-target="#header-navbar">
 <div id="header" class="header navbar navbar-transparent navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
+            <button type="button" class="navbar-toggle collapsed" data-target="#header-navbar" data-toggle="collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -33,6 +34,7 @@
                 <li><a href="#home" data-click="scroll-to-target" data-toggle="dropdown">HOME</a></li>
                 <li><a href="#about" data-click="scroll-to-target">ABOUT</a></li>
                 <li><a href="#team" data-click="scroll-to-target">TEAM</a></li>
+                <li><a href="#docs" data-click="scroll-to-target">DOCS</a></li>
                 <li><a href="@Url.Action("Login", "Account")">LOGIN</a></li>
             </ul>
         </div>
@@ -101,7 +103,7 @@
     </div>
 </div>
 <div id="team" class="content">
-    <div class="container">
+    <div id="main-container" class="container">
         <h2 class="header-content">The Team</h2>
         <div class="row">
             <div class="col-md-3 col-sm-3">
@@ -163,6 +165,35 @@
         </div>
     </div>
 </div>
+    <div id="docs" class="content has-bg">
+        <div class="content-bg">
+            <img src="~/Content/Images/sprinkler-1.jpg" style="height: 100%; width: 100%" alt="SmartGrass Banner">
+        </div>
+        <div class="container">
+            <div class="row" style="color: #fff; text-align: center">
+                <div class="col-md-6">
+                    <h2 class="header-content" style="margin-bottom: 0; padding-bottom: 0; border-right: 1px solid">Documentation</h2>            
+                </div>
+                <div class="col-md-6 document-links">
+                    <div class="col-md-offset-1 col-md-2">
+                        <a href="~/Documents/SRS_SmartGrass_1.0.pdf" target="_blank"><i class="fa fa-file-text"></i>SRS</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="~/Documents/Team SmartGrass_ADS_2.0.pdf" target="_blank"><i class="fa fa-file-text"></i>ADS</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="~/Documents/SmartGrass_DDS_2.0.pdf" target="_blank"><i class="fa fa-file-text"></i>DDS</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="~/Documents/STP v1.2.pdf" target="_blank"><i class="fa fa-file-text"></i>STP</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="~/Documents/HICS-User Manual.pdf" target="_blank"><i class="fa fa-file-text"></i>User Manual</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script type="text/javascript">
@@ -192,7 +223,7 @@
         //        "SensorNumber": 3,
         //        "SoilMoisture": 0.5
         //    }
-        //                ],
+        //    ],
         //    "ProductKey": "1234",
         //    "Temperature": 75.0,
         //    "Rain": 0

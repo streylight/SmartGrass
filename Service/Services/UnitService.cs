@@ -129,7 +129,7 @@ namespace Service.Services {
                             data.Add(new {
                                 d = date.Date.ToString("yyyy-MM-dd"),
                                 max = soilReadingsByDay.ContainsKey(date.Date) ? soilReadingsByDay[date.Date].Max(x => x.SoilMoisture) * 20 : 0,
-                                min = soilReadingsByDay.ContainsKey(date.Date) ? soilReadingsByDay[date.Date].Min(x => x.SoilMoisture) * 20 : 0
+                                min = soilReadingsByDay.ContainsKey(date.Date) ? soilReadingsByDay[date.Date].Where(x => x.SoilMoisture > 0).Min(x => x.SoilMoisture) * 20 : 0
                             });
                             date = date.AddDays(1);
                         }

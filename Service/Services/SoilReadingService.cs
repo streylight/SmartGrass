@@ -30,7 +30,7 @@ namespace Service.Interfaces {
                 var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
                 foreach (var soilReading in soilReadings) {
                     if (soilReading.Id == 0) {
-                        soilReading.DateTime = now;
+                        //soilReading.DateTime = now;
                         soilReading.UnitId = unitId;
                         _soilReadingRepository.Insert(soilReading);
                     }

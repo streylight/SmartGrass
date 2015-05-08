@@ -12,6 +12,7 @@ using Web.Infrastructure;
 using Service.Interfaces;
 using Core.Domains;
 using System.Web.Security;
+using Core;
 
 namespace Web.Controllers {
     /// <summary>
@@ -102,6 +103,8 @@ namespace Web.Controllers {
             }
         }
 
+        [HttpGet]
+        [AppAuthorize(Role.User, Role.Admin)]
         public ActionResult Settings() {
             try {
                 var user = _userService.GetUserById(UserId);
@@ -111,6 +114,8 @@ namespace Web.Controllers {
             }
         }
 
+        [HttpPost]
+        [AppAuthorize(Role.User, Role.Admin)]
         public ActionResult SaveSettings(SettingsViewModel model) {
             try {
                 _settingsService.Insert(model.UnitSettings);
@@ -128,6 +133,12 @@ namespace Web.Controllers {
             } catch (Exception ex) {
                 return View();
             }
+        }
+
+        [AppAuthorize(Role.User, Role.Admin)]
+        public ActionResult Signout() {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account");
         }
 
         private void SaveUserState(User user, bool rememberMe) {

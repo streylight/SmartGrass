@@ -8,7 +8,7 @@
         cursor: pointer;
     }
 </style>
-@*<link href="~/Content/toastr.min.css" rel="stylesheet" />*@
+
 <link href='//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <div class="row" style="margin-top: 75px;">
@@ -65,9 +65,9 @@
                 <div id="errorDiv" class="hidden"></div>
             </div>
 
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -130,7 +130,6 @@
                     rowData[1] = data.username;
                     rowData[3] = data.pkey;
                     $('#userTable').DataTable().row(row.index()).data(rowData).draw();
-                    //rowData[1] = data.
                     $('#userAccountModal').modal('hide');
                     $('#userAccountModal').find('modal-body').empty();
                     toastr.success(data.msg, 'Success!');

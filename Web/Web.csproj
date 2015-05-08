@@ -41,6 +41,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Glimpse.AspNet">
+      <HintPath>..\packages\Glimpse.AspNet.1.8.0\lib\net45\Glimpse.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Core">
+      <HintPath>..\packages\Glimpse.1.8.2\lib\net45\Glimpse.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Mvc5">
+      <HintPath>..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
@@ -156,6 +165,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SensorsController.cs" />
+    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,6 +233,7 @@
     <Content Include="Content\Images\sprinkler-icon.png" />
     <Content Include="Content\Images\summer-lawn-1920x1080.jpg" />
     <Content Include="Content\Images\tung-display.png" />
+    <Content Include="Content\landing.css" />
     <Content Include="Content\select2.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -284,6 +295,11 @@
     <Content Include="Content\weather-icons\weather-icons\variables.less" />
     <Content Include="Content\weather-icons\weather-icons\weather-icons.less" />
     <Content Include="Content\weather-icons\weather-icons\weather-icons.min.less" />
+    <Content Include="Documents\HICS-User Manual.pdf" />
+    <Content Include="Documents\SmartGrass_DDS_2.0.pdf" />
+    <Content Include="Documents\SRS_SmartGrass_1.0.pdf" />
+    <Content Include="Documents\STP v1.2.pdf" />
+    <Content Include="Documents\Team SmartGrass_ADS_2.0.pdf" />
     <None Include="Properties\PublishProfiles\azure.pubxml" />
     <None Include="Properties\PublishProfiles\hostgator.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

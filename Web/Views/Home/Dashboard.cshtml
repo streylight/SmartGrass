@@ -206,6 +206,7 @@
     .watering-status > h4 {
           font-size: 20px;
         font-weight: 800;
+        color: #707478;
         width: 100%;
     }
     .watering-status > i {
@@ -216,6 +217,9 @@
         color: #428bca;
     }
 
+    .watering-status.active > h4 {
+        color: black;
+    }
     /*.watering-status.active {
         color: #428bca;
     }*/
@@ -248,8 +252,6 @@
             </div>
         </div>
     </div>
-    <!-- end col-3 -->
-    <!-- begin col-3 -->
     <div class="col-md-3 col-sm-6">
         <div role="presentation" class="widget widget-stats btn-warning">
             <div class="stats-icon">
@@ -264,8 +266,6 @@
             </div>
         </div>
     </div>
-    <!-- end col-3 -->
-    <!-- begin col-3 -->
     <div class="col-md-3 col-sm-6">
         <div class="widget widget-stats btn-info">
             <div class="stats-icon"><i class="fa fa-tint"></i>
@@ -337,6 +337,7 @@
                 var temp = Model.TemperatureByDates.ContainsKey(date.Date) ? Model.TemperatureByDates[date.Date] : 999; // 999 signifies invalid temp
                 <div class="col-md-1 btn-warning calendar-day">
                     <div class="col-md-12">@date.DayOfWeek</div>
+                    <div class="col-md-12" style="font-size: 12px">@date.Date.ToString("d")</div>
                     <div class="col-md-12">
                         @if (temp != 999) {
                             if (temp > 80) {
@@ -465,33 +466,8 @@
 
 <script type="text/javascript">
 
-    function ToastrConfirm(title, text) {
-
-
-        toastr.options = {
-            "closeButton": true,
-            "newestOnTop": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "onclick": function(val) {
-                console.log('clicked: ' + val);
-            },
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": 0,
-            "extendedTimeOut": 0,
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut",
-            "tapToDismiss": false
-        };
-        toastr["warning"](text, title);
-    }
-
     $(document).ready(function () {
         $('.watering-switch').bootstrapSwitch();
-        $('.watering-switch').tooltip({ title: 'Valve: ', placement: 'right', container: 'body' });
 
         $('.watering-switch').on('switchChange.bootstrapSwitch', function (event, state) {
             var valveId = $(this).data('valveid');
@@ -565,10 +541,6 @@
                 }
             });
         }).trigger('change');
-            
-
-
-
 
         for (var i = 0; i < 3; i++) {
             var graph = 'graph' + (i + 1);
@@ -580,7 +552,6 @@
                 rotate: 0
             }
 
-
             var el = document.getElementById('graph' + (i + 1));
             var canvas = document.createElement('canvas');
             canvas.className = "chart-canvas";
@@ -591,7 +562,6 @@
             canvas.width = canvas.height = options.size;
             el.appendChild(canvas);
             el.appendChild(span);
-
 
             ctx.translate(options.size / 2, options.size / 2); // change center
             ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI); // rotate -90 deg
@@ -618,7 +588,6 @@
             selectHelper: true,
            // editable: true,
             eventLimit: 4,
-            eventLimitText: "Something",
             dayClick: function (date, jsEvent, view) {
                 var check = $.fullCalendar.formatDate(date, 'yyyy-MM-dd');
                 var today = $.fullCalendar.formatDate(new Date(), 'yyyy-MM-dd');
@@ -655,7 +624,7 @@
                 }
             },
             eventRender: function (event, element) {
-                $(element).tooltip({ title: 'Valve: ' + event.valve, placement: 'right', container: 'body' });
+                $(element).tooltip({ title: 'Valve ' + event.valve, placement: 'right', container: 'body' });
             }
         });
 
@@ -685,6 +654,7 @@
                 traditional: true,
                 type: 'POST',
                 success: function (data) {
+                    debugger
                     for (var i = 0; i < data.eventData.length; i++) {
                         $('#calendar').fullCalendar('renderEvent', data.eventData[i], true);
                     }

@@ -4206,6 +4206,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand {
     margin-left: -15px;
+      padding: 5px 15px;
   }
 }
 

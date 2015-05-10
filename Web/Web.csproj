@@ -214,12 +214,13 @@
     <Content Include="Content\Images\green_grass_banner.jpg" />
     <Content Include="Content\Images\jeremiah-display.png" />
     <Content Include="Content\Images\leaf_in_lawn.jpg" />
-    <Content Include="Content\Images\Nuts&amp;Bolts.png" />
+    <Content Include="Content\Images\NutsandBolts.png" />
     <Content Include="Content\Images\nutsandbolts-logo.png" />
     <Content Include="Content\Images\select2-spinner.gif" />
     <Content Include="Content\Images\select2.png" />
     <Content Include="Content\Images\select2x2.png" />
     <Content Include="Content\Images\sg-logo-trans.png" />
+    <Content Include="Content\Images\sg-logo-trans1.png" />
     <Content Include="Content\Images\sg-logo.png" />
     <Content Include="Content\Images\sg-main-full.png" />
     <Content Include="Content\Images\smartGrassLogo.png" />
@@ -300,6 +301,7 @@
     <Content Include="Documents\SRS_SmartGrass_1.0.pdf" />
     <Content Include="Documents\STP v1.2.pdf" />
     <Content Include="Documents\Team SmartGrass_ADS_2.0.pdf" />
+    <Content Include="Documents\Charter_SmartGrass_1.2.pdf" />
     <None Include="Properties\PublishProfiles\azure.pubxml" />
     <None Include="Properties\PublishProfiles\hostgator.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

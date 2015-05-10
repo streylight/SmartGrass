@@ -73,3 +73,36 @@ p {
     color: white;
     text-decoration: none;
 }
+
+@media (max-width: 1200px) {
+    .content.has-bg .content-bg img {
+        max-height: 100%;
+        max-width: inherit;
+    }
+}
+
+@media (max-width: 767px) {
+    .container-home h1, .container-home h2, .container-home h3, .container-home h4 {
+        margin: 0 0 15px;
+    }
+    .container-home h1 {
+      font-size: 36px;
+    }
+    .container-home h3 {
+      font-size: 18px;
+    }
+    .container-home p {
+      margin-bottom: 30px;
+    }
+}
+
+    @media (min-width: 768px) {
+  .navbar > .container .navbar-brand {
+    margin-left: -15px;
+      padding: 20px 15px !important;
+  }
+}
+
+    .header .navbar-brand {
+  padding: 25px 15px;
+}

@@ -13,11 +13,14 @@ namespace Core.Domains {
         /// The product key for the unit
         /// </summary>
         public string ProductKey { get; set; }
-
+        /// <summary>
+        /// The foreign key for settings
+        /// </summary>
         public int? SettingsId { get; set; }
-
+        /// <summary>
+        /// Virtual property for the settings
+        /// </summary>
         public virtual Settings Settings { get; set; }
-
         /// <summary>
         /// Virtual property for the irrigation valves
         /// </summary>
@@ -34,6 +37,5 @@ namespace Core.Domains {
         /// Virtual property for the rain events
         /// </summary>
         public virtual ICollection<RainEvent> RainEvents { get; set; }
-        
-    }
-}
+    } // class
+} // namespace

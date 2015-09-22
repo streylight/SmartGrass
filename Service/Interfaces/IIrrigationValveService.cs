@@ -6,9 +6,9 @@ namespace Service.Interfaces {
     /// The interface for the irrigation valve service
     /// </summary>
     public interface IIrrigationValveService {
-        IrrigationValve GetIrrigationValveById(int id);
+        IrrigationValve GetIrrigationValveById( int id );
         IList<IrrigationValve> GetAllIrrigationValves();
-        void Insert(IrrigationValve irrigationValve);
-        void Delete(int id);
-    }
-}
+        void Insert( IrrigationValve irrigationValve );
+        void Delete( int id );
+    } // class
+} // namespace

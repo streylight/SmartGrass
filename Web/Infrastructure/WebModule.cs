@@ -1,9 +1,11 @@
 ﻿using Ninject.Modules;
-using Service;
 using Service.Interfaces;
 using Service.Services;
 
 namespace Web.Infrastructure {
+    /// <summary>
+    /// The WebModule class
+    /// </summary>
     public class WebModule : NinjectModule {
         /// <summary>
         /// Loads the module into the kernel
@@ -18,5 +20,5 @@ namespace Web.Infrastructure {
             Bind<ITemperatureReadingService>().To<TemperatureReadingService>();
             Bind<ISettingsService>().To<SettingsService>();
         }
-    }
-}
+    } // class
+} // namespace

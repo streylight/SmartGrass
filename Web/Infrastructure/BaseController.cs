@@ -4,12 +4,15 @@ using Core;
 using Core.Domains;
 
 namespace Web.Infrastructure {
+    /// <summary>
+    /// The base controller : used for user state information
+    /// </summary>
     public class BaseController : Controller {
 
         protected Role Role {
             get {
-                var identity = (FormsIdentity)HttpContext.User.Identity;
-                return JsonManager.Deserialize<UserDataModel>(identity.Ticket.UserData).Role;
+                var identity = ( FormsIdentity )HttpContext.User.Identity;
+                return JsonManager.Deserialize<UserDataModel>( identity.Ticket.UserData ).Role;
             }
         }
 
@@ -19,46 +22,43 @@ namespace Web.Infrastructure {
 
         protected int UserId  {
             get {
-                var identity = (FormsIdentity)HttpContext.User.Identity;
-                return JsonManager.Deserialize<UserDataModel>(identity.Ticket.UserData).Id;
+                var identity = ( FormsIdentity )HttpContext.User.Identity;
+                return JsonManager.Deserialize<UserDataModel>( identity.Ticket.UserData ).Id;
             }
         }
 
         /// <summary>
-        /// Adds TempData with specified Attention message.
+        /// Adds TempData with specified Attention message
         /// </summary>
-        /// <param name="message">The message.</param>
-        public void Attention(string message) {
-            TempData.Add(Alert.Attention, message);
+        /// <param name="message"></param>
+        public void Attention( string message ) {
+            TempData.Add( Alert.Attention, message );
         }
 
         /// <summary>
-        /// Adds TempData with specified Success message.
+        /// Adds TempData with specified Success message
         /// </summary>
-        /// <param name="message">The message.</param>
-        public void Success(string message)
-        {
-            TempData.Add(Alert.Success, message);
+        /// <param name="message"></param>
+        public void Success( string message ) {
+            TempData.Add( Alert.Success, message );
         }
 
         /// <summary>
-        /// Adds TempData with specified Information message.
+        /// Adds TempData with specified Information message
         /// </summary>
-        /// <param name="message">The message.</param>
-        public void Information(string message)
-        {
-            TempData.Add(Alert.Information, message);
+        /// <param name="message"></param>
+        public void Information( string message ) {
+            TempData.Add( Alert.Information, message );
         }
 
         /// <summary>
-        /// Adds TempData with specified Error message.
+        /// Adds TempData with specified Error message
         /// </summary>
-        /// <param name="message">The message.</param>
-        public void Error(string message)
-        {
-            TempData.Add(Alert.Error, message);
+        /// <param name="message"></param>
+        public void Error( string message ) {
+            TempData.Add( Alert.Error, message );
         }
-    } // BaseController
+    } // class
 
     /// <summary>
     /// Alert
@@ -90,5 +90,5 @@ namespace Web.Infrastructure {
         public static string[] All {
             get { return new[] { Success, Attention, Information, Error }; }
         }
-    } // Alert
+    } // class
 } // namespace

@@ -25,5 +25,5 @@ namespace Core.Domains {
         /// Virtual reference to the unit object
         /// </summary>
         public virtual Unit Unit { get; set; }
-    }
-}
+    } // class
+} // namespace

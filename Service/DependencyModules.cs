@@ -8,7 +8,9 @@ namespace Service {
     /// Interface to service bindings for dependency injection
     /// </summary>
     public class DependencyModules : NinjectModule {
-
+        /// <summary>
+        /// Bind IRepository instances to their corresponding Repositories
+        /// </summary>
         public override void Load() {
             Bind<IDbContext>().To<AppContext>();
             Bind<IRepository<User>>().To<Repository<User>>();
@@ -20,5 +22,5 @@ namespace Service {
             Bind<IRepository<WateringEvent>>().To<Repository<WateringEvent>>();
             Bind<IRepository<Settings>>().To<Repository<Settings>>();
         }
-    }
-}
+    } // class
+} // namespace

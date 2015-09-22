@@ -8,42 +8,68 @@ namespace Service.Interfaces {
     /// <summary>
     /// The service for the temperature reading class
     /// </summary>
-    public class TemperatureReadingService : ITemperatureReadingService{
+    public class TemperatureReadingService : ITemperatureReadingService {
+
+        #region vars
 
         private readonly IRepository<TemperatureReading> _temperatureReadingRepository;
 
-        public TemperatureReadingService(){
+        #endregion
+
+        #region ctor
+
+        /// <summary>
+        /// Constructor for the TemperatureReadingService class
+        /// </summary>
+        public TemperatureReadingService() {
             _temperatureReadingRepository = new Repository<TemperatureReading>();    
         }
 
-        public TemperatureReading GetTemperatureReadingById(int id){
+        #endregion
+
+        #region methods
+
+        /// <summary>
+        /// Returns a TemperatureReading with matching id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public TemperatureReading GetTemperatureReadingById( int id ) {
             return _temperatureReadingRepository.GetById(id);
         }
 
-        public IList<TemperatureReading> GetAllTemperatureReadings(){
+        /// <summary>
+        /// Returns all TemperatureReadings
+        /// </summary>
+        /// <returns></returns>
+        public IList<TemperatureReading> GetAllTemperatureReadings() {
             return _temperatureReadingRepository.Table.ToList();
         }
 
-        public void Insert(TemperatureReading temperatureReading){
-            try{
-                if (temperatureReading.Id == 0)
-                    _temperatureReadingRepository.Insert(temperatureReading);
-                else
-                    _temperatureReadingRepository.Update(temperatureReading);    
-
-            } catch (Exception ex){
-                throw new Exception(ex.Message);
+        /// <summary>
+        /// Inserts a new TemperatureReading into the db
+        /// </summary>
+        /// <param name="temperatureReading"></param>
+        public void Insert( TemperatureReading temperatureReading ) {
+            if ( temperatureReading.Id == 0 ) {
+                _temperatureReadingRepository.Insert( temperatureReading );
+            } else {
+                _temperatureReadingRepository.Update( temperatureReading );
             }
         }
 
+        /// <summary>
+        /// Deletes a TemperatureReading from the db
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int id){
-            try{
-                var temperatureReading = _temperatureReadingRepository.GetById(id);
-                _temperatureReadingRepository.Delete(temperatureReading);
-
-            } catch (Exception ex){
-                throw new Exception(ex.Message);
+            var temperatureReading = _temperatureReadingRepository.GetById( id );
+            if ( temperatureReading == null ) {
+                throw new Exception(string.Format("No temperature reading found with id: {0}", id)); 
             }
+            _temperatureReadingRepository.Delete(temperatureReading);
         }
-    }
-}
+
+        #endregion
+    } // class
+} // namespace

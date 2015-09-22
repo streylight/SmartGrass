@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using Core.Domains;
 
 namespace Map.Mappings {
@@ -12,30 +7,32 @@ namespace Map.Mappings {
     /// </summary>
     public class UnitMap : EntityTypeConfiguration<Unit> {
         public UnitMap() {
-            ToTable("Unit", "dbo");
-            HasKey(u => u.Id);
+            // Table
+            ToTable( "Unit", "dbo" );
+
+            // Primary key
+            HasKey( u => u.Id );
 
             // Relationships
-            HasMany(x => x.RainEvents)
+            HasMany( x => x.RainEvents )
                 .WithRequired()
-                .HasForeignKey(x => x.UnitId);
+                .HasForeignKey( x => x.UnitId );
 
-            HasMany(x => x.IrrigationValves)
+            HasMany( x => x.IrrigationValves )
                 .WithRequired()
-                .HasForeignKey(x => x.UnitId);
+                .HasForeignKey( x => x.UnitId );
 
-            HasMany(x => x.SoilReadings)
+            HasMany( x => x.SoilReadings )
                 .WithRequired()
-                .HasForeignKey(x => x.UnitId);
+                .HasForeignKey( x => x.UnitId );
 
-            HasMany(x => x.TemperatureReadings)
+            HasMany( x => x.TemperatureReadings )
                 .WithRequired()
-                .HasForeignKey(x => x.UnitId);
+                .HasForeignKey( x => x.UnitId );
 
-            HasOptional(x => x.Settings)
+            HasOptional( x => x.Settings )
                 .WithMany()
-                .HasForeignKey(x => x.SettingsId);
-
+                .HasForeignKey( x => x.SettingsId );
         }
-    }
-}
+    } // class
+} // namespace

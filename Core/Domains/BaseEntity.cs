@@ -13,5 +13,5 @@ namespace Core.Domains {
         /// The base id used in all domains
         /// </summary>
         public virtual int Id { get; set; }
-    }
-}
+    } // class
+} // namespace

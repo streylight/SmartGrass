@@ -29,5 +29,5 @@ namespace Core.Domains {
         /// Virtual property for the irrigation valve object
         /// </summary>
         public IrrigationValve IrrigationValve { get; set; }
-    }
-}
+    } // class
+} // namespace

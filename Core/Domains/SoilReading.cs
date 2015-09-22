@@ -29,5 +29,5 @@ namespace Core.Domains {
         /// Virtual property for the unit object
         /// </summary>
         public Unit Unit { get; set; }
-    }
-}
+    } // class
+} // namespace

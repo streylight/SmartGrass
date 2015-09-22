@@ -7,234 +7,14 @@
     var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
     var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
 }
-@*<link href="~/Content/select2.css" rel="stylesheet" />*@
-@*<link href="~/Content/bootstrap-switch.min.css" rel="stylesheet" />*@
+
 <link href="~/Content/weather-icons/css/weather-icons.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-@*<script src="~/Scripts/bootstrap-switch.min.js"></script>*@
-@*<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>*@
-
-<style>
-    .widget.widget-stats {
-        position: relative;
-    }
-
-    .widget {
-        border-radius: 3px;
-        margin-bottom: 20px;
-        color: #fff;
-        padding: 15px;
-        overflow: hidden;
-    }
-
-    .bg-green {
-        background-color: #5cb85c;
-        border-color: #4cae4c;
-    }
-    .widget-stats .stats-desc, .widget-stats .stats-title {
-        color: #fff;
-        color: rgba(255,255,255,.6);
-    }
-
-    .widget-stats .stats-title {
-        position: relative;
-        line-height: 1.1;
-        font-size: 12px;
-        margin: 2px 0 7px;
-    }
-
-    .widget-stats .stats-number {
-        font-size: 24px;
-        font-weight: 300;
-        margin-bottom: 10px;
-    }
-    .widget-stats .stats-icon.stats-icon-lg {
-        font-size: 52px;
-        top: 12px;
-        right: 21px;
-    }
-
-    .widget-stats .stats-desc {
-        font-weight: 300;
-        margin-bottom: 0;
-    }
-
-    .datepicker{z-index:1151 !important;}
-
-    .widget-stats .stats-desc, .widget-stats .stats-title {
-        color: #fff;
-        color: rgba(255,255,255,.6);
-    }
-
-    .widget-stats .stats-info h4 {
-        font-size: 12px;
-        margin: 5px 0;
-        color: #fff;
-    }
-
-    .widget-stats .stats-info p {
-        font-size: 24px;
-        font-weight: 300;
-        margin-bottom: 0;
-    }
-
-    .widget-stats .stats-link a {
-        display: block;
-        margin: 15px -15px -15px;
-        padding: 7px 15px;
-        background: url(../img/transparent/black-0.4.png);
-        background: rgba(0,0,0,.4);
-        text-align: right;
-        color: #ddd;
-        font-weight: 300;
-        text-decoration: none;
-    }
-
-    .widget-stats .stats-icon {
-        font-size: 42px;
-        height: 56px;
-        width: 56px;
-        text-align: center;
-        line-height: 56px;
-        margin-left: 15px;
-        color: #fff;
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        opacity: .2;
-        filter: alpha(opacity=20);
-    }
-
-    .circle {
-        border-radius: 50%;
-        width: 200px;
-        height: 200px;
-        /* width and height can be anything, as long as they're equal */
-    }
-
-    .weekday-col .col-md-1,
-    .weekday-col .col-sm-1,
-    .weekday-col .col-lg-1 {
-        border-right: 1px solid #ddd;
-        text-align: center;
-    }
-
-    .weekday-col .col-md-1:last-child,
-    .weekday-col .col-sm-1:last-child,
-    .weekday-col .col-lg-1:last-child {
-        border-right: none;
-    }
-
-    .weekday-col {
-        margin-bottom: 20px;
-    }
-
-    .day-label {
-        width: 100%;
-        font-size: 18px;
-    }
-
-    .day-temp {
-        font-size: 22px;
-    }
-    .calendar-day > label {
-        width: 100%;
-    }
-    .calendar-day {
-        font-size: 14px;
-        font-weight: 700;
-        padding: 10px 0 10px 0;
-    }
-    .calendar-day > .col-md-12 > i {
-        font-size: 30px;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-
-    .chart-icon {
-    color:#5BC0DE;
-    display:block;
-    /*line-height:145px;*/
-    text-align:center;
-        position: relative;
-        bottom: 95px;
-    /*width:153px;*/
-    font-size:50px;
-    font-weight:100;
-    /*margin-left:5px;*/
-}
-    .chart-canvas {
-    display: block;
-    top:0;
-        width: 100%;
-    /*left:0;*/
-}
-
-    
-    .sensor-label > h4 {
-        font-size: 20px;
-        font-weight: 800;
-        margin-bottom: 3px;
-    }
-    .sensor-label > p {
-        font-size: 14px;
-    }
-
-    .sensor-details {
-          position: relative;
-          top: 50%;
-        transform: translateY(50%);
-        -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-        margin-bottom: 70px;
-    }
-
-    .sensor-details > .input-group {
-        margin-bottom: 5px;
-    }
-
-    .watering-status {
-        text-align: center;
-    }
-    .watering-status > h4 {
-          font-size: 20px;
-        font-weight: 800;
-        color: #707478;
-        width: 100%;
-    }
-    .watering-status > i {
-        font-size: 65px;
-        color: #707478;
-    }
-    .watering-status.active > i {
-        color: #428bca;
-    }
-
-    .watering-status.active > h4 {
-        color: black;
-    }
-    /*.watering-status.active {
-        color: #428bca;
-    }*/
-
-    .loading {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 20px;
-    }
-</style>
+<link href="~/Content/dashboard.css" rel="stylesheet" />
 
 <div class="row" style="margin-top: 75px;">
-    @*<div class="col-md-12">
-        <ol class="breadcrumb">
-            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-            <li><a href="@Url.Action("Dashboard", "Home")">Dashboard</a></li>
-        </ol>    
-    </div>*@
     <div class="col-md-3 col-sm-6">
         <div class="widget widget-stats btn-success">
             <div class="stats-icon">
@@ -290,7 +70,6 @@
         </div>
     </div>
 </div>
-
 <div class="collapse moistureChart well" id="viewSoilDetails">
     <div class="row">
         @foreach (var sensorDetail in Model.SensorDetails) {
@@ -323,7 +102,6 @@
         }
     </div>
 </div>
-
 <div class="collapse" id="viewTempDetails">
     <div class="row weekday-col">
         <div class="col-md-12">
@@ -356,7 +134,6 @@
         </div>
     </div>
 </div>
-
 <div class="collapse well" id="viewWateringDetails">
     <div class="row">
         @foreach (var valve in Model.IrrigationValves.Take(3)) {
@@ -374,7 +151,6 @@
     </div>
     
 </div>
-    
 <div class="row">
     <div class="col-md-5">
         <div class="panel" style="border: none">
@@ -401,8 +177,6 @@
                     <div class="col-md-12">
                         <div id="soilMoistureChart"></div>
                     </div>
-                    
-
                 </div>
             </div>
         </div>
@@ -418,51 +192,47 @@
         </div>
     </div>
 </div>
-
-    <div id="newEventModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">Schedule Watering</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="wateringEventForm">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Select Irrigation Valve(s)</label>
-                                @Html.DropDownList("IrrigationValveS2", new SelectList(ListHelper.GetListOfIrrigationValves(Model.Unit.Id).Select(x => new { x.Id, Name = "Valve " + (x.ValveNumber + 1) }), "Id", "Name"), null, new { @id = "irrigationValveS2", @class = "s2Init", @style = "width: 100%", @multiple = "multiple" })
-                            </div>
-                            <br />
-                            <div class="col-md-6">
-                                <label>Start Time</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label>End Time</label>
-                            </div>
-                            <div class="input-group col-md-6">
-                                <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-                                @*@Html.TextBox("StartTime", new { @class = "form-control", @id = "startTime" })*@
-                                <input id="startTime" class="form-control"/>
-                            </div>
-                            <div class="input-group col-md-6">
-                                <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-                                @*@Html.TextBox("EndTime", new { @class = "form-control", @id = "endTime" })*@
-                                <input id="endTime" class="form-control" />
-                            </div>
+<div id="newEventModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">Schedule Watering</h4>
+            </div>
+            <div class="modal-body">
+                <form id="wateringEventForm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Select Irrigation Valve(s)</label>
+                            @Html.DropDownList("IrrigationValveS2", new SelectList(ListHelper.GetListOfIrrigationValves(Model.Unit.Id).Select(x => new { x.Id, Name = "Valve " + (x.ValveNumber + 1) }), "Id", "Name"), null, new { @id = "irrigationValveS2", @class = "s2Init", @style = "width: 100%", @multiple = "multiple" })
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="createEvent" type="button" class="btn btn-primary">Create event</button>
-                </div>
+                        <br />
+                        <div class="col-md-6">
+                            <label>Start Time</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>End Time</label>
+                        </div>
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+                            <input id="startTime" class="form-control"/>
+                        </div>
+                        <div class="input-group col-md-6">
+                            <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+                            <input id="endTime" class="form-control" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="createEvent" type="button" class="btn btn-primary">Create event</button>
             </div>
         </div>
     </div>
+</div>
 
 <script type="text/javascript">
-
     $(document).ready(function () {
         $('.watering-switch').bootstrapSwitch();
 

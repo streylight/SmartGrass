@@ -11,40 +11,66 @@ namespace Service.Services {
     /// </summary>
     public class SettingsService : ISettingsService {
 
+        #region vars
+
         private readonly IRepository<Settings> _settingsRepository;
 
-        public SettingsService(){
+        #endregion
+
+        #region ctor
+
+        /// <summary>
+        /// Constructor for the Settings class
+        /// </summary>
+        public SettingsService() {
             _settingsRepository = new Repository<Settings>();    
         }
 
-        public Settings GetSettingsById(int id){
-            return _settingsRepository.GetById(id);
+        #endregion
+
+        #region methods
+
+        /// <summary>
+        /// Returns a Setting with matching id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Settings GetSettingsById( int id ) {
+            return _settingsRepository.GetById( id );
         }
 
-        public IList<Settings> GetAllSettings(){
+        /// <summary>
+        /// Returns all Settings
+        /// </summary>
+        /// <returns></returns>
+        public IList<Settings> GetAllSettings() {
             return _settingsRepository.Table.ToList();
         }
 
-        public void Insert(Settings unitSettings){
-            try{
-                if (unitSettings.Id == 0) {
-                    _settingsRepository.Insert(unitSettings);
-                } else {
-                    _settingsRepository.Update(unitSettings);
-                }
-            } catch (Exception ex){
-                throw new Exception(ex.Message);
+        /// <summary>
+        /// Inserts a new Settings object into the db
+        /// </summary>
+        /// <param name="unitSettings"></param>
+        public void Insert( Settings unitSettings ) {
+            if ( unitSettings.Id == 0 ) {
+                _settingsRepository.Insert( unitSettings );
+            } else {
+                _settingsRepository.Update( unitSettings );
             }
         }
 
-        public void Delete(int id){
-            try{
-                var settings = _settingsRepository.GetById(id);
-                _settingsRepository.Delete(settings);
-
-            } catch (Exception ex){
-                throw new Exception(ex.Message);
+        /// <summary>
+        /// Deletes a Setting from the db
+        /// </summary>
+        /// <param name="id"></param>
+        public void Delete( int id ) {
+            var settings = _settingsRepository.GetById(id);
+            if ( settings == null ) {
+                throw new Exception( string.Format( "No settings found with id: {0}", id ) );
             }
+            _settingsRepository.Delete( settings );
         }
-    }
-}
+
+        #endregion
+    } // class
+} // namespace

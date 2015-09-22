@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using Core.Domains;
 
 namespace Map.Mappings {
@@ -12,13 +7,16 @@ namespace Map.Mappings {
     /// </summary>
     public class UserMap : EntityTypeConfiguration<User> {
         public UserMap() {
-            ToTable("User", "dbo");
+            // Table
+            ToTable( "User", "dbo" );
+
+            // Primary key
             HasKey(u => u.Id);
 
             // Relationships
-            HasRequired(x => x.Unit)
+            HasRequired( x => x.Unit )
                 .WithMany()
-                .HasForeignKey(x => x.UnitId);
+                .HasForeignKey( x => x.UnitId );
         }
-    }
-}
+    } // class
+} // namespace

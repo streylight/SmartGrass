@@ -1,16 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Web.Models
-{
-    public class ExternalLoginConfirmationViewModel
-    {
+namespace Web.Models {
+    /// <summary>
+    /// The ExternalLoginConfirmationViewModel class
+    /// </summary>
+    public class ExternalLoginConfirmationViewModel {
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
-    }
+    } // class
 
-    public class ManageUserViewModel
-    {
+    /// <summary>
+    /// The ManageUserViewModel class
+    /// </summary>
+    public class ManageUserViewModel {
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
@@ -26,12 +29,12 @@ namespace Web.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-    }
+    } // class
 
-
-
-    public class RegisterViewModel
-    {
+    /// <summary>
+    /// THe RegisterViewModel class
+    /// </summary>
+    public class RegisterViewModel {
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
@@ -50,5 +53,5 @@ namespace Web.Models
         [Required]
         [Display(Name = "Product key")]
         public string ProductKey { get; set; }
-    }
-}
+    } // class
+} // namespace

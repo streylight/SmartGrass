@@ -14,16 +14,16 @@ namespace Core.Helpers.Security {
         /// <param name="password">plain text password</param>
         /// <param name="salt">password</param>
         /// <returns></returns>
-        public static string HashPassword(string password, ref string salt) {
-            if (string.IsNullOrEmpty(salt)) {
+        public static string HashPassword( string password, ref string salt ) {
+            if ( string.IsNullOrEmpty( salt ) ) {
                 var saltByte = new byte[16];
                 var randomData = RandomNumberGenerator.Create();
-                randomData.GetBytes(saltByte);
-                salt = Convert.ToBase64String(saltByte);
+                randomData.GetBytes( saltByte );
+                salt = Convert.ToBase64String( saltByte );
             }
-            var passwordByte = Encoding.Unicode.GetBytes(salt + password);
-            var hashedBytes = SHA512.Create().ComputeHash(passwordByte);
-            var hashedPassword = Convert.ToBase64String(hashedBytes);
+            var passwordByte = Encoding.Unicode.GetBytes( salt + password );
+            var hashedBytes = SHA512.Create().ComputeHash( passwordByte );
+            var hashedPassword = Convert.ToBase64String( hashedBytes );
             return hashedPassword;
         }
 
@@ -33,13 +33,13 @@ namespace Core.Helpers.Security {
         /// <param name="messageKey"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static string ComputeHash(string messageKey, string message) {
-            var key = Encoding.UTF8.GetBytes(messageKey.ToUpper());
+        public static string ComputeHash( string messageKey, string message ) {
+            var key = Encoding.UTF8.GetBytes( messageKey.ToUpper() );
             string hashString;
 
-            using (var hmac = new HMACSHA512(key)) {
-                var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(message));
-                hashString = Convert.ToBase64String(hash);
+            using ( var hmac = new HMACSHA512( key ) ) {
+                var hash = hmac.ComputeHash( Encoding.UTF8.GetBytes( message ) );
+                hashString = Convert.ToBase64String( hash );
             }
 
             return hashString;

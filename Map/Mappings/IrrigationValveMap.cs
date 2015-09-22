@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using Core.Domains;
 
 namespace Map.Mappings {
@@ -12,17 +7,20 @@ namespace Map.Mappings {
     /// </summary>
     public class IrrigationValveMap : EntityTypeConfiguration<IrrigationValve> {
         public IrrigationValveMap() {
-            ToTable("IrrigationValve", "dbo");
-            HasKey(u => u.Id);
+            // Table
+            ToTable( "IrrigationValve", "dbo" );
+
+            // Primary key
+            HasKey( u => u.Id );
 
             // Relationships
-            HasRequired(x => x.Unit)
+            HasRequired( x => x.Unit )
                 .WithMany()
-                .HasForeignKey(x => x.UnitId);
+                .HasForeignKey( x => x.UnitId );
 
-            HasMany(x => x.WateringEvents)
+            HasMany( x => x.WateringEvents )
                 .WithRequired()
-                .HasForeignKey(x => x.IrrigationValveId);
+                .HasForeignKey( x => x.IrrigationValveId );
         }
-    }
-}
+    } // class
+} // namespace

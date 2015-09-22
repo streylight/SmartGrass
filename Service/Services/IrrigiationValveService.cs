@@ -8,42 +8,68 @@ namespace Service.Interfaces {
     /// <summary>
     /// The service for the irrigation valve class
     /// </summary>
-    public class IrrigationValveService : IIrrigationValveService{
+    public class IrrigationValveService : IIrrigationValveService {
 
+        #region vars
+        
         private readonly IRepository<IrrigationValve> _irrigationValveRepository;
+        
+        #endregion
 
-        public IrrigationValveService(){
+        #region ctor
+
+        /// <summary>
+        /// Constructor for the IrrigationValveService class
+        /// </summary>
+        public IrrigationValveService() {
             _irrigationValveRepository = new Repository<IrrigationValve>();    
         }
 
-        public IrrigationValve GetIrrigationValveById(int id){
-            return _irrigationValveRepository.GetById(id);
+        #endregion
+
+        #region methods
+
+        /// <summary>
+        /// Returns an IrrigationValve with a matching id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IrrigationValve GetIrrigationValveById( int id ) {
+            return _irrigationValveRepository.GetById( id );
         }
 
-        public IList<IrrigationValve> GetAllIrrigationValves(){
+        /// <summary>
+        /// Returns all IrrigationValves
+        /// </summary>
+        /// <returns></returns>
+        public IList<IrrigationValve> GetAllIrrigationValves() {
             return _irrigationValveRepository.Table.ToList();
         }
 
-        public void Insert(IrrigationValve irrigationValve){
-            try{
-                if (irrigationValve.Id == 0)
-                    _irrigationValveRepository.Insert(irrigationValve);
-                else
-                    _irrigationValveRepository.Update(irrigationValve);    
-
-            } catch (Exception ex){
-                throw new Exception(ex.Message);
+        /// <summary>
+        /// Inserts a new IrrigationValve in the db
+        /// </summary>
+        /// <param name="irrigationValve"></param>
+        public void Insert( IrrigationValve irrigationValve ) {
+            if ( irrigationValve.Id == 0 ) {
+                _irrigationValveRepository.Insert( irrigationValve );
+            } else {
+                _irrigationValveRepository.Update( irrigationValve );
             }
         }
 
-        public void Delete(int id){
-            try{
-                var irrigationValve = _irrigationValveRepository.GetById(id);
-                _irrigationValveRepository.Delete(irrigationValve);
-
-            } catch (Exception ex){
-                throw new Exception(ex.Message);
+        /// <summary>
+        /// Deletes an IrrigationValve from the db
+        /// </summary>
+        /// <param name="id"></param>
+        public void Delete( int id ) {
+            var irrigationValve = _irrigationValveRepository.GetById( id );
+            if ( irrigationValve == null ) {
+                throw new Exception( string.Format( "No irrigation valve found with id: {0}", id ) );
             }
+            _irrigationValveRepository.Delete( irrigationValve );
         }
-    }
-}
+
+        #endregion
+    } // class
+} // namespace

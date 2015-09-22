@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
-namespace Web
-{
-    public static class WebApiConfig
-    {
-        public static void Register(HttpConfiguration config)
-        {
+namespace Web {
+    /// <summary>
+    /// The web API configuration class
+    /// </summary>
+    public static class WebApiConfig {
+        /// <summary>
+        /// Register the routes for the API calls
+        /// </summary>
+        /// <param name="config"></param>
+        public static void Register( HttpConfiguration config ) {
 			config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
@@ -17,5 +18,5 @@ namespace Web
                 defaults: new { id = RouteParameter.Optional }
             );
         }
-    }
-}
+    } // class
+} // namespace

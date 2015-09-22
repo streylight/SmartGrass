@@ -5,10 +5,10 @@ namespace Service.Interfaces {
     /// <summary>
     /// The interface for the rain event service
     /// </summary>
-    public interface IRainEventService{
-        RainEvent GetRainEventById(int id);
+    public interface IRainEventService {
+        RainEvent GetRainEventById( int id );
         IList<RainEvent> GetAllRainEvents();
-        void Insert(RainEvent rainEvent);
-        void Delete(int id);
-    }
-}
+        void Insert( RainEvent rainEvent );
+        void Delete( int id );
+    } // class
+} // namespace

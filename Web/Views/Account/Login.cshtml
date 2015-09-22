@@ -7,209 +7,30 @@
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 @Styles.Render("~/Content/css")
+<link href="~/Content/login.css" rel="stylesheet" />
 
-<style>
-    .login-cover, .login-cover-bg, .login-cover-image {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-    .login-cover, .login-cover-bg, .login-cover-image {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-        .login-cover-image img {
-            max-width: 100%;
-            top: 0;
-            left: 0;
-            position: absolute;
-        }
-
-    .login-cover-bg {
-        background: #666;
-        background: -moz-radial-gradient(center,ellipse cover,#666 0,#000 100%);
-        background: -webkit-gradient(radial,center center,0,center center,100%,color-stop(0%,#666),color-stop(100%,#000));
-        background: -webkit-radial-gradient(center,ellipse cover,#666 0,#000 100%);
-        background: -o-radial-gradient(center,ellipse cover,#666 0,#000 100%);
-        background: -ms-radial-gradient(center,ellipse cover,#666 0,#000 100%);
-        background: radial-gradient(ellipse at center,#666 0,#000 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#000000', GradientType=1);
-        opacity: .6;
-        filter: alpha(opacity=60);
-    }
-
-    /*.login.login-v2 {
-        margin: 108px 0;
-        width: 100%;
-    }*/
-
-    .login-v2 {
-        background: url(../img/transparent/black-0.4.png);
-        /*background: rgba(0,0,0,.4);*/
-        background: white;
-        color: #ccc;
-        width: 450px;
-        margin: 168px auto;
-        position: relative;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-    }
-
-    .login.login-v2 .login-header {
-        color: #fff;
-    }
-
-    .login .login-header {
-        left: 0;
-        margin: 0;
-    }
-
-    .login .login-header, .login-content {
-        width: 100% !important;
-    }
-
-    .login .login-header {
-        position: absolute;
-        top: -80px;
-        left: 50%;
-        right: 0;
-        width: 450px;
-        padding: 0 40px;
-        margin-left: -225px;
-        font-weight: 300;
-    }
-
-        .login .login-header .brand {
-            padding: 0;
-            font-size: 28px;
-        }
-
-        .login .login-header .icon {
-            position: absolute;
-            right: 40px;
-            top: -2px;
-            opacity: .1;
-            filter: alpha(opacity=10);
-        }
-
-    .login-v2 .login-content {
-        padding: 40px;
-    }
-
-    .login .login-content {
-        padding: 30px 40px;
-        color: #999;
-        width: 450px !important;
-        margin: 0 auto;
-    }
-
-    .login .login-content {
-        padding: 30px 40px;
-        color: #999;
-        width: 450px;
-        margin: 0 auto;
-    }
-
-    Inherited from div.login.login-v2.animated.flipInX .login-v2 {
-        background: url(../img/transparent/black-0.4.png);
-        background: rgba(0,0,0,.4);
-        color: #ccc;
-        width: 450px;
-        margin: 168px auto;
-        position: relative;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-    }
-
-    .login .login-content {
-        padding: 30px 40px;
-        color: #999;
-        width: 450px;
-        margin: 0 auto;
-    }
-
-    .m-b-20 {
-        margin-bottom: 20px !important;
-    }
-
-    .login .login-content {
-        padding: 30px 40px;
-        color: #999;
-        width: 450px;
-        margin: 0 auto;
-    }
-
-    .login-v2 .form-control {
-        /*background: url(../img/transparent/black-0.4.png);*/
-        /*background: rgba(0,0,0,.4);*/
-        /*border: none;*/
-        color: #000;
-    }
-
-    .form-control {
-        border: 1px solid #ccd0d4;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        font-size: 12px;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-    }
-
-    /*.btn.btn-success {
-        color: #fff;
-        background: #00acac;
-        border-color: #00acac;
-    }*/
-
-    .btn-block {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .btn {
-        font-weight: 300;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
-
-    .m-t-20 {
-        margin-top: 20px !important;
-    }
-
-</style>
-<div class="login-cover">
-    <div class="login-cover-image"><img src="~/Content/Images/leaf_in_lawn.jpg" data-id="login-cover-image" style="height: 100%; width: 100%"></div>
-    <div class="login-cover-bg"></div>
+<div class="login-overlay">
+    <div class="login-overlay-image"><img src="~/Content/Images/leaf_in_lawn.jpg" data-id="login-overlay-image" style="height: 100%; width: 100%"></div>
+    <div class="login-overlay-bg"></div>
 </div>
 <div id="page-container" class="fade in">
-    <div class="login login-v2">
+    <div class="login login-main">
         <div class="login-header">
         </div>
         <div class="login-content">
-            <div class="form-group m-b-20" style="min-width: 370px">
+            <div class="form-group btm-20" style="min-width: 370px">
                 <img src="~/Content/Images/sg-main-full.png" style="width: 100%; margin-left: auto; margin-right:auto; display:block;" />
             </div>
-           @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "loginForm" })) {
+           @using ( Html.BeginForm( "Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "loginForm" } ) ) {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                <div class="form-group m-b-20">
+                <div class="form-group btm-20">
                     @Html.TextBoxFor(x => x.Username, new { @class = "form-control input-lg", @placeholder = "Username"})
                 </div>
-                <div class="form-group m-b-20">
+                <div class="form-group btm-20">
                     @Html.PasswordFor(x => x.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
                 </div>
-                <div class="checkbox m-b-20">
+                <div class="checkbox btm-20">
                     <label>
                         @Html.CheckBox("RememberMe") Remember Me
                     </label>
@@ -217,7 +38,7 @@
                 <div class="login-buttons">
                     <button type="submit" class="btn btn-success btn-block btn-lg">Login</button>
                 </div>
-                <div class="m-t-20">
+                <div class="top-20">
                     Not a member yet? Click <a href='@Url.Action("Register","Account")'>here</a> to register.
                 </div>
             }

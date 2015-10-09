@@ -276,6 +276,10 @@
     <Content Include="Content\weather-icons\css\weather-icons.css" />
     <Content Include="Content\weather-icons\css\weather-icons.min.css" />
     <Content Include="Content\weather-icons\font\weathericons-regular-webfont.svg" />
+    <Content Include="DB\smartgrass.mdf" />
+    <Content Include="DB\smartgrass_log.ldf">
+      <DependentUpon>smartgrass.mdf</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

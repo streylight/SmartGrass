@@ -13,6 +13,7 @@ namespace Web
     {
         protected void Application_Start()
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", Server.MapPath("~/DB/"));
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
